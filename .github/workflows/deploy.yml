@@ -16,6 +16,9 @@ jobs:
       - name: Check out your repository using git
         uses: actions/checkout@v2
 
+      - name: Use pnpm
+        uses: pnpm/action-setup@v2.2.2
+
       - name: Use Node.js 16
         uses: actions/setup-node@v2
         with:
