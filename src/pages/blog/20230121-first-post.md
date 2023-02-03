@@ -1,7 +1,9 @@
 ---
 layout: '../../layouts/BlogPost.astro'
 title: '初投稿'
+description: '初投稿'
 pubDate: '2023-01-21'
+updatedDate: '2023-02-03'
 ---
 
 気が向いたらなにか投稿します。
