@@ -62,24 +62,8 @@ declare module 'astro:content' {
 	};
 
 	const entryMap: {
-		"blog": {
-"2023-01-04.mdx": {
-  id: "2023-01-04.mdx",
-  slug: "2023-01-04",
-  body: string,
-  collection: "blog",
-  data: InferEntrySchema<"blog">
-},
-"20230121-first-post.mdx": {
-  id: "20230121-first-post.mdx",
-  slug: "20230121-first-post",
-  body: string,
-  collection: "blog",
-  data: InferEntrySchema<"blog">
-},
-},
-
+		
 	};
 
-	type ContentConfig = typeof import("../src/content/config");
+	type ContentConfig = never;
 }
