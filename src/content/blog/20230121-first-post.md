@@ -1,5 +1,4 @@
 ---
-layout: '../../layouts/BlogPost.astro'
 title: '初投稿'
 description: '初投稿'
 pubDate: '2023-01-21'
