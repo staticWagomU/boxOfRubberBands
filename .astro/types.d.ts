@@ -116,67 +116,67 @@ declare module 'astro:content' {
   slug: "2023-01-04",
   body: string,
   collection: "blog",
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] },
 "2023-02-1st-week.mdx": {
   id: "2023-02-1st-week.mdx",
   slug: "2023-02-1st-week",
   body: string,
   collection: "blog",
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] },
 "2023-02-2nd-week.mdx": {
   id: "2023-02-2nd-week.mdx",
   slug: "2023-02-2nd-week",
   body: string,
   collection: "blog",
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] },
 "2023-02-3rd-week.mdx": {
   id: "2023-02-3rd-week.mdx",
   slug: "2023-02-3rd-week",
   body: string,
   collection: "blog",
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] },
 "2023-02-4th-week.mdx": {
   id: "2023-02-4th-week.mdx",
   slug: "2023-02-4th-week",
   body: string,
   collection: "blog",
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] },
 "2023-03-12-vim-ekiden.mdx": {
   id: "2023-03-12-vim-ekiden.mdx",
   slug: "2023-03-12-vim-ekiden",
   body: string,
   collection: "blog",
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] },
 "2023-03-1st-week.mdx": {
   id: "2023-03-1st-week.mdx",
   slug: "2023-03-1st-week",
   body: string,
   collection: "blog",
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] },
 "20230121-first-post.md": {
   id: "20230121-first-post.md",
   slug: "20230121-first-post",
   body: string,
   collection: "blog",
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] },
 "kangaeru-hito-no-memo-no-gijutu.mdx": {
   id: "kangaeru-hito-no-memo-no-gijutu.mdx",
   slug: "kangaeru-hito-no-memo-no-gijutu",
   body: string,
   collection: "blog",
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] },
 },
 
 	};
 
-	type ContentConfig = never;
+	type ContentConfig = typeof import("../src/content/config");
 }

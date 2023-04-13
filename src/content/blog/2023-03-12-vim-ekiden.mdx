@@ -5,9 +5,6 @@ pubDate: '2023-03-12'
 updatedDate: '2023-03-13'
 ---
 
-import vim from '../../assets/2023-03-12-vim-ekiden/vim-set-guifont'
-import neovim from '../../assets/2023-03-12-vim-ekiden/neovim-set-guifont'
-
 ## はじめに（言い訳）
  この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2023年03月13日の記事です。
 
@@ -38,20 +35,23 @@ import neovim from '../../assets/2023-03-12-vim-ekiden/neovim-set-guifont'
 
 それぞれ`set guifont=*`を実行した際に表示されるフォント設定ウィンドウはこのような感じです。
 - vim
-<img src={vim}>vimで:set guifont=*と入力</img>
+![](/assets/2023-03-12-vim-ekiden/vim-set-guifont.png)
 
 - neovim
-<img src={neovim}>neovimで:set guifont=*と入力</img>
+![](/assets/2023-03-12-vim-ekiden/neovim-set-guifont.png)
 
 ここでフォントを設定したらこれで解決すると思いましたが、一時的に設定されているだけなので、vimを落とすと設定が初期化されてしまいます。そのため、設定したフォント名を設定ファイル(vimrcやinit.vim)に追記しましょう。
 
-インサートモードで`<C-r>=&guifont<CR>`とすることで`guifont`に設定した内容をバッファに挿入することができます。
+インサートモードで`set guifont=<C-r>=&guifont<CR>`とすることで`guifont`に設定した内容をバッファに挿入することができます。
 
 フォント名に空白が含まれる場合は空白を`_`または`¥ `とすることで空白をエスケープすることができるそうです。
 ```
 	- A '_' can be used in the place of a space, so you don't need to use
 	  backslashes to escape the spaces.
 ```
+
+## 2023.03.13 追記
+`set foo=bar` の形式に拘らないのであれば、インサートモードで`let &guifont = <C-r>=string(&guifont)<CR>`でもできるとthincaさんに教えていただいた。
 
 ## おわりに
 
