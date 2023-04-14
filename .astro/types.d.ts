@@ -160,13 +160,20 @@ declare module 'astro:content' {
   collection: "blog",
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] },
-"20230121-first-post.md": {
-  id: "20230121-first-post.md",
+"2023-04-13.mdx": {
+  id: "2023-04-13.mdx",
+  slug: "2023-04-13",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] },
+"20230121-first-post.mdx": {
+  id: "20230121-first-post.mdx",
   slug: "20230121-first-post",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
-} & { render(): Render[".md"] },
+} & { render(): Render[".mdx"] },
 "kangaeru-hito-no-memo-no-gijutu.mdx": {
   id: "kangaeru-hito-no-memo-no-gijutu.mdx",
   slug: "kangaeru-hito-no-memo-no-gijutu",
