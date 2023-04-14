@@ -41,7 +41,12 @@ const posts = (await getCollection('blog')).sort(
 					{
 						posts.map((post) => (
 							<li>
-                <time>{post.data.pubDate}</time><a href={`/blog/${post.slug}`}>{post.data.title}</a>
+                <time>{
+                  post.data.pubDate.toLocaleDateString('ja-JP'
+                  , { year: "numeric", month: "2-digit", day: "2-digit"})
+                  .split("/")
+                  .join("-")
+                }</time><a href={`/blog/${post.slug}`}>{post.data.title}</a>
 							</li>
 						))
 					}
