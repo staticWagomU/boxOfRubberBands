@@ -1,0 +1,92 @@
+---
+title: 'Java開発でもVimが使いたかったはなし'
+description: 'Java開発でもVimが使いたかったはなし'
+pubDate: 2023-04-20
+---
+
+## はじめに
+
+この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2023年04月21日の記事です。
+「Vimmer たるものなんでも Vim で操作できるべき！！！」という強い思いはないものの、テキスト編集は Vim のキーバインドを使えたら便利だなと思っていました。そんなときに、Vrapper というものを見つけました。
+この記事は３ヵ月ほど使ったうえでの感想です。
+
+## Vrapper とは
+
+Vrapper は、Vim ライクな操作を可能にするプラグインです。（Eclipse 上では「ソリューション」とよばれていますが、以下「プラグイン」と呼びます）
+Vim ライクな操作を可能にするプラグインはさまざまなエディタで提供されていますが、そのうち Eclipse 上で配布されているものが Vrapper です。
+
+ドキュメントは「https://vrapper.sourceforge.net/documentation/ 」です。
+
+## 導入方法
+
+1. 「ヘルプ(H) > 新規ソフトウェアのインストール...」 を選択し、作業対象へ 「http://vrapper.sourceforge.net/update-site/stable｝ を貼り付けます。
+![作業対象へ、VrapperのURLを貼り付ける。](/images/blog/2023-04-21-vim-ekiden/001.png)
+2. ほしい機能を選択し、 「次へ」 を選択、インストール完了後に Eclipse を再起動すると導入が完了します。
+
+## 設定
+
+vrapper 用の設定ファイルは [ここ](https://vrapper.sourceforge.net/documentation/?topic=configuration#config) に書かれてあるように `$HOME` 直下へ `.vrapperrc` または `_vrapperrc` を配置します。
+
+私は以下の設定をしています。
+
+
+```vim
+set nonumber
+set smartindent
+set autoindent
+set ignorecase
+set smartcase
+set clipboard=unnamed
+
+nnoremap <Space>w : w<CR>
+
+nnoremap H ^
+nnoremap L $
+
+onoremap 2 i"
+onoremap 7 i'
+onoremap 8 i(
+onoremap [ i[
+onoremap { i{
+onoremap @ i`
+
+onoremap a2 a"
+onoremap a7 a'
+onoremap a8 a(
+onoremap a, a<
+onoremap a@ a`
+
+nnoremap v2 vi"
+nnoremap v7 vi'
+nnoremap v8 vi(
+nnoremap v[ vi[
+nnoremap v{ vi{
+nnoremap v@ vi`
+
+nnoremap va2 va"
+nnoremap va7 va'
+nnoremap va8 va(
+nnoremap va, va<
+nnoremap va@ va`
+
+```
+
+## よかったところ
+
+私自身は、Vim や Neovim で凝った設定をしていなかったため、 Vrapper を使う上で後述するキーバインドの競合を以外は特に問題はありませんでした。Eclipse のショートカットである `Ctrl + Shift + r` でファイルを開いたり、`Ctrl + o` でメソッドを移動して Vrapper でテキスト編集をする等、完全に Vrapper の機能にたよるのではなく Eclipse の機能も併用してコーディングを行っています。
+
+また、Vim の大きな特徴であるtext-object に対する操作が拡張される [Surround Plugin](https://vrapper.sourceforge.net/documentation/?topic=optional_plugins) が使えるのも個人的に大きな利点でした。
+勝手にこの手の Vim ライクな操作を提供するプラグインは素の Vim 以上のことはできないものかと思っていましたが、ドキュメントを見るに Vrapper ではいくつかのプラグインの移植がされていました。
+ゆるふわ Vimmer だけではなくガチガチな Vimmer でもある程度使えるのではないかという印象です。（私はゆるふわ Vimmer なので十分でした）
+
+## 困ったところ
+
+IDE を使っている以上仕方ないのですが、 Vim のキーバインドが IDE のショートカットキーと競合してしまう問題が起きてしまいます。
+Eclipse の設定で競合したショートカットキーを別のキーへ設定してあげることでこの問題は回避できるのですが、面倒だったのでやりませんでした。
+そのため自業自得ですが、コーディングをしているとそこそこな頻度で使いたくなる `<C-a>` が全選択のショートカットキーと競合して困ってます。（現在進行形）
+
+また、 `<C-h>` で文字の削除(`BS`)ができないのも結構痛いです。1日に10回くらい間違えて置換のウィンドウを表示させているのでそろそろ対応しないといけないとは思っています。
+
+## おわりに
+
+最低限の Vim キーバインドが使えたら十分です！という人にはおすすめできるプラグインです。
