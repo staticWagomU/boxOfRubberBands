@@ -1,34 +1,42 @@
 ---
-title: 'Java開発でもVimが使いたかったはなし'
-description: 'Java開発でもVimが使いたかったはなし'
+title: 'Eclipse 上で Vim ライクな操作を可能にする Vrapper を使ったはなし'
+description: 'Eclipse 上で Vim ライクな操作を可能にするプラグイン Vrapper を使ったはなし'
 pubDate: 2023-04-20
 ---
 
 ## はじめに
 
 この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2023年04月21日の記事です。
-「Vimmer たるものなんでも Vim で操作できるべき！！！」という強い思いはないものの、テキスト編集は Vim のキーバインドを使えたら便利だなと思っていました。そんなときに、Vrapper というものを見つけました。
+
+現在仕事で Java を使用しています。エディタはプロジェクトに参加時に配布された Eclipseを使っていたのですが、テキスト編集は Vim のキーバインドを使えたら便利だなと思っていました。そんなときに、Vrapper というソリューション（Eclipse 上では「ソリューション」とよばれていますが、以下「プラグイン」と呼びます）を見つけました。
+
 この記事は３ヵ月ほど使ったうえでの感想です。
 
 ## Vrapper とは
 
-Vrapper は、Vim ライクな操作を可能にするプラグインです。（Eclipse 上では「ソリューション」とよばれていますが、以下「プラグイン」と呼びます）
+Vrapper は、Vim ライクな操作を Eclipse 上で可能にするプラグインです。
 Vim ライクな操作を可能にするプラグインはさまざまなエディタで提供されていますが、そのうち Eclipse 上で配布されているものが Vrapper です。
 
 ドキュメントは「https://vrapper.sourceforge.net/documentation/ 」です。
 
 ## 導入方法
 
-1. 「ヘルプ(H) > 新規ソフトウェアのインストール...」 を選択し、作業対象へ 「http://vrapper.sourceforge.net/update-site/stable｝ を貼り付けます。
+1. 「ヘルプ(H) > 新規ソフトウェアのインストール...」 を選択し、作業対象へ 「http://vrapper.sourceforge.net/update-site/stable 」 を貼り付けます。
 ![作業対象へ、VrapperのURLを貼り付ける。](/images/blog/2023-04-21-vim-ekiden/001.png)
-2. ほしい機能を選択し、 「次へ」 を選択、インストール完了後に Eclipse を再起動すると導入が完了します。
+ここで気を付けないことは、一番上の Programming Language Plugins チェックボックスを開くと、Python, Java, C の追加機能を任意で選択することができます。しかし、それぞれ依存パッケージが必要となるのでご自身で必要な機能のみを選択してください。
+
+ドキュメントでは[ここ](https://vrapper.sourceforge.net/documentation/?topic=optional_plugins#programming)に記載されています。
+> The CDT, JDT, and PyDev plugins access Eclipse features found only in the CDT package (C++ Development Tools) the JDT package (Java Development Tools), or PyDev package (Python Development). If you do any C++ development in Eclipse, chances are you already have CDT installed. Likewise with JDT for Java development. The Vrapper CDT plugin has a dependency on the CDT package, the Vrapper JDT plugin has a dependency on the JDT package, and the Vrapper PyDev plugin has a dependency on the PyDev package.
+
+以下、Deepl先生の翻訳です。
+> CDT、JDT、PyDevプラグインは、CDTパッケージ（C++開発ツール）、JDTパッケージ（Java開発ツール）、PyDevパッケージ（Python開発ツール）にのみ含まれるEclipseの機能にアクセスします。EclipseでC++の開発を行う場合、CDTがすでにインストールされている可能性があります。同様に、Java開発用のJDTもあります。*Vrapper CDTプラグイン*は*CDTパッケージ*に、*Vrapper JDTプラグイン*は*JDTパッケージ*に、*Vrapper PyDevプラグイン*は*PyDevパッケージ*に依存します。
+2. 必要な機能を選択し、 「次へ」 を選択、インストール完了後に Eclipse を再起動すると導入が完了します。
 
 ## 設定
 
-vrapper 用の設定ファイルは [ここ](https://vrapper.sourceforge.net/documentation/?topic=configuration#config) に書かれてあるように `$HOME` 直下へ `.vrapperrc` または `_vrapperrc` を配置します。
+vrapper 用の設定ファイルはドキュメントの [ここ](https://vrapper.sourceforge.net/documentation/?topic=configuration#config) に書かれてあるように `$HOME` 直下へ `.vrapperrc` または `_vrapperrc` を配置します。
 
-私は以下の設定をしています。
-
+私は Eclipse の機能も楽しみたいので、最低限使えるような以下の設定をしています。
 
 ```vim
 set nonumber
@@ -73,7 +81,7 @@ nnoremap va@ va`
 
 ## よかったところ
 
-私自身は、Vim や Neovim で凝った設定をしていなかったため、 Vrapper を使う上で後述するキーバインドの競合を以外は特に問題はありませんでした。Eclipse のショートカットである `Ctrl + Shift + r` でファイルを開いたり、`Ctrl + o` でメソッドを移動して Vrapper でテキスト編集をする等、完全に Vrapper の機能にたよるのではなく Eclipse の機能も併用してコーディングを行っています。
+私自身は、Vim や Neovim でも凝った設定をしていなかったため、 Vrapper を使う上で後述するキーバインドの競合を以外は特に問題はありませんでした。Eclipse のショートカットである `Ctrl + Shift + r` でファイルを開いたり、`Ctrl + o` でメソッドを移動して Vrapper でテキスト編集をする等、完全に Vrapper の機能にたよるのではなく Eclipse の機能も併用してコーディングを行っています。
 
 また、Vim の大きな特徴であるtext-object に対する操作が拡張される [Surround Plugin](https://vrapper.sourceforge.net/documentation/?topic=optional_plugins) が使えるのも個人的に大きな利点でした。
 勝手にこの手の Vim ライクな操作を提供するプラグインは素の Vim 以上のことはできないものかと思っていましたが、ドキュメントを見るに Vrapper ではいくつかのプラグインの移植がされていました。
@@ -90,3 +98,8 @@ Eclipse の設定で競合したショートカットキーを別のキーへ設
 ## おわりに
 
 最低限の Vim キーバインドが使えたら十分です！という人にはおすすめできるプラグインです。
+
+
+## 変更履歴
+
+- 2023/04/21: タイトルや本文から「Eclipse」についての記事であることが分かりにくかったため、タイトル・表現を修正しました。ご指摘くださいました、vim-jpの方々にこの場をお借りしてお礼申し上げます。
