@@ -28,9 +28,6 @@ dependencies:
   mdx:
     specifier: ^0.3.1
     version: 0.3.1
-  svelte:
-    specifier: 3.54.0
-    version: 3.54.0
   textlint:
     specifier: ^13.3.2
     version: 13.3.2
