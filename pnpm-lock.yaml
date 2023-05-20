@@ -54,6 +54,9 @@ devDependencies:
   '@markuplint/astro-parser':
     specifier: ^3.7.0
     version: 3.7.0(@markuplint/ml-core@3.10.0)(typescript@5.0.4)
+  husky:
+    specifier: ^8.0.3
+    version: 8.0.3
   markuplint:
     specifier: ^3.10.0
     version: 3.10.0(@types/node@17.0.45)(ts-node@10.9.1)(typescript@5.0.4)
@@ -3613,6 +3616,12 @@ packages:
   /human-signals@4.3.1:
     resolution: {integrity: sha512-nZXjEF2nbo7lIw3mgYjItAfgQXog3OjJogSbKa2CQIIvSGWcKgeJnQlNXip6NglNzYH45nSRiEVimMvYL8DDqQ==}
     engines: {node: '>=14.18.0'}
+
+  /husky@8.0.3:
+    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
 
   /ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
