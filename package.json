@@ -9,7 +9,13 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "markuplint \"./src/**/*.astro\""
+    "lint": "markuplint \"./src/**/*.astro\"",
+    "precommit": "pnpm build"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "precommit"
+    }
   },
   "dependencies": {
     "@astrojs/image": "^0.16.9",
