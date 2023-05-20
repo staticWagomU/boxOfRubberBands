@@ -67,13 +67,13 @@ if (ogp[url]) {
 ---
 <style>
 .og_wrap {
-widows: 100%;
-border: 1px solid #000;
-border-radius: 4px;
-display: flex;
-padding: 1rem;
-justify-content: space-between;
-max-width: 800px;
+  width: 100%;
+  border: 1px solid #000;
+  border-radius: 4px;
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  max-width: 800px;
 }
 
 .og_wrap .og_text {
@@ -82,15 +82,21 @@ flex-direction: column;
 }
 
 .og_wrap .og_text  * {
-flex-gap: 0.5rem;
+  flex-gap: 0.5rem;
 }
 
 .og_wrap .og_text a {
-font-weight: bold;
+  font-weight: bold;
 }
 
 .og_wrap img {
-width: 200px;
+  width: 200px;
+}
+
+@media (width < 800px) {
+  .og_wrap {
+    flex-direction: column;
+  }
 }
 </style>
 
@@ -99,17 +105,17 @@ width: 200px;
     <a href={url} target="_blank" >
       {title}
     </a>
-    <span
-      >{
+    <span>
+    {
         description && description.length > 100
           ? `${description?.slice(0, 100)}...`
           : description
-      }</span
-    >
+    }
+    </span>
   </div>
   {
     image && (
-    <img src={image} alt="title" />
+    <img src={image} alt="ogp" />
     )
   }
 </div>
