@@ -1,0 +1,56 @@
+---
+title: 'キーマッピングを設定しないVimmerが居たっていい'
+description: 'キーマッピングを設定しないVimmerが居たっていい'
+pubDate: 2023-06-01
+published: true
+---
+import OG from "../../components/OG.astro";
+
+この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2023年06月02日の記事です。
+
+前回の記事は mityu さんの「[Zsh on :terminal on Vim でカレントディレクトリを Vim と同期する](https://zenn.dev/vim_jp/articles/sync-cwd-zsh-on-vim)」という記事でした。
+
+次回の記事は 6/5 に投稿される予定です。
+
+
+
+## キーマッピングを覚えられない
+
+自分は自分で設定したキーマッピングをよく忘れます。
+
+全く覚えられません。
+
+プラグインを入れていないのか？ということはなく、そこそこの量を入れています。それらのプラグインをどうやって使っているのかというと、**コマンド補完**に頼っています。
+
+更に現在進行形でnvimの設定のプラグインを再選定をしています。そのためプラグインの設定が整っておらず、以前設定していたプラグインのキーマッピングも消失しておりそれらもコマンド補完で乗り切っています。(`:Lspsaga code_action`とか、、、)
+
+ある種縛りのように見えるコーディングスタイルですが、補完プラグインの一つである、[nvim-cmp](https://github.com/hrsh7th/nvim-cmp)では[hrsh7th/cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)、[dmitmel/cmp-cmdline-history](https://github.com/dmitmel/cmp-cmdline-history)というプラグインがあります。 これらのプラグインを導入することによって、コマンドやコマンド履歴を補完することができるので、そこまで大変な思いはしていません。
+
+[dmitmel/cmp-cmdline-history](https://github.com/dmitmel/cmp-cmdline-history)のお陰で、一度入力したコマンドを次回入力時に補完することができて非常に助かっています。
+
+## 現状に満足はしていない！！
+
+キーマッピングを可視化してくれるプラグインとして、[which-key.nvim](https://github.com/folke/which-key.nvim) があります。キー入力に迷ったとき、自動的に候補がポップアップ表示されるという非常に便利なプラグインなのですが、自分はどうも負けた気がしてしまうため直ぐに消してしまいました。
+
+そして最近、某-jpのtimesチャンネルでキーマッピングの模索をしてたときに、複数の方から自分はこういう運用をしているよ。というのを教えてもらいました。
+
+[atusy](https://github.com/atusy)さんは
+<OG url="https://blog.atusy.net/2022/11/03/telescope-as-command-pallete" />
+に書いてあるように、[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)を使ってVSコードのコマンドパレットのようなものを再現していました。
+
+[yuki yano](https://github.com/yuki-yano)さんは、[lexima](https://github.com/cohama/lexima.vim)を拡張して、EXコマンドを自動展開させる[lexima-alter-command.vim](https://github.com/yuki-yano/lexima-alter-command.vim)というプラグインを使っているとのことでした。
+
+そして[monaqa](https://github.com/monaqa)さんは
+<OG url="https://zenn.dev/monaqa/articles/2020-12-22-vim-abbrev" />
+に書いてあるように、プラグインを使わず`cabbrev`コマンドを使って[yuki yano](https://github.com/yuki-yano)さんとほぼ同等のことを実現していました。
+
+## どれがいいだろう？
+自分はアドバイスをもらったらとりあえずやってみるタイプなので、これらを試そうと思っています。(やることがたまりすぎていて、まだ試せていません)
+
+また、今回[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)ではなく[ddu.vim](https://github.com/Shougo/ddu.vim)を使おうと思っているので、dduでキーマッピングを引っぱってくるソースを作ろうと思います。
+
+## まとめ
+
+全く話が着地していませんが、自分の思いとしてはこれからもあまりキーマッピングは設定しないと思います。
+
+以上！！
