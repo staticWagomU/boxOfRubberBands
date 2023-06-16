@@ -14,41 +14,39 @@ import OG from "../../components/OG.astro";
 
 ## はじめに
 
-キーマッピングをせずにどうやってコーディングをしているのか、どのようにその問題を解決しようとしているのかの過程です。
+キーマッピングを設定せずにどうやってコーディングをしているのか、どのようにその問題を解決しようとしているのかの過程です。
 
-因みに全く解決していません。まだまだ手探り状態です。
+まだまだ手探り状態です。
 
 ## キーマッピングを覚えられない
 
-**キーマッピングを設定しないVimmerが居たっていいと思います。**
+**キーマッピングを設定しないVimmerが居たっていいんじゃないでしょうか**
 
-なぜなら自分で設定したキーマッピングをよく忘れるからです。
+自分は設定したキーマッピングをよく忘れます。
 
 全く覚えられません。
 
-プラグインを入れていないのか？ということはなく、そこそこの量を入れています。それらのプラグインをどうやって使っているのかというと、**コマンド補完**に頼っています。
+プラグインを入れていないのか？ということはなく、そこそこの量を入れています。それらのプラグインをどうやって使っているのかというと、**コマンド補完**に完全に頼っています。
 
-更に現在進行形でnvimの設定のプラグインを再選定をしています。そのためプラグインの設定が整っておらず、以前設定していたプラグインのキーマッピングも消失しておりそれらもコマンド補完で乗り切っています。(`:Lspsaga code_action`とか、、、)
+現在進行形でnvimの設定のプラグインを再選定をしているのですが、プラグインの設定が整っておらず、以前設定していたプラグインのキーマッピングも消失してそれらもコマンド補完で乗り切っています。(`:Lspsaga code_action`とか、、、)
 
-ある種縛りのように見えるコーディングスタイルですが、補完プラグインの一つである、[nvim-cmp](https://github.com/hrsh7th/nvim-cmp)では[hrsh7th/cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)、[dmitmel/cmp-cmdline-history](https://github.com/dmitmel/cmp-cmdline-history)というプラグインがあります。 これらのプラグインを導入することによって、コマンドやコマンド履歴を補完することができるので、そこまで大変な思いはしていません。
+ある種縛りのように見えるコーディングスタイルですが、補完プラグインの一つである、[nvim-cmp](https://github.com/hrsh7th/nvim-cmp)のお陰でそこまで苦労はしていません。nvim-cmpには[hrsh7th/cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline)、[dmitmel/cmp-cmdline-history](https://github.com/dmitmel/cmp-cmdline-history)というプラグインがあります。 これらのプラグインを導入することによって、コマンドやコマンド履歴を補完することができるので、一度入力したコマンドを次回入力時に補完することができて非常に助かっています。
 
-[dmitmel/cmp-cmdline-history](https://github.com/dmitmel/cmp-cmdline-history)のお陰で、一度入力したコマンドを次回入力時に補完することができて非常に助かっています。
-
-## 現状に満足はしていない！！
+## 解決策は？
 
 キーマッピングを可視化してくれるプラグインとして、[which-key.nvim](https://github.com/folke/which-key.nvim) があります。キー入力に迷ったとき、自動的に候補がポップアップ表示されるという非常に便利なプラグインなのですが、自分はどうも負けた気がしてしまうため直ぐに消してしまいました。
 
-そして最近、某-jpのtimesチャンネルでキーマッピングの模索をしてたときに、複数の方から自分はこういう運用をしているよ。というのを教えてもらいました。
+そして最近、某-jpのtimesチャンネルでキーマッピングの模索をしてたときに、複数の方から「自分はこういう運用をしているよ。」というのを教えてもらいました。
 
-[atusy](https://github.com/atusy)さんは
+[atusy](https://github.com/atusy)さんは、
 <OG url="https://blog.atusy.net/2022/11/03/telescope-as-command-pallete" />
 に書いてあるように、[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)を使ってVSコードのコマンドパレットのようなものを再現していました。
 
 [yuki yano](https://github.com/yuki-yano)さんは、[lexima](https://github.com/cohama/lexima.vim)を拡張して、EXコマンドを自動展開させる[lexima-alter-command.vim](https://github.com/yuki-yano/lexima-alter-command.vim)というプラグインを使っているとのことでした。
 
-そして[monaqa](https://github.com/monaqa)さんは
+そして[monaqa](https://github.com/monaqa)さんは、
 <OG url="https://zenn.dev/monaqa/articles/2020-12-22-vim-abbrev" />
-に書いてあるように、プラグインを使わず`cabbrev`コマンドを使って[yuki yano](https://github.com/yuki-yano)さんとほぼ同等のことを実現していました。
+に書いてあるように、プラグインを使わず`cabbrev`コマンドを使うことによって[yuki yano](https://github.com/yuki-yano)さんとほぼ同等のことを実現していました。
 
 また、これを書いている今日、[kuu](https://github.com/kuuote)さんはコマンド補完と`cmdwin`を使っているということを教えてもらいました。
 
@@ -56,10 +54,11 @@ import OG from "../../components/OG.astro";
 ## どれがいいだろう？
 自分はアドバイスをもらったらとりあえずやってみるタイプなので、これらを試そうと思っています。(やることがたまりすぎていて、まだ試せていません)
 
-また、今回[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)ではなく[ddu.vim](https://github.com/Shougo/ddu.vim)を使おうと思っているので、dduでキーマッピングを引っぱってくるソースを作ろうと思います。
+今回のプラグイン選定では[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)ではなく[ddu.vim](https://github.com/Shougo/ddu.vim)を使おうと思っているので、dduでキーマッピングを引っぱってくるソースを作ろうと思います。
 
 ## まとめ
+いかがでしたか？
 
-全く話が着地していませんが、自分の思いとしてはこれからもあまりキーマッピングは設定しないと思います。
+全く話が着地していませんが、自分の思いとしてはこれからもあまりキーマッピングは設定しない方向性を続けていこうと思います。なにか進展があれば報告しようと思います。
 
 以上！！
