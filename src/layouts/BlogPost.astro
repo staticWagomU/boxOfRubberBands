@@ -3,15 +3,17 @@ import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../config.ts';
 
 type Props = CollectionEntry<'blog'>['data'];
 
 const {title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const tabTitle = `${title} - ${SITE_TITLE}`;
 ---
 
 <html lang="ja">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={tabTitle} description={description} />
 		<style>
 			.title {
 				font-size: 2em;
