@@ -23,7 +23,9 @@
     "@astrojs/sitemap": "^3.0.0",
     "@vanilla-extract/css": "^1.13.0",
     "astro": "^3.0.5",
-    "mdx": "^0.3.1"
+    "markdown-it": "^13.0.1",
+    "mdx": "^0.3.1",
+    "sanitize-html": "^2.11.0"
   },
   "devDependencies": {
     "@markuplint/astro-parser": "^3.9.0",
