@@ -1,0 +1,414 @@
+---
+title: '闇の力への入門 ddc.vim編'
+description: '闇の力への入門 ddc.vim編'
+pubDate: 2023-09-22
+published: true
+---
+
+この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2023年09月22日(金)の記事です。
+
+前回の記事は kawarimidoll さんの「[Vimでインデント幅の単位で左右移動する](https://zenn.dev/vim_jp/articles/6027c57d34a142)」という記事でした。
+
+次回の記事は 9月25日(月) に投稿される予定です。
+
+---
+
+## はじめに
+こんにちは！次の式年遷宮は暗黒美夢王(以下Shougoさん)の新規開発中のプラグインマネージャーdpp.vimが完成時になるだろうと思っている輪ごむです。
+
+この記事は闇のプラグインであるddc.vim(Dark deno-powered completion)にluaとtsで入門した作業ログ的な記事です。
+
+### 環境
+| | |
+|-----------------|-------------------|
+| OS:             | m1 mac            |
+| Terminal:       | WezTerm           |
+| Editor:         | Neovim            |
+| Plugin Manager: | Lazy.nvim         |
+
+```
+:version
+NVIM v0.10.0-dev-4258f4d
+Build type: RelWithDebInfo
+LuaJIT 2.1.1694316387
+Run ":verbose version" for more info
+```
+
+## 補完プラグインに求めること
+- 周辺文字列や単語の補完
+- lspとの連携
+- コマンドライン補完（履歴補完も含む）
+
+要件を整理すると、非常にシンプルでした。この要望をただ満たすためであれば、今まで使っていたvim-cmpのほうが簡単で直ぐに使えます。
+
+ただ、男の子は闇の力に憧れを抱くものです。最近tsでも設定できると聞いたこともあり、闇の力へ入門することとなりました。
+
+## ソースの選定
+以下のソースを使います
+- [LumaKernel/ddc-source-file](https://github.com/LumaKernel/ddc-source-file)]
+	- ファイル名補完
+- [Shougo/ddc-source-around](https://github.com/Shougo/ddc-source-around)
+	- カーソル周辺の補完
+- [Shougo/ddc-source-cmdline](https://github.com/Shougo/ddc-source-cmdline)
+	- コマンドラインの補完
+- [Shougo/ddc-source-cmdline-history](https://github.com/Shougo/ddc-source-cmdline-history)
+	- コマンドラインの履歴の補完
+- [Shougo/ddc-source-copilot](https://github.com/Shougo/ddc-source-copilot)
+	- Github copilotの補完
+- [Shougo/ddc-source-input](https://github.com/Shougo/ddc-source-input)
+	- コマンドラインでの入力補完
+	- いまいちよく分かっていない第一
+- [Shougo/ddc-source-nvim-lsp](https://github.com/Shougo/ddc-source-nvim-lsp)
+	- nvim-lspの補完
+- [Shougo/ddc-source-shell-native](https://github.com/Shougo/ddc-source-shell-native)
+	- zsh等の補完をしてくれる
+- [Shougo/ddc-source-shell](https://github.com/Shougo/ddc-source-shell)
+	- いまいちよく分かっていない第二
+- [matsui54/ddc-buffer](https://github.com/matsui54/ddc-buffer)
+	- バッファ内のワード補完
+- [uga-rosa/ddc-source-nvim-lua](https://github.com/uga-rosa/ddc-source-nvim-lua)
+	- nvimのlua関数の補完
+
+
+他のソースを探したい人は以下のリンクを参照してください。  
+[ddc-source · GitHub Topics · GitHub](https://github.com/topics/ddc-source)
+### フィルターの選定
+以下のフィルターを使います。いまいち理解できていないので、各フィルターの説明は割愛します。
+- [Shougo/ddc-filter-converter_remove_overlap](https://github.com/Shougo/ddc-filter-converter_remove_overlap)
+- [Shougo/ddc-filter-matcher_head](https://github.com/Shougo/ddc-filter-matcher_head)
+- [Shougo/ddc-filter-matcher_length](https://github.com/Shougo/ddc-filter-matcher_length)
+- [Shougo/ddc-filter-matcher_prefix](https://github.com/Shougo/ddc-filter-matcher_prefix)
+- [Shougo/ddc-filter-sorter_head](https://github.com/Shougo/ddc-filter-sorter_head)
+- [Shougo/ddc-filter-sorter_rank](https://github.com/Shougo/ddc-filter-sorter_rank)
+- [Shougo/ddc-filter-converter_remove_overlap](https://github.com/Shougo/ddc-filter-converter_remove_overlap)
+- [Shougo/ddc-filter-matcher_head](https://github.com/Shougo/ddc-filter-matcher_head)
+- [Shougo/ddc-filter-matcher_length](https://github.com/Shougo/ddc-filter-matcher_length)
+- [Shougo/ddc-filter-matcher_prefix](https://github.com/Shougo/ddc-filter-matcher_prefix)
+- [Shougo/ddc-filter-sorter_rank](https://github.com/Shougo/ddc-filter-sorter_rank)
+
+他のフィルターを探したい人は以下のリンクを参照してください。  
+[ddc-filter · GitHub Topics · GitHub](https://github.com/topics/ddc-filter)
+
+## いざ設定開始!
+使いたいソースとフィルターがそろったので、設定を書き始めます。Shougoさんのプラグインの設定を書くにあたって**必要なもの**と**あると便利なもの**があります。  
+必要なものは、導入したプラグインのヘルプです。  
+あると便利なものはShougoさん本人のdotfiles通称リファレンス実装と言われているものです。導入したプラグインのヘルプを読むことは勿論大事ですが、リファレンス実装を読むことでそれぞれの機能がどう使われているのか等の大枠をぱっと確認できることができ非常に有用です。
+
+### tsファイル読み込みで詰まった
+これはリファレンス実装を頼りにしすぎたことと、Vimscriptに関する知識不足によって発生した問題なのですが、ddc#custom#load_config関数でtsファイルが読み込めませんでした。ShougoさんはVimscriptでtsファイルのあるディレクトリを環境変数として利用していました。しかし、自分がluaで設定を書いているのが影響したのかvim.fs.joinpath関数内で環境変数が展開されず、うまく読み込むことができないという問題が起こりました。  
+この問題は、stdpath('config')起点でパスを結合させることによって解決しました。
+```lua
+-- utils.lua
+M.plugins_path = vim.fs.joinpath(vim.fn.stdpath("config"), "lua", "plugins")
+
+-- ddc/init.lua
+vim.fn["ddc#custom#load_config"](vim.fs.joinpath(require("utils").plugins_path, "ddc", "ddc.ts"))
+
+```
+その際にはvim-jpの皆様に大変お世話になりました。
+
+### 参考にしつつカスタマイズ
+tsファイルの読み込みさえできてしまえば、あとはリファレンス実装とヘルプを頼りに自分の好きなように設定していくだけです。
+
+### 全体のソースコード
+
+luaとtsファイルは同一階層に配置しています。
+<details>
+<summary>init.lua</summary>
+```lua
+function _G.CommandlinePre(mode) 
+  vim.b["prev_buffer_config"] = vim.fn["ddc#custom#get_buffer"]()
+  if mode == ":" then
+    vim.fn["ddc#custom#patch_buffer"]("sourceOptions", { _ = {keywordPattern = "[0-9a-zA-Z_:#-]*", minAutoCompleteLength = 2, }})
+  end
+
+  vim.api.nvim_create_autocmd("User", {
+      pattern = "DDCCmdlineLeave",
+      callback = function()
+        if vim.fn.exists("b:prev_buffer_config") then
+          vim.fn["ddc#custom#set_buffer"](vim.b["prev_buffer_config"])
+          vim.b["prev_buffer_config"] = nil
+        end
+      end,
+      once = true,
+    })
+
+  vim.fn["ddc#enable_cmdline_completion"]()
+end
+
+return {
+  "Shougo/ddc.vim",
+  dependencies = {
+    "vim-denops/denops.vim",
+    "Shougo/pum.vim",
+    "Shougo/ddc-ui-pum",
+    -- source
+    "LumaKernel/ddc-source-file",
+    "Shougo/ddc-source-around",
+    "Shougo/ddc-source-cmdline",
+    "Shougo/ddc-source-cmdline-history",
+    "Shougo/ddc-source-copilot",
+    "Shougo/ddc-source-input",
+    "Shougo/ddc-source-nvim-lsp",
+    "Shougo/ddc-source-rg",
+    "Shougo/ddc-source-shell",
+    "Shougo/ddc-source-shell-native",
+    "matsui54/ddc-buffer",
+    "uga-rosa/ddc-source-nvim-lua",
+    -- filter
+    "Shougo/ddc-filter-converter_remove_overlap",
+    "Shougo/ddc-filter-matcher_head",
+    "Shougo/ddc-filter-matcher_length",
+    "Shougo/ddc-filter-matcher_prefix",
+    "Shougo/ddc-filter-sorter_head",
+    "Shougo/ddc-filter-sorter_rank",
+  },
+  config = function()
+    -- keymaps
+    vim.keymap.set({"i", "c"}, "<C-n>", "<Cmd>call pum#map#insert_relative(+1, 'loop')<CR>")
+    vim.keymap.set({"i", "c"}, "<C-p>", "<Cmd>call pum#map#insert_relative(-1, 'loop')<CR>")
+    vim.keymap.set({"i", "c"}, "<C-e>", function()
+      if vim.fn["ddc#visible"]() then
+        return vim.fn["ddc#hide"]("Manual")
+      else
+        return "<End>"
+      end
+    end, { remap = true })
+    vim.keymap.set({"i", "c"}, "<C-l>", function()
+      return vim.fn["ddc#map#manual_complete"]()
+    end, { expr = true, desc="Refresh the completion" })
+    vim.keymap.set({"n", "x"}, ":", "<Cmd>call v:lua.CommandlinePre(':')<CR>:")
+    vim.keymap.set({"n"}, "?", "<Cmd>call v:lua.CommandlinePre('/')<CR>?")
+
+    -- options
+    vim.fn["pum#set_option"]({
+      auto_confirm_time = 3000,
+      auto_select = false,
+      border = "singlle",
+      horizontal_menu = false,
+      max_width = 80,
+      max_height = 20,
+      offset_cmdcol = 0,
+      padding = true,
+      preview = true,
+      preview_border = "single",
+      preview_width = 80,
+      reversed = false,
+      use_complete = true,
+      use_setline = false,
+    })
+    vim.fn["pum#set_local_option"]("c",{ { horizontal_menu = false, }, })
+    vim.fn["ddc#custom#load_config"](vim.fs.joinpath(require("utils").plugins_path, "ddc", "ddc.ts"))
+    vim.fn["ddc#enable"]({context_filetype = "treesitter"})
+    vim.fn["ddc#enable_terminal_completion"]()
+  end
+}
+
+```
+</details>
+
+<details>
+<summary>ddc.ts</summary>
+```ts
+import { BaseConfig } from "https://deno.land/x/ddc_vim@v4.0.4/types.ts";
+import { fn } from "https://deno.land/x/ddc_vim@v4.0.4/deps.ts";
+import { ConfigArguments } from "https://deno.land/x/ddc_vim@v4.0.4/base/config.ts";
+
+export class Config extends BaseConfig {
+  override async config(args: ConfigArguments): Promise<void> {
+    const hasWindows = await fn.has(args.denops, "win32");
+
+    args.contextBuilder.patchGlobal({
+      ui: "pum",
+      autoCompleteEvents: [
+        "InsertEnter",
+        "TextChangedI",
+        "TextChangedP",
+        "CmdlineEnter",
+        "CmdlineChanged",
+        "TextChangedT",
+      ],
+      sources: ["around", "file", "skkeleton"],
+      cmdlineSources: {
+        ":": ["cmdline", "cmdline-history", "around"],
+        "/": ["around"],
+        "?": ["around"],
+        "=": ["input"],
+      },
+      sourceOptions: {
+        _: {
+          ignoreCase: true,
+          matchers: ["matcher_head", "matcher_prefix", "matcher_length"],
+          sorters: ["sorter_rank"],
+          converters: ["converter_remove_overlap"],
+          timeout: 1000,
+        },
+        around: {
+          mark: "A",
+        },
+        buffer: {
+          mark: "B",
+        },
+        "nvim-lua": {
+          mark: "",
+          forceCompletionPattern: "\\.\\w*",
+        },
+        cmdline: {
+          mark: "󰆍",
+          forceCompletionPattern: "\\S/\\S*|\\.\\w*",
+        },
+        "cmdline-history": {
+          mark: "󰆍 his",
+          sorters: [],
+        },
+        copilot: {
+          mark: "",
+          matchers: [],
+          minAutoCompleteLength: 0,
+          isVolatile: false,
+        },
+        input: {
+          mark: "input",
+          forceCompletionPattern: "\\S/\\S*",
+          isVolatile: true,
+        },
+        "nvim-lsp": {
+          mark: "lsp",
+          forceCompletionPattern: "\\.\\w*|::\\w*|->\\w*",
+          dup: "force",
+        },
+        file: {
+          mark: "F",
+          isVolatile: true,
+          minAutoCompleteLength: 1000,
+          forceCompletionPattern: "\\S/\\S*",
+        },
+        shell: {
+          mark: "sh",
+          isVolatile: true,
+          forceCompletionPattern: "\\S/\\S*",
+        },
+        "shell-native": {
+          mark: "sh",
+          isVolatile: true,
+          forceCompletionPattern: "\\S/\\S*",
+        },
+        rg: {
+          mark: "rg",
+          minAutoCompleteLength: 5,
+          enabledIf: "finddir('.git', ';') != ''",
+        },
+        skkeleton: {
+          mark: "sk",
+          matchers: ["skkeleton"],
+          sorters: [],
+          minAutoCompleteLength: 2,
+          isVolatile: true,
+        },
+      },
+      sourceParams: {
+        buffer: {
+          requireSameFiletype: false,
+          limitBytes: 50000,
+          fromAltBuf: true,
+          forceCollect: true,
+        },
+        file: {
+          filenameChars: "[:keyword:].",
+        },
+        "shell-native": {
+          shell: "zsh",
+        },
+      },
+      postFilters: ["sorter_head"],
+    });
+
+    for (
+      const filetype of [
+        "help",
+        "vimdoc",
+        "markdown",
+        "markdown_inline",
+        "gitcommit",
+        "comment",
+      ]
+    ) {
+      args.contextBuilder.patchFiletype(filetype, {
+        sources: ["around", "copilot"],
+      });
+    }
+
+    for (const filetype of ["html", "css"]) {
+      args.contextBuilder.patchFiletype(filetype, {
+        sourceOptions: {
+          _: {
+            keywordPattern: "[0-9a-zA-Z_:#-]*",
+          },
+        },
+      });
+    }
+
+    for (const filetype of ["zsh", "sh", "bash"]) {
+      args.contextBuilder.patchFiletype(filetype, {
+        sourceOptions: {
+          _: {
+            keywordPattern: "[0-9a-zA-Z_./#:-]*",
+          },
+        },
+        sources: [
+          hasWindows ? "shell" : "shell-native",
+          "around",
+        ],
+      });
+    }
+    args.contextBuilder.patchFiletype("ddu-ff-filter", {
+      sources: ["buffer"],
+      sourceOptions: {
+        _: {
+          keywordPattern: "[0-9a-zA-Z_:#-]*",
+        },
+      },
+      specialBufferCompletion: true,
+    });
+
+    for (
+      const filetype of [
+        "css",
+        "go",
+        "html",
+        "python",
+        "ruby",
+        "typescript",
+        "typescriptreact",
+        "tsx",
+        "graphql",
+        "astro",
+        "svelte",
+      ]
+    ) {
+      args.contextBuilder.patchFiletype(filetype, {
+        sources: ["copilot", "nvim-lsp", "around"],
+      });
+    }
+
+    args.contextBuilder.patchFiletype("lua", {
+      sources: ["copilot", "nvim-lsp", "nvim-lua", "around"],
+    });
+
+    // Enable specialBufferCompletion for cmdwin.
+    args.contextBuilder.patchFiletype("vim", {
+      specialBufferCompletion: true,
+    });
+  }
+}
+```
+</details>
+
+### うまくいかなくて詰まったら
+このvim駅伝を企画しているvim-jpという素敵なコミュニティがあります。Slack上で自分よりも圧倒的にVimやNeovimに詳しい方がたくさんいるなんとも素晴しいコミュニティです。なによりもddc.vimの作者のShougoさんも所属しているコミュニティでもあるので、困ったときの頼り先としてこれ以上心強い場所はありません。もし、この稚拙な記事を読んでvim-jpに興味を持たれた方がいましたらどうぞおいでください。
+
+## まとめ
+これらの手順を踏めば、macではコマンドライン補完が動作すると思います。  
+一緒に闇の力に入門しませんか？
+
+※windowsではddcの読みこみがよく失敗してしまって、うまく動作しません。解決次第追記します。
