@@ -14,20 +14,20 @@ const tabTitle = `${title} - ${SITE_TITLE}`;
 <html lang="ja">
 	<head>
 		<BaseHead title={tabTitle} description={description ? description : title} />
-		<style>
-			.title {
-				font-size: 2em;
-				margin: 0.25em 0 0;
-			}
-			hr {
-				border-top: 1px solid #ddd;
-				margin: 1rem 0;
-			}
-      #heroImage {
-        max-height: 360px;
-        height: auto;
-      }
-		</style>
+<style>
+	.title {
+		font-size: 2em;
+		margin: 0.25em 0 0;
+	}
+	hr {
+		border-top: 1px solid #ddd;
+		margin: 1rem 0;
+	}
+	#heroImage {
+		max-height: 360px;
+		height: auto;
+	}
+</style>
 	</head>
 
 	<body>
@@ -36,25 +36,25 @@ const tabTitle = `${title} - ${SITE_TITLE}`;
 			<article>
 				{heroImage && <img id="heroImage" src={heroImage} alt="" />}
 				<h1 class="title">{title}</h1>
-        {pubDate && 
-          <time>{
-            pubDate.toLocaleDateString('ja-JP'
-            , { year: "numeric", month: "2-digit", day: "2-digit"})
-            .split("/")
-            .join("-")
-          }</time>
-        }
+				{pubDate && 
+				<time>{
+					pubDate.toLocaleDateString('ja-JP'
+					, { year: "numeric", month: "2-digit", day: "2-digit"})
+					.split("/")
+					.join("-")
+					}</time>
+				}
 				{
-					updatedDate && (
-						<div>
-              Last updated on <time>{
-                updatedDate.toLocaleDateString('ja-JP'
-                , { year: "numeric", month: "2-digit", day: "2-digit"})
-                .split("/")
-                .join("-")
-              }</time>
-						</div>
-					)
+				updatedDate && (
+				<div>
+					Last updated on <time>{
+						updatedDate.toLocaleDateString('ja-JP'
+						, { year: "numeric", month: "2-digit", day: "2-digit"})
+						.split("/")
+						.join("-")
+						}</time>
+				</div>
+				)
 				}
 				<hr />
 				<slot />
