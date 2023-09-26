@@ -13,7 +13,7 @@ const tabTitle = `${title} - ${SITE_TITLE}`;
 
 <html lang="ja">
 	<head>
-		<BaseHead title={tabTitle} description={description} />
+		<BaseHead title={tabTitle} description={description ? description : title} />
 		<style>
 			.title {
 				font-size: 2em;
