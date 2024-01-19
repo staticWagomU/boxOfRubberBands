@@ -13,4 +13,9 @@ export default defineConfig({
   vite: {
     plugins: [vanillaExtractPlugin()],
   },
+  markdown: {
+    shikiConfig: {
+      theme: "github-light",
+    },
+  },
 });
