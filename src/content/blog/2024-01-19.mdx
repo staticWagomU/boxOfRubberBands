@@ -1,0 +1,36 @@
+---
+title: '全テーブルの特定日時以降のデータを削除する'
+pubDate: 2024-01-19
+published: true
+---
+
+SQL Serverを使って特定日時以降のデータを削除する必要があり、このクエリがとっても役に立った。実際に仕事で使ったときには、特定テーブルのみなのでこのクエリをそのまま使うことはなかった。実際に仕事では、全テーブルでは削除しなかった。  
+基本的にクエリを実行するためにA5M2というSQLクライアントを使用していたが、このクエリはSQL Server Management Studioを使わないと実行できなかった。
+```sql
+declare t_cursor cursor for
+select name from sys.tables
+
+open t_cursor;
+
+declare @Date datetime = '2019/01/01 00:00:00';
+declare @UserId uniqueidentifier = '00000000-0000-0000-0000-000000000000';
+
+declare @TableName nvarchar(MAX);
+
+fetch next from t_cursor into @TableName;
+
+while @@FETCH_STATUS = 0
+  begin
+    declare @Query =
+    	'DELETE FROM ' + QUOTENAME(@TableName) +
+      ' WHERE CREATED_AT >= @Date AND CREATED_BY = @UserId';
+    print '---' + char(13) + @TableName;
+    exec sp_executesql @Query, N'@Date datetime, @UserId uniqueidentifier', @Date, @UserId;
+
+    fetch next from t_cursor into @TableName;
+  end
+
+close t_cursor;
+deallocate t_cursor;
+
+```
