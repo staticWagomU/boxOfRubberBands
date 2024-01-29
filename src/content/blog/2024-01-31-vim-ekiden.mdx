@@ -1,0 +1,86 @@
+---
+title: 'windowsでdenops shared serverを使ったり使わなかったりする'
+pubDate: 2024-01-31
+published: true
+---
+
+この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2024年1月31日(水)の記事です。
+
+前回の記事は [Liquid_system](https://github.com/liquid-system) さんの「[新世代のneovimプラグインマネージャlazy.nvimの紹介](https://zenn.dev/vim_jp/articles/cd3e45f5c105ed)」という記事でした。
+
+次回の記事は 2月2日(金) に投稿される予定です。
+
+---
+
+
+## はじめに
+windows使い（WSLではない）のvimmerがdenopsプラグインを使うと、ある問題に気が付きます。それはdenopsのサービス起動がゆっくりであるためにプラグインを使えるようになるまでにすこし時間がかかってしまうということだ。
+
+この問題を解決するために多くのwindows使いのvimmerは[denops-shared-server.vim](https://github.com/vim-denops/denops-shared-server.vim)というプラグインを別途入れています。これはプラグイン名のとおり、共有サーバー を立ち上げてそのサーバーに対してVimがアクセスすることによって起動毎にdenopsのサービスを立ち上げる必要がなくなり起動速度が向上するプラグインです。
+
+しかし、shared serverを使ってもごくまれに起動速度が遅いことがります。そのようなときはPCの再起動あるいはdenops shared serverの再起動で大抵の場合復活します。それらをするのが面倒なとき自分はshread serverを介さずにNeovimを起動しています。
+
+
+## 本編
+前置きが長くなってしまいましたがここからが結論であり本編です。どうしたらdenops shared serverを使ったり使わなかったりという切り替えができるのでしょうか。
+
+nvimコマンドのヘルプをみると`--cmd`フラグをつけることによって、設定の前に`<cmd>`を実行できると書いています。
+```shell
+$ nvim -h
+Usage:
+  nvim [options] [file ...]
+
+Options:
+  --cmd <cmd>           Execute <cmd> before any config
+  +<cmd>, -c <cmd>      Execute <cmd> after config and first file
+  -l <script> [args...] Execute Lua <script> (with optional args)
+  -S <session>          Source <session> after loading the first file
+  -s <scriptin>         Read Normal mode commands from <scriptin>
+  -u <config>           Use this config file
+
+  -d                    Diff mode
+  -es, -Es              Silent (batch) mode
+  -h, --help            Print this help message
+  -i <shada>            Use this shada file
+  -n                    No swap file, use memory only
+  -o[N]                 Open N windows (default: one per file)
+  -O[N]                 Open N vertical windows (default: one per file)
+  -p[N]                 Open N tab pages (default: one per file)
+  -R                    Read-only (view) mode
+  -v, --version         Print version information
+  -V[N][file]           Verbose [level][file]
+
+  --                    Only file names after this
+  --api-info            Write msgpack-encoded API metadata to stdout
+  --clean               "Factory defaults" (skip user config and plugins, shada)
+  --embed               Use stdin/stdout as a msgpack-rpc channel
+  --headless            Don't start a user interface
+  --listen <address>    Serve RPC API from this address
+  --remote[-subcommand] Execute commands remotely on a server
+  --server <address>    Specify RPC server to send commands to
+  --startuptime <file>  Write startup timing messages to <file>
+
+See ":help startup-options" for all options.
+```
+ということは`nvim --cmd "let g:useShared=v:true"`で起動することによって`useShared`という変数を定義できるというわけです。あとは、変数がtrueになっているかを判断すればいいのでこのようなコードを書けばOSがwindows且つ、`useShared`が`true`のきにはshared serverに接続しにいくことができます。
+```lua
+if vim.uv.os_uname().sysname == "Windows_NT" and vim.g['useShared'] == true then
+  vim.g['denops_server_addr'] = '127.0.0.1:32123'
+end
+```
+
+
+shared serverを使いたいときに毎度このコマンドを打つのは非常に面倒なので、
+[Windows ユーザは cmd.exe で生きるべき 2020年版](https://mattn.kaoriya.net/software/why-i-use-cmd-on-windows-2020.htm)
+このブログ投稿を元に`init.macros`に下記のエイリアスを定義しています。
+```
+n=nvim --cmd "let g:useShared=v:true" $*
+nn=nvim $*
+```
+これにより`n`でshared serverを使って、`nn`では通常の起動ができるようになっています。
+
+
+## おわりに
+`## はじめに`でも書きましたが大抵の場合shared serverの再起動で問題は解決できるのでわざわざ`nn`からNeovimを起動することはありません。しかし稀に役に立つことがあるので残しています。
+
+今日はdenops shared serverを切り替える方法について書きました。
