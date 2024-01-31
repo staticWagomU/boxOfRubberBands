@@ -62,7 +62,7 @@ Options:
 
 See ":help startup-options" for all options.
 ```
-ということは`nvim --cmd "let g:useShared=v:true"`で起動することによって`useShared`という変数を定義できるというわけです。あとは、変数がtrueになっているかを判断すればいいのでこのようなコードを書けばOSがwindows且つ、`useShared`が`true`のきにはshared serverに接続しにいくことができます。
+ということは`nvim --cmd "let g:useShared=v:true"`で起動することによって`useShared`という変数を定義できるというわけです。あとは、変数がtrueになっているかを判断すればいいのでこのようなコードを書けばOSがWindows且つ、`useShared`が`true`のときにはshared serverに接続しにいくことができます。
 ```lua
 if vim.uv.os_uname().sysname == "Windows_NT" and vim.g['useShared'] == true then
   vim.g['denops_server_addr'] = '127.0.0.1:32123'
