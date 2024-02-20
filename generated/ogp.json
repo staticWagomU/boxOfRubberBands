@@ -3,5 +3,25 @@
     "title": "Neovim+LSPをなるべく簡単な設定で構築する",
     "description": "",
     "image": "https://res.cloudinary.com/zenn/image/upload/s--QzR5-aH3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Neovim%252BLSP%25E3%2582%2592%25E3%2581%25AA%25E3%2582%258B%25E3%2581%25B9%25E3%2581%258F%25E7%25B0%25A1%25E5%258D%2598%25E3%2581%25AA%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%25A7%25E6%25A7%258B%25E7%25AF%2589%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:botamotch%2Cx_203%2Cy_98/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FGZFp1Y3JMd1JLVk02Q194MVNrSUhXTU02Tk9BV2RQTmQ1VS1CeXNndTc5PXM5Ni1j%2Cr_max%2Cw_90%2Cx_87%2Cy_72/og-base.png"
+  },
+  "https://blog.atusy.net/2022/08/08/ctrlg-as-prefix-vim/": {
+    "title": "Vim/NeovimのCTRL_GをPrefixにしてみる",
+    "description": "CTRL_Gの機能はステータスラインで賄えるのでGit用のPrefixにしてみました",
+    "image": "https://blog.atusy.net/images/atusy-large.jpg"
+  },
+  "https://blog.atusy.net/2023/11/29/gin-diff/": {
+    "title": "gin.vimでgitの差分を快適に閲覧する",
+    "description": "2023/11/29のVim駅伝記事です。 前回はyasunori0418さんによる「vimを切っ掛けにエンジニアになった話」でした。 gin.",
+    "image": "https://blog.atusy.net/images/atusy-large.jpg"
+  },
+  "https://zenn.dev/monaqa/articles/2020-12-22-vim-abbrev": {
+    "title": "Vim の abbrev を使いこなしてみる",
+    "description": "",
+    "image": "https://res.cloudinary.com/zenn/image/upload/s--CfYEZluU--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vim%2520%25E3%2581%25AE%2520abbrev%2520%25E3%2582%2592%25E4%25BD%25BF%25E3%2581%2584%25E3%2581%2593%25E3%2581%25AA%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:monaqa%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzE3OTQ0OWFlNjYuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png"
+  },
+  "https://blog.atusy.net/2022/11/03/telescope-as-command-pallete": {
+    "title": "telescope.nvimで作る簡易コマンドパレット（VSCodeのCtrl + Shift + Pっぽいの）",
+    "description": "telescope.nvimはキーマップ、Exコマンド、ファイルなどを検索・活用するためのNeovim用プラグインです。 この内、キーマップ（",
+    "image": "https://blog.atusy.net/images/atusy-large.jpg"
   }
 }

@@ -1,0 +1,100 @@
+---
+title: 'Neovimのサブ環境を作るという選択肢'
+pubDate: 2024-02-21
+published: true
+---
+
+この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2024年2月21日(水)の記事です。
+
+前回の記事は [monaqa](https://github.com/monaqa) さんの「[Vim 駅伝にランキングページを追加しました](https://zenn.dev/vim_jp/articles/2024-02-19-vim-ekiden-add-ranking)」という記事でした。
+
+次回の記事は 2月23日(金) に投稿される予定です。
+
+---
+
+## はじめに
+Neovimのサブ環境を作りました！！
+
+## 経緯
+[v 0.9.0](https://github.com/neovim/neovim/releases/tag/v0.9.0)から[$NVIM\_APPNAME](https://github.com/neovim/neovim/commit/d34c64e342dfba9248d1055e702d02620a1b31a8#diff-6893b15a0240d31940f114149ad217c547d3263efcaa2731906ea8c8fa9d7f39)という名前で環境変数を定義することにより、複数の環境を切替えられるようになりました。無知だった私は「`$XDG_CONFIG_HOME`ってlinuxとかで見る環境変数だからWindowsで使えないじゃないか...」と思っていましたが、試してみたところWindowsでも使えたため、ウキウキでサブ環境を作りこの記事を書き始めました。  
+この記事を書くにあたって該当機能が追加されたコミットを探したところ2023/02/16のコミットでした。試してみれば分かった話なのに1年間もWindowsでも使えることに気が付かなかったようです...
+
+## 使い方
+ここが本編です。  
+ヘルプ(`:h $NVIM_APPNAME`)を確認するとこのように書かれています。
+> NVIM_APPNAME					*$NVIM_APPNAME*  
+> The standard directories can be further configured by the `$NVIM_APPNAME`  
+> environment variable. This variable controls the sub-directory that Nvim will  
+> read from (and auto-create) in each of the base directories. For example,  
+> setting `$NVIM_APPNAME` to "foo" before starting will cause Nvim to look for  
+> configuration files in `$XDG_CONFIG_HOME/foo` instead of  
+> `$XDG_CONFIG_HOME/nvim`. `$NVIM_APPNAME` must be a name, such as "foo", or a  
+> relative path, such as "foo/bar".  
+>   
+> One use-case for $NVIM_APPNAME is to "isolate" Nvim applications.  
+> Alternatively, for true isolation, on Linux you can use cgroups namespaces: >  
+>     systemd-run --user -qt -p PrivateUsers=yes -p BindPaths=/home/user/profile_xy:/home/user/.config/nvim nvim  
+>   
+> Note: Throughout the help pages, wherever `$XDG_CONFIG_…/nvim` is mentioned it  
+> is understood to mean `$XDG_CONFIG_…/$NVIM_APPNAME`.  
+
+`$NVIM_APPNAME`を定義するとNeovimが起動したときに`$XDG_CONFIG_HOME/nvim`ではなく`$XDG_CONFIG_HOME/$NVIM_APPNAME`を標準のディレクトリにするよということです。  
+よって、下記のように`$NVIM_APPNAME`環境変数をセットした後に普段どおりnvimコマンドを実行することで別の環境としてNeovimを起動することができます。私のメイン環境であるWindowsを例として取り上げるとこのように実行します。
+```cmd
+REM cmd.exe
+$ set NVIM_APPNAME=nvim-hoge&& nvim
+```
+$NVIM_APPNAMEを使って起動していることはstadpath関数を実行することで確認できます。
+```
+:echo stdpath('cache')
+C:\Users\wagomu\AppData\Local\Temp\nvim-hoge
+
+:echo stdpath('config')
+C:\Users\wagomu\AppData\Local\nvim-hoge
+
+:echo stdpath('data')
+C:\Users\wagomu\AppData\Local\nvim-hoge-data
+```
+環境変数に設定した`nvim-hoge`が使われていることを確認できました。
+
+因みにzshでは、このように実行することでNVIM_APPNAMEを使えます。
+```shell
+# zsh
+$ NVIM_APPNAME=nvim-hoge nvim
+```
+stdpath関数の実行結果は以下のようになっています。
+```
+:echo stdpath('cache')
+/Users/wagomu/.cache/nvim-hoge
+
+:echo stdpath('config')
+/Users/wagomu/.config/nvim-hoge
+
+:echo stdpath('data')
+/Users/wagomu/.local/share/nvim-hoge
+```
+
+あとは好きなように使ってください。  
+私のwindows環境では、init.macros内に下記のエイリアスを設定しており、`n2`コマンドでサブ環境が立ち上がるようになっています。
+```
+n2=set NVIM_APPNAME=nvim-v2&&nvim $*
+```
+
+一点注意点としては、vim-Plugなどのインストールスクリプトを実行するときに正しいパスになっているか確認する必要があります。  
+こちらがvim-PlugのREADMEに記載されているインストールスクリプトですが、配置先が標準の配置先である`$XDG_DATA_HOME/nvim-data`以下になっています。`$NVIM_APPNAME`に設定した値になっているのか確認したうえで実行するようにしてください。
+```
+iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
+    ni "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])/nvim-data/site/autoload/plug.vim" -Force
+```
+
+## メイン環境とサブ環境の違いは？
+メイン環境ではDark Poweredと呼ばれているShougoさんのプラグインを多く使い多くの挙動を自分で設定できる構成にしています。しかし私が闇の力にうまく適合できていないためにうまく動かないことが多々ありましたし、未だにあります。そのようなときは一部うまく動いていない状態の不完全なNeovimを使うか、涙を流しながらVSCodeを起動するという2択をせまられていました。サブ環境ではそのようなことが起こらないようにDark Powerdプラグインを採用せずにメジャーなプラグイン構成にしました
+
+| **分類** | **プラグイン名** |
+| ---- | ---- |
+| プラグインマネージャー | [tani/vim-jetpack](https://github.com/tani/vim-jetpack) |
+| 自動補完 | [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp) |
+| ff | [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) |
+
+## おわりに
+複数環境を持てるようになり、自分の世界が広がりました。これによって他人のdotfilesを試すことが容易になりました。次はmini.nvimを使った構成をサブのサブ環境として作ろうかなと考えています。  なんならサブ環境を作るのが楽しすぎてメイン環境を作りなおしたくなってきました。
