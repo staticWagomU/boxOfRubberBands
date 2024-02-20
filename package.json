@@ -9,8 +9,12 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "markuplint \"./src/**/*.astro\"",
-    "precommit": "pnpm build"
+    "markuplint": "markuplint \"./src/**/*.astro\"",
+    "lint:check": "eslint src",
+    "lint:fix": "eslint --fix src",
+    "precommit": "pnpm build",
+    "prettier:fix": "prettier --write --plugin-search-dir=. src",
+    "prettier:check": "prettier --check --plugin-search-dir=. "
   },
   "husky": {
     "hooks": {
