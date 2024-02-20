@@ -65,58 +65,51 @@ if (ogp[url]) {
   }
 }
 ---
+
 <style>
-.og_wrap {
-  width: 100%;
-  border: 1px solid #000;
-  border-radius: 4px;
-  display: flex;
-  padding: 1rem;
-  justify-content: space-between;
-  max-width: 800px;
-}
-
-.og_wrap .og_text {
-display: flex;
-flex-direction: column;
-}
-
-.og_wrap .og_text  * {
-  flex-gap: 0.5rem;
-}
-
-.og_wrap .og_text a {
-  font-weight: bold;
-}
-
-.og_wrap img {
-  max-width: 200px;
-  max-height: 150px;
-}
-
-@media (width < 800px) {
   .og_wrap {
+    width: 100%;
+    border: 1px solid #000;
+    border-radius: 4px;
+    display: flex;
+    padding: 1rem;
+    justify-content: space-between;
+    max-width: 800px;
+  }
+
+  .og_wrap .og_text {
+    display: flex;
     flex-direction: column;
   }
-}
+
+  .og_wrap .og_text * {
+    flex-gap: 0.5rem;
+  }
+
+  .og_wrap .og_text a {
+    font-weight: bold;
+  }
+
+  .og_wrap img {
+    max-width: 200px;
+    max-height: 150px;
+  }
+
+  @media (width < 800px) {
+    .og_wrap {
+      flex-direction: column;
+    }
+  }
 </style>
 
 <div class="og_wrap">
   <div class="og_text">
-    <a href={url} target="_blank" >
+    <a href={url} target="_blank">
       {title}
     </a>
     <span>
-    {
-        description && description.length > 100
-          ? `${description?.slice(0, 100)}...`
-          : description
-    }
+      {description && description.length > 100 ? `${description?.slice(0, 100)}...` : description}
     </span>
   </div>
-  {
-    image && (
-    <img src={image} alt="ogp" />
-    )
-  }
+  {image && <img src={image} alt="ogp" />}
 </div>

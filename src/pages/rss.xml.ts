@@ -18,6 +18,6 @@ export const GET: APIRoute = async function get({ site }) {
     description: "輪ゴムっていきなり切れるとびっくりするよね",
     site: site!.toString(),
     customData: `<language>ja-JP</language>`,
-    items
+    items,
   });
-}
+};

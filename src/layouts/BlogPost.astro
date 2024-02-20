@@ -1,65 +1,72 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE } from '../config.ts';
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE } from "../config.ts";
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<"blog">["data"];
 
-const {title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 const tabTitle = `${title} - ${SITE_TITLE}`;
 ---
 
 <html lang="ja">
-	<head>
-		<BaseHead title={tabTitle} description={description ? description : title} />
-<style>
-	.title {
-		font-size: 2em;
-		margin: 0.25em 0 0;
-	}
-	hr {
-		border-top: 1px solid #ddd;
-		margin: 1rem 0;
-	}
-	#heroImage {
-		max-height: 360px;
-		height: auto;
-	}
-</style>
-	</head>
+  <head>
+    <BaseHead title={tabTitle} description={description ? description : title} />
+    <style>
+      .title {
+        font-size: 2em;
+        margin: 0.25em 0 0;
+      }
+      hr {
+        border-top: 1px solid #ddd;
+        margin: 1rem 0;
+      }
+      #heroImage {
+        max-height: 360px;
+        height: auto;
+      }
+    </style>
+  </head>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				{heroImage && <img id="heroImage" src={heroImage} alt="" />}
-				<h1 class="title">{title}</h1>
-				{pubDate && 
-				<time>{
-					pubDate.toLocaleDateString('ja-JP'
-					, { year: "numeric", month: "2-digit", day: "2-digit"})
-					.split("/")
-					.join("-")
-					}</time>
-				}
-				{
-				updatedDate && (
-				<div>
-					Last updated on <time>{
-						updatedDate.toLocaleDateString('ja-JP'
-						, { year: "numeric", month: "2-digit", day: "2-digit"})
-						.split("/")
-						.join("-")
-						}</time>
-				</div>
-				)
-				}
-				<hr />
-				<slot />
-			</article>
-		</main>
-		<Footer />
-	</body>
+  <body>
+    <Header />
+    <main>
+      <article>
+        {heroImage && <img id="heroImage" src={heroImage} alt="" />}
+        <h1 class="title">{title}</h1>
+        {
+          pubDate && (
+            <time>
+              {pubDate
+                .toLocaleDateString("ja-JP", { year: "numeric", month: "2-digit", day: "2-digit" })
+                .split("/")
+                .join("-")}
+            </time>
+          )
+        }
+        {
+          updatedDate && (
+            <div>
+              Last updated on{" "}
+              <time>
+                {updatedDate
+                  .toLocaleDateString("ja-JP", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  })
+                  .split("/")
+                  .join("-")}
+              </time>
+            </div>
+          )
+        }
+        <hr />
+        <slot />
+      </article>
+    </main>
+    <Footer />
+  </body>
 </html>

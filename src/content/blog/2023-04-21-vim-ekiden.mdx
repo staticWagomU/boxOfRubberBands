@@ -1,5 +1,5 @@
 ---
-title: 'Eclipse 上で Vim ライクな操作を可能にする Vrapper を使ったはなし'
+title: "Eclipse 上で Vim ライクな操作を可能にする Vrapper を使ったはなし"
 pubDate: 2023-04-20
 published: true
 ---
@@ -22,15 +22,16 @@ Vim ライクな操作を可能にするプラグインはさまざまなエデ�
 ## 導入方法
 
 1. 「ヘルプ(H) > 新規ソフトウェアのインストール...」 を選択し、作業対象へ 「http://vrapper.sourceforge.net/update-site/stable 」 を貼り付けます。
-![作業対象へ、VrapperのURLを貼り付ける。](/images/blog/2023-04-21-vim-ekiden/001.png)
-ここで気を付けないことは、一番上の Programming Language Plugins チェックボックスを開くと、Python, Java, C の追加機能を任意で選択することができます。しかし、それぞれ依存パッケージが必要となるのでご自身で必要な機能のみを選択してください。
+   ![作業対象へ、VrapperのURLを貼り付ける。](/images/blog/2023-04-21-vim-ekiden/001.png)
+   ここで気を付けないことは、一番上の Programming Language Plugins チェックボックスを開くと、Python, Java, C の追加機能を任意で選択することができます。しかし、それぞれ依存パッケージが必要となるのでご自身で必要な機能のみを選択してください。
 
 ドキュメントでは[ここ](https://vrapper.sourceforge.net/documentation/?topic=optional_plugins#programming)に記載されています。
+
 > The CDT, JDT, and PyDev plugins access Eclipse features found only in the CDT package (C++ Development Tools) the JDT package (Java Development Tools), or PyDev package (Python Development). If you do any C++ development in Eclipse, chances are you already have CDT installed. Likewise with JDT for Java development. The Vrapper CDT plugin has a dependency on the CDT package, the Vrapper JDT plugin has a dependency on the JDT package, and the Vrapper PyDev plugin has a dependency on the PyDev package.
 
 以下、Deepl先生の翻訳です。
-> CDT、JDT、PyDevプラグインは、CDTパッケージ（C++開発ツール）、JDTパッケージ（Java開発ツール）、PyDevパッケージ（Python開発ツール）にのみ含まれるEclipseの機能にアクセスします。EclipseでC++の開発を行う場合、CDTがすでにインストールされている可能性があります。同様に、Java開発用のJDTもあります。*Vrapper CDTプラグイン*は*CDTパッケージ*に、*Vrapper JDTプラグイン*は*JDTパッケージ*に、*Vrapper PyDevプラグイン*は*PyDevパッケージ*に依存します。
-2. 必要な機能を選択し、 「次へ」 を選択、インストール完了後に Eclipse を再起動すると導入が完了します。
+
+> CDT、JDT、PyDevプラグインは、CDTパッケージ（C++開発ツール）、JDTパッケージ（Java開発ツール）、PyDevパッケージ（Python開発ツール）にのみ含まれるEclipseの機能にアクセスします。EclipseでC++の開発を行う場合、CDTがすでにインストールされている可能性があります。同様に、Java開発用のJDTもあります。*Vrapper CDTプラグイン*は*CDTパッケージ*に、*Vrapper JDTプラグイン*は*JDTパッケージ*に、*Vrapper PyDevプラグイン*は*PyDevパッケージ*に依存します。2. 必要な機能を選択し、 「次へ」 を選択、インストール完了後に Eclipse を再起動すると導入が完了します。
 
 ## 設定
 
@@ -98,7 +99,6 @@ Eclipse の設定で競合したショートカットキーを別のキーへ設
 ## おわりに
 
 最低限の Vim キーバインドが使えたら十分です！という人にはおすすめできるプラグインです。
-
 
 ## 変更履歴
 

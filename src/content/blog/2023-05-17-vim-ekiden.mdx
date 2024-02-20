@@ -1,13 +1,15 @@
 ---
-title: 'Neovim+LSPをなるべく簡単な設定で構築する ~ Lazy.nvim編 ~'
+title: "Neovim+LSPをなるべく簡単な設定で構築する ~ Lazy.nvim編 ~"
 pubDate: 2023-05-17
 published: true
 ---
+
 import OG from "../../components/OG.astro";
 
- この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2023年05月17日の記事です。
+この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2023年05月17日の記事です。
 
 ## はじめに
+
 現在、私はNeovimの設定ファイルを吹き飛ばして一からプラグインの選定、設定を行っています。そしてLSP周りのプラグインの選定や設定を探していたところこのような記事を見つけました。
 
 <OG url="https://zenn.dev/botamotch/articles/21073d78bc68bf" />
@@ -35,12 +37,9 @@ import OG from "../../components/OG.astro";
 
 ![補完](/images/blog/2023-05-17-vim-ekiden/img03.png)
 
-
-
 NVIM v0.10.0
 
 Windows 11
-
 
 ```lua
 -- init.lua
@@ -107,7 +106,6 @@ require("lazy").setup( {
   }
 })
 ```
-
 
 ### おわりに
 

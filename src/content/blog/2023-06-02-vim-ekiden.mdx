@@ -1,8 +1,9 @@
 ---
-title: 'キーマッピングを設定しないVimmerが居たっていい'
+title: "キーマッピングを設定しないVimmerが居たっていい"
 pubDate: 2023-06-01
 published: true
 ---
+
 import OG from "../../components/OG.astro";
 
 この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2023年06月02日の記事です。
@@ -38,24 +39,27 @@ import OG from "../../components/OG.astro";
 そして最近、某-jpのtimesチャンネルでキーマッピングの模索をしてたときに、複数の方から「自分はこういう運用をしているよ。」というのを教えてもらいました。
 
 [atusy](https://github.com/atusy)さんは、
+
 <OG url="https://blog.atusy.net/2022/11/03/telescope-as-command-pallete" />
 に書いてあるように、[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)を使ってVSコードのコマンドパレットのようなものを再現していました。
 
 [yuki yano](https://github.com/yuki-yano)さんは、[lexima](https://github.com/cohama/lexima.vim)を拡張して、EXコマンドを自動展開させる[lexima-alter-command.vim](https://github.com/yuki-yano/lexima-alter-command.vim)というプラグインを使っているとのことでした。
 
 そして[monaqa](https://github.com/monaqa)さんは、
+
 <OG url="https://zenn.dev/monaqa/articles/2020-12-22-vim-abbrev" />
 に書いてあるように、プラグインを使わず`cabbrev`コマンドを使うことによって[yuki yano](https://github.com/yuki-yano)さんとほぼ同等のことを実現していました。
 
 また、これを書いている今日、[kuu](https://github.com/kuuote)さんはコマンド補完と`cmdwin`を使っているということを教えてもらいました。
 
-
 ## どれがいいだろう？
+
 自分はアドバイスをもらったらとりあえずやってみるタイプなので、これらを試そうと思っています。(やることがたまりすぎていて、まだ試せていません)
 
 今回のプラグイン選定では[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)ではなく[ddu.vim](https://github.com/Shougo/ddu.vim)を使おうと思っているので、dduでキーマッピングを引っぱってくるソースを作ろうと思います。
 
 ## まとめ
+
 いかがでしたか？
 
 全く話が着地していませんが、自分の思いとしてはこれからもあまりキーマッピングは設定しない方向性を続けていこうと思います。なにか進展があれば報告しようと思います。
