@@ -1,0 +1,75 @@
+---
+title: 'mini.depsが初心者にも扱いやすいのではないかという提案'
+pubDate: 2024-03-29
+published: true
+---
+
+import OG from "../../components/OG.astro";
+
+この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2024年3月29日(金)の記事です。
+
+前回の記事は [tadashi-aikawa](https://github.com/tadashi-aikawa) さんの「[📘あまり紹介されていないけど かけがえのないNeovimプラグインたち - Minerva](https://minerva.mamansoft.net/%F0%9F%93%98Articles/%F0%9F%93%98%E3%81%82%E3%81%BE%E3%82%8A%E7%B4%B9%E4%BB%8B%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%81%AA%E3%81%84%E3%81%91%E3%81%A9+%E3%81%8B%E3%81%91%E3%81%8C%E3%81%88%E3%81%AE%E3%81%AA%E3%81%84Neovim%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%9F%E3%81%A1)」という記事でした。
+
+次回の記事は 4月1日(月) に投稿される予定です。
+
+---
+
+## はじめに
+タイトルの通りです。
+初心者向けのNeovimのプラグインマネージャーとしてよく選択肢に上がるのはこの２つだと思います。
+- VimPlug
+- Lazy.nvim
+
+その中にmini.depsも加えてもよいのではないかと思い記事を書くことにしました。
+
+mini.depsのレポジトリはこちらです。  
+
+<OG url="https://github.com/echasnovski/mini.deps" />
+
+
+## mini.depsが合うであろう人
+- 最低限の機能を持ったlua製プラグインマネージャーを探している
+- 遅延について詳しくない／遅延読み込みする気があまりない
+
+## mini.depsとは
+プラグインマネージャーです。
+mini.nvimという小さなプラグインが沢山集まっているプラグイン集の一つで先月公開された新作です。
+## mini.depsの特徴
+### シンプルで軽量
+mini.depsはシンプルで軽量なプラグインマネージャーです。必要最低限の機能に絞られているため、設定方法に悩むことなく使い始めることができます。
+
+### 導入が簡単
+Lazy.nvimと同様に、インストールするためのLuaコードが提供されています。初心者でも`init.lua`にコードを貼り付けるだけで導入できる点が嬉しいポイントです。具体的には、以下のコードを`init.lua`の先頭付近に貼り付けてNeovimを再起動するだけで使い始められます。
+```lua
+local path_package = vim.fn.stdpath('data') .. '/site/'
+local mini_path = path_package .. 'pack/deps/start/mini.deps'
+-- mini.depsだけではなくてmini.nvimを入れたい場合はこっち↓
+-- local mini_path = path_package .. 'pack/deps/start/mini.nvim'
+if not vim.loop.fs_stat(mini_path) then
+  vim.cmd('echo "Installing `mini.deps`" | redraw')
+  local clone_cmd = {
+    'git', 'clone', '--filter=blob:none',
+    'https://github.com/echasnovski/mini.deps', mini_path
+  }
+  vim.fn.system(clone_cmd)
+  vim.cmd('packadd mini.deps | helptags ALL')
+  vim.cmd('echo "Installed `mini.deps`" | redraw')
+end
+
+require('mini.deps').setup({ path = { package = path_package } })
+```
+
+### シンプルな遅延
+mini.depsでは、遅延読み込みのために`MiniDeps.now()`と`MiniDeps.later()`の2つの関数が用意されています。しかし、`MiniDeps.now()`は安全に呼び出すだけなのでもはや遅延ではなく、実質のところ遅延読み込みさせたい場合に使う関数は`MiniDeps.later()`のみです。
+
+使い分けとしては`MiniDeps.now()`には起動直後に読み込みたいプラグインを、`MiniDeps.later()`には起動直後じゃなくてもいいプラグインを指定します。
+
+### 作者のnvimの設定が公開されている
+これは結構大きいです。mini.nvimの作者がmini.depsを使った設定ファイルを公開しています。これを見ることで実際の使い方を知ることができる点も良いところです。
+https://github.com/echasnovski/nvim/blob/a3916554cb3cada94b7c4a1f7a1c4d6ab4e8b558/init.lua
+
+## まとめ
+
+mini.depsは、Neovimを触り始めたばかりの初心者にもおすすめできるシンプルで扱いやすいプラグインマネージャーです。
+
+mini.depsはいいぞ
