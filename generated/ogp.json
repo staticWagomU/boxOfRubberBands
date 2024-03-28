@@ -23,5 +23,10 @@
     "title": "telescope.nvimで作る簡易コマンドパレット（VSCodeのCtrl + Shift + Pっぽいの）",
     "description": "telescope.nvimはキーマップ、Exコマンド、ファイルなどを検索・活用するためのNeovim用プラグインです。 この内、キーマップ（",
     "image": "https://blog.atusy.net/images/atusy-large.jpg"
+  },
+  "https://github.com/echasnovski/mini.deps": {
+    "title": "GitHub - echasnovski/mini.deps: Plugin manager. Part of 'mini.nvim' library.",
+    "description": "Plugin manager. Part of 'mini.nvim' library. . Contribute to echasnovski/mini.deps development by creating an account on GitHub.",
+    "image": "https://repository-images.githubusercontent.com/755881626/4e85c613-c089-48da-8cca-918fefded1f0"
   }
 }
