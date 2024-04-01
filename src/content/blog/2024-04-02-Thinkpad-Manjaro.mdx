@@ -1,0 +1,84 @@
+---
+title: "ThinkpadT14Gen3にManjaroを入れる"
+pubDate: 2024-04-02
+published: true
+---
+
+## はじめに
+Ubuntu 22.0.4LTSを入れていたThinkpadにManjaroを入れた。
+その過程を残しておく
+
+## インストールメディアの作成
+インストールメディアはwindowsPCから作成する
+
+### ISOのダウンロード
+https://manjaro.org/download/ に飛んでSWAY WINDOW MANAGERを選択  
+[![Manjaro Downloadsページ](/images/blog/2024-04-02-Thinkpad-Manjaro/img01.png)](https://manjaro.org/download/) 
+
+ISOイメージが欲しいので「manjaro-sway-22.1.2-240331-linux66.iso」をダウンロード  
+[![manjaro-sway-22.1.2-240331-linux66.isoを選択](/images/blog/2024-04-02-Thinkpad-Manjaro/img02.png)](https://manjaro-sway.download/)
+
+
+### Rufsを入れる
+USBメディアを作成するためにRufsというソフトをインストールする。  
+[「Rufus」ブート可能なISOイメージファイルをもとにブータブルUSBメモリを簡単に作成 - 窓の杜](https://forest.watch.impress.co.jp/library/software/rufus/)
+
+「選択」からISOイメージを選択して、スタートを選択  
+![Rufsを起動してISOイメージを選択した状態](/images/blog/2024-04-02-Thinkpad-Manjaro/img03.png)  
+状態のプログレスバーが全部緑になればUSBメディアの作成は完了。USBメモリが取り外された状態になるため、そのままPCから抜いても大丈夫。    
+![ISOイメージの書き込みが完了した状態](/images/blog/2024-04-02-Thinkpad-Manjaro/img04.png)
+
+## Manjaroのインストール
+
+### 起動時の優先順位を変更
+ThinkpadへUSBメモリを指してから電源を入れる。  
+Thinkpadの画面を起動するときにピッという音が鳴るまで「F1」キーを連打する。  
+![ThinkPad起動時の画面](/images/blog/2024-04-02-Thinkpad-Manjaro/img23.png)  
+
+このような画面に移動すると成功。左側の「Startup」を選択し、一番上の「Boot」を選択する。  
+![BIOS画面](/images/blog/2024-04-02-Thinkpad-Manjaro/img05.png)  
+USBメモリを一番上に持ってくる。  
+![BIOS画面のBoot](/images/blog/2024-04-02-Thinkpad-Manjaro/img06.png)  
+右下の「Save and Exit」を選択して再起動する。
+
+### Manjaroのインストール
+
+![boot 画面](/images/blog/2024-04-02-Thinkpad-Manjaro/img11.png)  
+このような画面が出た後で、インストール画面になる。
+![manjaroのインストール画面](/images/blog/2024-04-02-Thinkpad-Manjaro/img07.png)  
+「tz=UTC」エンターキーを押す。  
+![manjaroのインストール画面 timezoneを変更](/images/blog/2024-04-02-Thinkpad-Manjaro/img08.png)  
+「Asia」でエンターキーを押す。  
+![manjaroのインストール画面 asiaを選択](/images/blog/2024-04-02-Thinkpad-Manjaro/img09.png)  
+「Asia/Tokyo」でエンターキーを押す。  
+![manjaroのインストール画面 asia/tokyoを選択](/images/blog/2024-04-02-Thinkpad-Manjaro/img09.png)  
+「Boot with open source drivers」でエンターキーを押す。  
+![manjaroのインストール画面 "Boot with open source drivers"を選択](/images/blog/2024-04-02-Thinkpad-Manjaro/img10.png)  
+「次へ」を押す。
+![manjaroのインストール画面 "日本語"を選択](/images/blog/2024-04-02-Thinkpad-Manjaro/img12.png)  
+タイムゾーンがTokyoを選択されていることを確認して「次へ」を押す。  
+![manjaroのインストール画面 ロケーション](/images/blog/2024-04-02-Thinkpad-Manjaro/img13.png)  
+キーボードを「Japanese」の「Default」を選択して「次へ」を押す。  
+※  画面下部にある「ここでタイプしてキーボードをテストしてください」に入力してみるとわかりますが、この時点ではUS配列になっているので気を付けてください。
+![manjaroのインストール画面 キーボード](/images/blog/2024-04-02-Thinkpad-Manjaro/img14.png)  
+今回はパーティションを分けないので「ディスクの消去」を選択して「次へ」を押す。
+![manjaroのインストール画面 パーティション](/images/blog/2024-04-02-Thinkpad-Manjaro/img15.png)  
+ユーザー情報を入力して「次へ」を押す。  
+先ほども書いたとおりこの時点ではUS配列になっているので、パスワードを入力する前にフルネームを入力する欄などで自分の設定したいパスワードを正しく入力できるか確認してからパスワードを設定してください。自分はこれに気が付かず3回ほど再インストールをしました。
+![manjaroのインストール画面 ユーザー情報](/images/blog/2024-04-02-Thinkpad-Manjaro/img16.png)  
+「次へ」を押す。
+![manjaroのインストール画面 要約](/images/blog/2024-04-02-Thinkpad-Manjaro/img17.png)  
+「いますぐインストール」を押す。
+![manjaroのインストール画面 インストール](/images/blog/2024-04-02-Thinkpad-Manjaro/img18.png)  
+待つ。
+![manjaroのインストール画面 インストール](/images/blog/2024-04-02-Thinkpad-Manjaro/img19.png) 
+「今すぐ再起動」にチェックを入れて、右下の「実行」を押す。 
+![manjaroのインストール画面 終了](/images/blog/2024-04-02-Thinkpad-Manjaro/img20.png)  
+再起動が完了するとこのような画面になるので、パスワードを入力してエンターキーを押す。
+![manjaroのログイン画面](/images/blog/2024-04-02-Thinkpad-Manjaro/img21.png)  
+インストール完了
+![manjaroのデスクトップ画面](/images/blog/2024-04-02-Thinkpad-Manjaro/img22.png)  
+
+## おわりに
+入れるだけであれば、UbuntuやWindowsと変わらず簡単だった。  
+ここから先が長そうだな...
