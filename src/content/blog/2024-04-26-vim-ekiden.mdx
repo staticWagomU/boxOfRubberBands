@@ -90,22 +90,15 @@ vim.opt.number = true
 
 require('mini.deps').setup { path = { package = path_package } }
 
-local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
-local opts = { noremap = true, silent = true }
-local bufopts = { noremap = true, buffer = true }
-
--- gin.vimの前提プラグインの導入
-now(function()
-  add('vim-denops/denops.vim')
-end)
+local add, later = MiniDeps.add, MiniDeps.later
+local opts = { noremap = true }
 
 later(function()
   add('lewis6991/gitsigns.nvim')
-  local gitsigns = require('gitsigns')
-  gitsigns.setup({
+  require('gitsigns').setup({
     signcolumn = false,
     numhl      = true,
-  })jk
+  })
 end)
 
 later(function()
@@ -239,6 +232,7 @@ later(function()
 + vim.keymap.set('n', '<C-g><C-s>', '<Cmd>GinStatus<Cr>', opts)
 + vim.keymap.set('n', '<C-g><C-b>', '<Cmd>GinBranch<Cr>', opts)
 + vim.keymap.set('n', '<C-g><C-l>', '<Cmd>GinLog<Cr>', opts)
++ vim.keymap.set('n', '<C-g>c', '<Cmd>Gin commit<Cr>', opts)
 end)
 
 ```
