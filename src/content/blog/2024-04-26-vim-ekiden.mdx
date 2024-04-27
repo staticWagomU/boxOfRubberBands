@@ -33,7 +33,7 @@ windowsユーザーの皆さんすみません！！！windowsでは起動速度
 <OG url="https://github.com/staticWagomU/neovim-as-a-git-tool" />
 
 ## 実際の操作
-![](/images/blog/2024-04-26-vim-ekiden/20240426-0805-44.gif)
+![](/images/blog/2024-04-26-vim-ekiden/20240426-0805-44.gif)  
 
 ## 必要なもの
 ###  Neovim
@@ -122,30 +122,31 @@ end)
 vim.cmd.colorscheme('habamax')
 ```
 
-再度nvimを開くとプラグインのインストールが始まり、このような画面になればプラグインのインストールが完了です。
+
+再度nvimを開くとプラグインのインストールが始まり、このような画面になればプラグインのインストールが完了です。  
 ![Pasted image 20240425172830.png](/images/blog/2024-04-26-vim-ekiden/image20240425172830.png)  
-一度`:q<Cr>`でNeovimを終了してgitで管理しているディレクトリからnvimコマンドでNeovimを起動します。`git status -sb`の実行結果のような画面になれば成功です。
+一度`:q<Cr>`でNeovimを終了してgitで管理しているディレクトリからnvimコマンドでNeovimを起動します。`git status -sb`の実行結果のような画面になれば成功です。  
 ![Pasted image 20240425172830.png](/images/blog/2024-04-26-vim-ekiden/image20240425172952.png)  
-git管理していないディレクトリでNeovimを起動すると画面下部にエラーが表示されます。
+git管理していないディレクトリでNeovimを起動すると画面下部にエラーが表示されます。  
 ![Pasted image 20240425172830.png](/images/blog/2024-04-26-vim-ekiden/image20240425172916.png)  
 
 ## 各プラグインの役割
  
 `必要なプラグイン`で導入するプラグインの軽い説明をしましたが、もう少し具体的に説明します。
 ### gin.vim
-git操作全般を担当するプラグイン。
+git操作全般を担当するプラグイン。  
 ファイルのステージ/アンステージ等の基本的な操作ははもちろんのこと、`:Gin hoge`と実行することで`git hoge`を実行できるので、ターミナルに戻ることなく任意のgitコマンド実行ができる優れもの。
 
 ### gitsigns.nvim
-主にhunk単位での操作を行うために使います。
+主にhunk単位での操作を行うために使います。  
 具体的にはhunk単位でのステージ／アンステージや、blameの確認、hunkの差分の確認ができます。
 
 ## 基本操作編
 
 ### gin.vim
-`:Gin`と入力した状態で`<C-d>`(Ctrlキーを押しながらdキーを押す)を押すとGinから始まるコマンド一覧を確認できます。
+`:Gin`と入力した状態で`<C-d>`(Ctrlキーを押しながらdキーを押す)を押すとGinから始まるコマンド一覧を確認できます。  
 ![Pasted image 20240425172830.png](/images/blog/2024-04-26-vim-ekiden/image20240425223451.png)  
-私がよく使う機能としては
+私がよく使う機能としては  
 - `git`コマンド相当の`Gin`
 - `git log`相当の`GinLog`
 - `git branch`相当の`GinBranch`
@@ -157,28 +158,28 @@ git操作全般を担当するプラグイン。
 
 試しに`:GinLog<Cr>`を実行します。  
 このようにターミナルの実行結果がそのままNeovim内で見られます。いいですね。  
-commitのハッシュが書いてある行で`<Cr>`を押すとそのcommitの詳細を確認することができます。
+commitのハッシュが書いてある行で`<Cr>`を押すとそのcommitの詳細を確認することができます。  
 ![Pasted image 20240425172830.png](/images/blog/2024-04-26-vim-ekiden/image20240425223849.png)  
-この画面で`a`と入力すると画面下部に`action:`と表示されます。
+この画面で`a`と入力すると画面下部に`action:`と表示されます。  
 ![Pasted image 20240425172830.png](/images/blog/2024-04-26-vim-ekiden/image20240425224530.png)  
-この状態で`<C-d>`を押すと`GinLog`内で実行できる様々なアクションを確認することができます。
+この状態で`<C-d>`を押すと`GinLog`内で実行できる様々なアクションを確認することができます。  
 ![Pasted image 20240425172830.png](/images/blog/2024-04-26-vim-ekiden/image20240425224634.png)  
 このように`GinLog`では様々なアクションを実行することができます。  
-おすすめのアクションは`fixup:instant-fixup`です。詳細についてはこちらの記事に委ねます。
+おすすめのアクションは`fixup:instant-fixup`です。詳細についてはこちらの記事に委ねます。  
 <OG url="https://blog.atusy.net/2024/03/15/instant-fixup-with-gin-vim/" />  
 
-`a`を押してアクションを選択することは`GinStatus`と`GinBranch`でもできるので確認してみてください。
+`a`を押してアクションを選択することは`GinStatus`と`GinBranch`でもできるので確認してみてください。  
 
 
 基本操作編にもかかわらず、ファイルのステージングの方法を書いていませんでした。
-`:GinStatus<Cr>`を実行するとこのような画面になります。
+`:GinStatus<Cr>`を実行するとこのような画面になります。  
 ![Pasted image 20240425172830.png](/images/blog/2024-04-26-vim-ekiden/image20240425172952.png)  
-ステージングしたいファイルの行で`<<`を押すことでステージングすることができます。
+ステージングしたいファイルの行で`<<`を押すことでステージングすることができます。  
 アンステージングは`>>`で行うことができます。
 
 
-初期設定されているキーマッピングについては`?`を押すことで確認することができます。
-![](/images/blog/2024-04-26-vim-ekiden/20240426171529.png)
+初期設定されているキーマッピングについては`?`を押すことで確認することができます。  
+![](/images/blog/2024-04-26-vim-ekiden/20240426171529.png)  
 
 
 gin.vimのヘルプを見たい方は、`:h gin.txt<Cr>`で確認してみてください。
