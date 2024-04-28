@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
+import remarkBreaks from "remark-breaks";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 
@@ -14,6 +15,7 @@ export default defineConfig({
     plugins: [vanillaExtractPlugin()],
   },
   markdown: {
+    remarkPlugins: [remarkBreaks],
     shikiConfig: {
       theme: "github-light",
     },
