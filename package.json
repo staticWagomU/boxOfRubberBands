@@ -27,7 +27,8 @@
     "@astrojs/sitemap": "^3.1.4",
     "@vanilla-extract/css": "^1.13.0",
     "astro": "^4.7.0",
-    "mdx": "^0.3.1"
+    "mdx": "^0.3.1",
+    "remark-breaks": "^4.0.0"
   },
   "devDependencies": {
     "@markuplint/astro-parser": "^4.0.0",
