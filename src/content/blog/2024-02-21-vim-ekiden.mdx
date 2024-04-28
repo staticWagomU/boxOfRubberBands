@@ -18,30 +18,30 @@ Neovimのサブ環境を作りました！！
 
 ## 経緯
 
-[v 0.9.0](https://github.com/neovim/neovim/releases/tag/v0.9.0)から[$NVIM_APPNAME](https://github.com/neovim/neovim/commit/d34c64e342dfba9248d1055e702d02620a1b31a8#diff-6893b15a0240d31940f114149ad217c547d3263efcaa2731906ea8c8fa9d7f39)という名前で環境変数を定義することにより、複数の環境を切替えられるようになりました。無知だった私は「`$XDG_CONFIG_HOME`ってlinuxとかで見る環境変数だからWindowsで使えないじゃないか...」と思っていましたが、試してみたところWindowsでも使えたため、ウキウキでサブ環境を作りこの記事を書き始めました。  
+[v 0.9.0](https://github.com/neovim/neovim/releases/tag/v0.9.0)から[$NVIM_APPNAME](https://github.com/neovim/neovim/commit/d34c64e342dfba9248d1055e702d02620a1b31a8#diff-6893b15a0240d31940f114149ad217c547d3263efcaa2731906ea8c8fa9d7f39)という名前で環境変数を定義することにより、複数の環境を切替えられるようになりました。無知だった私は「`$XDG_CONFIG_HOME`ってlinuxとかで見る環境変数だからWindowsで使えないじゃないか...」と思っていましたが、試してみたところWindowsでも使えたため、ウキウキでサブ環境を作りこの記事を書き始めました。
 この記事を書くにあたって該当機能が追加されたコミットを探したところ2023/02/16のコミットでした。試してみれば分かった話なのに1年間もWindowsでも使えることに気が付かなかったようです...
 
 ## 使い方
 
-ここが本編です。  
+ここが本編です。
 ヘルプ(`:h $NVIM_APPNAME`)を確認するとこのように書かれています。
 
-> NVIM*APPNAME *$NVIM_APPNAME_  
+> NVIM*APPNAME *$NVIM_APPNAME_
 > The standard directories can be further configured by the `$NVIM_APPNAME` 
-environment variable. This variable controls the sub-directory that Nvim will  
-read from (and auto-create) in each of the base directories. For example,  
-setting`$NVIM_APPNAME` to "foo" before starting will cause Nvim to look for  
-> configuration files in `$XDG_CONFIG_HOME/foo`instead of  `$XDG_CONFIG_HOME/nvim`. `$NVIM_APPNAME` must be a name, such as "foo", or a  
+environment variable. This variable controls the sub-directory that Nvim will
+read from (and auto-create) in each of the base directories. For example,
+setting`$NVIM_APPNAME` to "foo" before starting will cause Nvim to look for
+> configuration files in `$XDG_CONFIG_HOME/foo`instead of  `$XDG_CONFIG_HOME/nvim`. `$NVIM_APPNAME` must be a name, such as "foo", or a
 > relative path, such as "foo/bar".
 >
-> One use-case for $NVIM_APPNAME is to "isolate" Nvim applications.  
-> Alternatively, for true isolation, on Linux you can use cgroups namespaces: >  
+> One use-case for $NVIM_APPNAME is to "isolate" Nvim applications.
+> Alternatively, for true isolation, on Linux you can use cgroups namespaces: >
 >  systemd-run --user -qt -p PrivateUsers=yes -p BindPaths=/home/user/profile_xy:/home/user/.config/nvim nvim
 >
-> Note: Throughout the help pages, wherever `$XDG_CONFIG_…/nvim` is mentioned it  
+> Note: Throughout the help pages, wherever `$XDG_CONFIG_…/nvim` is mentioned it
 > is understood to mean `$XDG_CONFIG_…/$NVIM_APPNAME`.
 
-`$NVIM_APPNAME`を定義するとNeovimが起動したときに`$XDG_CONFIG_HOME/nvim`ではなく`$XDG_CONFIG_HOME/$NVIM_APPNAME`を標準のディレクトリにするよということです。  
+`$NVIM_APPNAME`を定義するとNeovimが起動したときに`$XDG_CONFIG_HOME/nvim`ではなく`$XDG_CONFIG_HOME/$NVIM_APPNAME`を標準のディレクトリにするよということです。
 よって、下記のように`$NVIM_APPNAME`環境変数をセットした後に普段どおりnvimコマンドを実行することで別の環境としてNeovimを起動することができます。私のメイン環境であるWindowsを例として取り上げるとこのように実行します。
 
 ```cmd
@@ -84,14 +84,14 @@ stdpath関数の実行結果は以下のようになっています。
 /Users/wagomu/.local/share/nvim-hoge
 ```
 
-あとは好きなように使ってください。  
+あとは好きなように使ってください。
 私のwindows環境では、init.macros内に下記のエイリアスを設定しており、`n2`コマンドでサブ環境が立ち上がるようになっています。
 
 ```
 n2=set NVIM_APPNAME=nvim-v2&&nvim $*
 ```
 
-一点注意点としては、vim-Plugなどのインストールスクリプトを実行するときに正しいパスになっているか確認する必要があります。  
+一点注意点としては、vim-Plugなどのインストールスクリプトを実行するときに正しいパスになっているか確認する必要があります。
 こちらがvim-PlugのREADMEに記載されているインストールスクリプトですが、配置先が標準の配置先である`$XDG_DATA_HOME/nvim-data`以下になっています。`$NVIM_APPNAME`に設定した値になっているのか確認したうえで実行するようにしてください。
 
 ```

@@ -73,7 +73,7 @@ Run ":verbose version" for more info
 - [uga-rosa/ddc-source-nvim-lua](https://github.com/uga-rosa/ddc-source-nvim-lua)
   - nvimのlua関数の補完
 
-他のソースを探したい人は以下のリンクを参照してください。  
+他のソースを探したい人は以下のリンクを参照してください。
 [ddc-source · GitHub Topics · GitHub](https://github.com/topics/ddc-source)
 
 ### フィルターの選定
@@ -92,18 +92,18 @@ Run ":verbose version" for more info
 - [Shougo/ddc-filter-matcher_prefix](https://github.com/Shougo/ddc-filter-matcher_prefix)
 - [Shougo/ddc-filter-sorter_rank](https://github.com/Shougo/ddc-filter-sorter_rank)
 
-他のフィルターを探したい人は以下のリンクを参照してください。  
+他のフィルターを探したい人は以下のリンクを参照してください。
 [ddc-filter · GitHub Topics · GitHub](https://github.com/topics/ddc-filter)
 
 ## いざ設定開始!
 
-使いたいソースとフィルターがそろったので、設定を書き始めます。Shougoさんのプラグインの設定を書くにあたって**必要なもの**と**あると便利なもの**があります。  
-必要なものは、導入したプラグインのヘルプです。  
+使いたいソースとフィルターがそろったので、設定を書き始めます。Shougoさんのプラグインの設定を書くにあたって**必要なもの**と**あると便利なもの**があります。
+必要なものは、導入したプラグインのヘルプです。
 あると便利なものはShougoさん本人のdotfiles通称リファレンス実装と言われているものです。導入したプラグインのヘルプを読むことは勿論大事ですが、リファレンス実装を読むことでそれぞれの機能がどう使われているのか等の大枠をぱっと確認できて非常に有用です。
 
 ### tsファイル読み込みで詰まった
 
-これはリファレンス実装を頼りにしすぎたことと、Vimscriptに関する知識不足によって発生した問題なのですが、ddc#custom#load_config関数でtsファイルが読み込めませんでした。ShougoさんはVimscriptでtsファイルのあるディレクトリを環境変数として利用していました。しかし、自分がluaで設定を書いているのが影響したのかvim.fs.joinpath関数内で環境変数が展開されず、うまく読み込むことができないという問題が起こりました。  
+これはリファレンス実装を頼りにしすぎたことと、Vimscriptに関する知識不足によって発生した問題なのですが、ddc#custom#load_config関数でtsファイルが読み込めませんでした。ShougoさんはVimscriptでtsファイルのあるディレクトリを環境変数として利用していました。しかし、自分がluaで設定を書いているのが影響したのかvim.fs.joinpath関数内で環境変数が展開されず、うまく読み込むことができないという問題が起こりました。
 この問題は、stdpath('config')起点でパスを結合させることによって解決しました。
 
 ```lua
@@ -422,12 +422,12 @@ export class Config extends BaseConfig {
 
 このvim駅伝を企画しているvim-jpという素敵なコミュニティがあります。Slack上で自分よりも圧倒的にVimやNeovimに詳しい方がたくさんいるなんとも素晴しいコミュニティです。なによりもddc.vimの作者のShougoさんも所属しているコミュニティでもあるので、困ったときの頼り先としてこれ以上心強い場所はありません。もし、この稚拙な記事を読んでvim-jpに興味を持たれた方がいましたらどうぞおいでください。
 
-2023/09/22追記：  
+2023/09/22追記：
 vim-jpのSlackには#tech-shougowareというチャンネルがあり、そこではShougoさん作のプラグインに関連する相談や話がされています。もしSlackには入った際には是非このチャンネルものぞいてみてください。
 
 ## まとめ
 
-これらの手順を踏めば、macではコマンドライン補完が動作すると思います。  
+これらの手順を踏めば、macではコマンドライン補完が動作すると思います。
 一緒に闇の力に入門しませんか？
 
 ※windowsではddcの読みこみがよく失敗してしまって、うまく動作しません。解決次第追記します。
