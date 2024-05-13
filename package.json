@@ -22,11 +22,11 @@
     }
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.3.1",
+    "@astrojs/mdx": "^3.0.0",
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.1.4",
     "@vanilla-extract/css": "^1.13.0",
-    "astro": "^4.7.0",
+    "astro": "^4.8.2",
     "mdx": "^0.3.1",
     "remark-breaks": "^4.0.0"
   },
