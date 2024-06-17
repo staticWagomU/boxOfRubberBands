@@ -1,0 +1,49 @@
+---
+title: "dduでお気に入りリストを実現させるためにddu-filterを作った"
+pubDate: 2024-06-17
+published: true
+---
+import OG from "../../components/OG.astro";
+
+この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2024年6月17日(月)の記事です。
+
+前回の記事は [kyoh86](https://github.com/kyoh86) さんの「[最近のvimいじり](https://zenn.dev/vim_jp/articles/31e88eec330508)」という記事でした。
+
+次回の記事は 5月20日(月) に投稿される予定です。
+
+---
+
+
+## 概要
+- dduのpatch_localをお気に入りリストとして使おうと思い、[ddu-source-patch_local](https://github.com/staticWagomU/ddu-source-patch_local)というソースを作った
+- しかし、patch_localとお気に入りは別物だと気づいた
+- であれば、お気に入りには接頭語をつけてそれだけを表示させるフィルターを作ればいいのではと思い、[ddu-filter-matcher-specific-items](https://github.com/staticWagomU/ddu-filter-matcher-specific-items)を作った
+
+## 紹介
+
+<OG url="https://github.com/staticWagomU/ddu-filter-matcher-specific-items" />
+
+というプラグインを作りました。
+
+READMEにあるように、`startsWith`に指定した文字列で始まる項目だけを表示させるフィルターです。
+```vim
+call ddu#custom#patch_global(#{
+    \   filterParams: #{
+    \     matcher_specific_items: #{
+    \       startsWith: '_',
+    \     },
+    \   }
+    \ })
+```
+
+このフィルターにはmatchedHilightは実装していないので、必要な際にはmatcher_substring等を併用してください。
+あくまで、このフィルターは特定の項目だけを表示させるためのフィルターとして作りました。
+
+## デモ
+![](/images/blog/2024-06-17-vim-ekiden/Animation.gif)
+
+
+
+## おわりに
+
+やりたいことが直ぐに実現できてニッコリです。
