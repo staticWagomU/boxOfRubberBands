@@ -53,6 +53,90 @@ const posts = (await getCollection("blog")).sort(
           <td></td>
         </tr>
         {
+          import.meta.env.DEV && (
+            <tr>
+              <td>
+                <hr />
+              </td>
+              <td>
+                非公開記事
+              </td>
+              <td>
+                <hr />
+              </td>
+              <td>
+                <hr />
+              </td>
+              <td>
+                <hr />
+              </td>
+            </tr>
+          )
+        }
+        {
+          import.meta.env.DEV &&
+            posts
+              .filter((post) => !post.data.published)
+              .map((post) => (
+                <tr>
+                  <td>
+                    <img src="/images/icon/link.png" alt="file icon" />
+                  </td>
+                  <td>
+                    <a href={`/blog/${post.slug}`}>{post.data.title}.html</a>
+                  </td>
+                  <td>
+                    <time>
+                      {post.data.pubDate
+                        .toLocaleDateString("ja-JP", {
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",
+                        })
+                        .split("/")
+                        .join("-")}
+                    </time>
+                  </td>
+                  <td>
+                    <time>
+                      {post.data.updatedDate
+                        ? post.data.updatedDate
+                            .toLocaleDateString("ja-JP", {
+                              year: "numeric",
+                              month: "2-digit",
+                              day: "2-digit",
+                            })
+                            .split("/")
+                            .join("-")
+                        : "-"}
+                    </time>
+                  </td>
+                  <td>-</td>
+                </tr>
+              ))
+        }
+        {
+          import.meta.env.DEV && (
+            <tr>
+              <td>
+                <hr />
+              </td>
+              <td>
+                <hr />
+              </td>
+              <td>
+                <hr />
+              </td>
+              <td>
+                <hr />
+              </td>
+              <td>
+                <hr />
+              </td>
+            </tr>
+          )
+        }
+        {
           posts
             .filter((post) => post.data.published)
             .map((post) => (
