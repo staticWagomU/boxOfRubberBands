@@ -1,0 +1,234 @@
+--
+title: "mini.nvimを使って環境構築したら優勝した"
+pubDate: 2024-07-12
+published: true
+---
+
+この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2024年7月12日(金)の記事です。
+
+前回の記事は [kawarimidoll](https://github.com/kawarimidoll) さんの「[Vimでvim-jpラジオを聞く](https://zenn.dev/vim_jp/articles/8cdd74125fa39e)」という記事でした。
+
+次回の記事は 7月15日(月) に投稿される予定です。
+
+---
+
+## はじめに
+
+Vimmerたるもの定期的に自分の設定ファイルを新しくしたくなるものです。（諸説あり）
+学生の時によくLINEのアカウントを作りなおしていた友達の気持ちが少しだけ分かりました。
+
+## mini.nvimとは
+
+話はかわりますが、mini.nvimというプラグインをご存知でしょうか？
+プラグインマネージャーや補完等の便利なプラグインを提供しているプラグイン集のようなものです。
+
+詳細な説明についてはこちらの記事におまかせします。
+https://zenn.dev/kawarimidoll/articles/56d61ecbab9755
+
+この記事を書いたときよりもプラグインが増えて2024年7月現在、42個のプラグインがあります。
+次回はmini.nvimの各プラグインの紹介記事を書こうと思います。
+
+## mini.nvimベースで環境構築した
+
+今回使ったプラグインについて説明します。
+mini.nvim以外で入れたプラグインはlazygitとLSP関連、treesitterのみで、この記事では紹介しません。
+
+ここで自分のdotfilesを公開してもいいのですが、いつまでこの構成を使うか分からないため、別のレポジトリで公開しました。
+参考になれば幸いです。
+
+https://github.com/staticWagomU/my-mini-config
+
+### [mini.deps](https://github.com/echasnovski/mini.deps)
+
+プラグインマネージャー。
+
+`now'()`、`later()`、`add()`だけ
+
+#### 類似プラグイン
+
+- [folke/lazy.nvim](https://github.com/folke/lazy.nvim)
+- [savq/paq-nvim](https://github.com/savq/paq-nvim)
+- [junegunn/vim-plug](https://github.com/junegunn/vim-plug)
+
+### [mini.basics](https://github.com/echasnovski/mini.basics)
+
+おすすめ設定をしてくれます。
+
+```lua
+now(function()
+	require('mini.basics').setup {
+		options = {
+			extra_ui = true, -- winblendとか設定される
+			win_borders = 'single',
+		},
+		mappings = {
+			option_toggle_prefix = 'm',
+		},
+	}
+end)
+```
+
+mini.basicsの特徴として、option_toggle_prefixを設定することで`number`や`wrap`などをtoggleできるマッピングが追加されることです。
+
+-- GIF
+
+#### 類似プラグイン
+
+- [tpope/vim-sensible](https://github.com/tpope/vim-sensible)
+- [tpope/vim-unimpaired](https://github.com/tpope/vim-unimpaired)
+
+
+### [mini.bracketed](https://github.com/echasnovski/mini.bracketed)
+
+`[`、`]`起点のマッピングを追加してくれます。
+自分は`[b`、`]b`（バッファの切り替え）と`[f`、`]f`（同一階層の次のファイルと切り替え）をよく使います。
+
+どのようなマッピングが追加されるかはここに書いてあります。
+https://github.com/echasnovski/mini.bracketed?tab=readme-ov-file#features
+
+#### 類似プラグイン
+
+- [tpope/vim-unimpaired](https://github.com/tpope/vim-unimpaired)
+
+### [mini.comment](https://github.com/echasnovski/mini.comment)
+
+コメントアウトできます。
+自分は`gcc`しか使わないです。
+
+#### 類似プラグイン
+
+- [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim)
+- [tpope/vim-commentary](https://github.com/tpope/vim-commentary)
+- [preservim/nerdcommenter](https://github.com/preservim/nerdcommenter)
+- [b3nj5m1n/kommentary](https://github.com/b3nj5m1n/kommentary)
+
+### [mini.completion](https://github.com/echasnovski/mini.completion)
+
+LSPの自動補完をしてくれます。更には、signature helpも表示してくれます。
+`setup()`を呼び出すだけで何もせずともLSPと連携してくれるびっくり仕様。
+
+```lua
+now(function()
+	-- 補完
+	require('mini.completion').setup()
+end)
+```
+
+#### 類似プラグイン
+
+- [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+- [Shougo/ddc.vim](https://github.com/Shougo/ddc.vim)
+
+### [mini.cursorword](https://github.com/echasnovski/mini.cursorword)
+
+カーソル下の単語にunderlineがつきます。
+
+#### 類似プラグイン
+
+- [RRethy/vim-illuminate](https://github.com/RRethy/vim-illuminate)
+- [itchyny/vim-cursorword](https://github.com/itchyny/vim-cursorword)
+
+### [mini.diff](https://github.com/echasnovski/mini.diff)
+
+gitsignsと一緒です。
+
+#### 類似プラグイン
+
+- [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
+
+### [mini.extra](https://github.com/echasnovski/mini.extra)
+
+mini.nvimに加えるほどではない便利関数が追加されます。
+自分は`mini.pick`のために導入しています。
+
+### [mini.files](https://github.com/echasnovski/mini.files)
+
+ファイラーです。
+他のファイラープラグインとは違うUIをしていておもしろい。
+
+#### 類似プラグイン
+
+- [nvim-tree/nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua)
+- [stevearc/oil.nvim](https://github.com/stevearc/oil.nvim)
+- [nvim-neo-tree/neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)
+
+### [mini.statusline](https://github.com/echasnovski/mini.statusline)
+
+ステータスラインです。
+
+### [mini.surround](https://github.com/echasnovski/mini.surround)
+
+surroundプラグインです。
+
+### [mini.tabline](https://github.com/echasnovski/mini.tabline)
+
+タブラインです。
+
+### [mini.git](https://github.com/echasnovski/mini-git)
+
+gitインテグレーションプラグインです。
+自分は全然使いこなせておらず、ターミルに戻ることなく`:Git hoge`を実行できるプラグインとして使っています。
+
+
+### [mini.icons](https://github.com/echasnovski/mini.icons)
+
+iconを表示します。
+
+```lua
+now(function()
+	-- nvim_web_deviconsの代わり
+	require('mini.icons').setup()
+	MiniIcons.mock_nvim_web_devicons()
+end)
+
+```
+
+### [mini.indentscope](https://github.com/echasnovski/mini.indentscope)
+
+インデントを可視化させます。
+
+### [mini.notify](https://github.com/echasnovski/mini.notify)
+
+通知をかっこよくみせます。
+
+### [mini.pairs](https://github.com/echasnovski/mini.pairs)
+
+括弧などの対応する記号を自動的に挿入します。
+
+### [mini.pick](https://github.com/echasnovski/mini.pick)
+
+telescopeのようなpickerプラグインです。
+自分はこのような設定で使っています。
+このうちの`<Cmd>Pick buf_lines<Cr>`を使うために`mini.extra`を導入しています。
+
+```lua
+later(function()
+	-- telescope的なやつ
+	require('mini.pick').setup()
+	vim.keymap.set('n', [[\e]], '<Cmd>Pick explorer<Cr>', opts)
+	vim.keymap.set('n', [[\b]], '<Cmd>Pick buffers<Cr>', opts)
+	vim.keymap.set('n', [[\h]], '<Cmd>Pick help<Cr>', opts)
+	vim.keymap.set('n', [[\\]], '<Cmd>Pick grep<Cr>', opts)
+	vim.keymap.set('n', [[\f]], '<Cmd>Pick files<Cr>', opts)
+	vim.keymap.set('n', [[\g]], '<Cmd>Pick git_files<Cr>', opts)
+	vim.keymap.set('n', [[\l]], '<Cmd>Pick buf_lines<Cr>', opts)
+	vim.keymap.set('n', [[\m]], '<Cmd>Pick visit_paths<Cr>', opts)
+end)
+```
+
+### [mini.splitjoin](https://github.com/echasnovski/mini.splitjoin)
+
+gSでJの逆の操作をしてくれます。
+
+### [mini.starter](https://github.com/echasnovski/mini.starter)
+
+スタート画面を表示させます。
+
+### [mini.visits](https://github.com/echasnovski/mini.visits)
+
+mr.vimのように以前に訪問したファイルを記録してくれます。
+`mini.pick`と連携させるために導入しています。
+
+## おわりに
+
+あまりこだわりがない人はmini.nvimに染めてみるのはどうでしょう？
