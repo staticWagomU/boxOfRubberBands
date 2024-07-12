@@ -4,6 +4,8 @@ pubDate: 2024-07-12
 published: true
 ---
 
+import OG from "../../components/OG.astro";
+
 この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2024年7月12日(金)の記事です。
 
 前回の記事は [kawarimidoll](https://github.com/kawarimidoll) さんの「[Vimでvim-jpラジオを聞く](https://zenn.dev/vim_jp/articles/8cdd74125fa39e)」という記事でした。
@@ -17,7 +19,7 @@ published: true
 Vimmerたるもの定期的に自分の設定ファイルを新しくしたくなるものです。（諸説あり）
 学生の時によくLINEのアカウントを作りなおしていた友達の気持ちが少しだけ分かりました。
 
-今回はmini.nvimで環境構築をしてみたら使い勝手がとてもよかったので、シェアしよう！！という記事です。
+今回はmini.nvimで環境構築をしてみたら使い勝手がとても良かったのでシェアしよう！！という記事です。
 
 ## mini.nvimとは
 
@@ -25,10 +27,10 @@ mini.nvimというプラグインをご存知でしょうか？
 プラグインマネージャーや補完等の便利なプラグインを提供しているプラグイン集のようなものです。
 
 詳細な説明についてはこちらの記事におまかせします。
-https://zenn.dev/kawarimidoll/articles/56d61ecbab9755
+<OG url="https://zenn.dev/kawarimidoll/articles/56d61ecbab9755" />
 
 この記事を書いたときよりもプラグインが増えて2024年7月現在、42個のプラグインがあります。
-次回はmini.nvimの各プラグインの紹介記事を書こうと思います。
+次の機会にはmini.nvimの各プラグインの紹介記事を書こうと思います。
 
 ## mini.nvimベースで環境構築した
 
@@ -58,15 +60,15 @@ https://github.com/staticWagomU/my-mini-config
 
 ```lua
 now(function()
-	require('mini.basics').setup {
-		options = {
-			extra_ui = true, -- winblendとか設定される
-			win_borders = 'single',
-		},
-		mappings = {
-			option_toggle_prefix = 'm',
-		},
-	}
+  require('mini.basics').setup {
+    options = {
+      extra_ui = true, -- winblendとか設定される
+      win_borders = 'single',
+    },
+    mappings = {
+      option_toggle_prefix = 'm',
+    },
+  }
 end)
 ```
 
@@ -111,8 +113,8 @@ LSPの自動補完をしてくれます。更には、signature helpも表示し
 
 ```lua
 now(function()
-	-- 補完
-	require('mini.completion').setup()
+  -- 補完
+  require('mini.completion').setup()
 end)
 ```
 
@@ -178,9 +180,9 @@ iconを表示します。
 
 ```lua
 now(function()
-	-- nvim_web_deviconsの代わり
-	require('mini.icons').setup()
-	MiniIcons.mock_nvim_web_devicons()
+  -- nvim_web_deviconsの代わり
+  require('mini.icons').setup()
+  MiniIcons.mock_nvim_web_devicons()
 end)
 
 ```
@@ -205,16 +207,16 @@ telescopeのようなpickerプラグインです。
 
 ```lua
 later(function()
-	-- telescope的なやつ
-	require('mini.pick').setup()
-	vim.keymap.set('n', [[\e]], '<Cmd>Pick explorer<Cr>', opts)
-	vim.keymap.set('n', [[\b]], '<Cmd>Pick buffers<Cr>', opts)
-	vim.keymap.set('n', [[\h]], '<Cmd>Pick help<Cr>', opts)
-	vim.keymap.set('n', [[\\]], '<Cmd>Pick grep<Cr>', opts)
-	vim.keymap.set('n', [[\f]], '<Cmd>Pick files<Cr>', opts)
-	vim.keymap.set('n', [[\g]], '<Cmd>Pick git_files<Cr>', opts)
-	vim.keymap.set('n', [[\l]], '<Cmd>Pick buf_lines<Cr>', opts)
-	vim.keymap.set('n', [[\m]], '<Cmd>Pick visit_paths<Cr>', opts)
+  -- telescope的なやつ
+  require('mini.pick').setup()
+  vim.keymap.set('n', [[\e]], '<Cmd>Pick explorer<Cr>', opts)
+  vim.keymap.set('n', [[\b]], '<Cmd>Pick buffers<Cr>', opts)
+  vim.keymap.set('n', [[\h]], '<Cmd>Pick help<Cr>', opts)
+  vim.keymap.set('n', [[\\]], '<Cmd>Pick grep<Cr>', opts)
+  vim.keymap.set('n', [[\f]], '<Cmd>Pick files<Cr>', opts)
+  vim.keymap.set('n', [[\g]], '<Cmd>Pick git_files<Cr>', opts)
+  vim.keymap.set('n', [[\l]], '<Cmd>Pick buf_lines<Cr>', opts)
+  vim.keymap.set('n', [[\m]], '<Cmd>Pick visit_paths<Cr>', opts)
 end)
 ```
 
