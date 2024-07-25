@@ -1,0 +1,21 @@
+---
+title: "WSLのNeovimとWindowsのクリップボードを同期させる一番簡単な方法"
+pubDate: 2024-07-25
+published: true
+---
+
+## 結論
+
+cmd.exeかpwshで下記コマンドを実行してください。
+```
+winget install --id Naovim.Neovim 
+```
+
+インストール後、WSL側から`win32yank.exe`がインストールされていることを確認できるはずです。
+```cmd
+$ which win32yank.exe                                                              
+/mnt/c/Program Files/Neovim/bin/win32yank.exe
+```
+## おわりに
+
+win32yank.exeを直接ダウンロードしてきてPATHを通す方法でもいいですが、コマンド一発で解決するため自分はこの方法を取っています。
