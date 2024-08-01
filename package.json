@@ -13,8 +13,8 @@
     "lint:check": "eslint src",
     "lint:fix": "eslint --fix src",
     "precommit": "pnpm build",
-    "prettier:fix": "prettier --write --plugin-search-dir=. src",
-    "prettier:check": "prettier --check --plugin-search-dir=. "
+    "format": "prettier --write --plugin-search-dir=. src",
+    "format:check": "prettier --check --plugin-search-dir=. "
   },
   "husky": {
     "hooks": {
