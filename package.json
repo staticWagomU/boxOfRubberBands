@@ -22,36 +22,13 @@
     }
   },
   "devDependencies": {
+    "@astrojs/check": "^0.7.0",
     "@astrojs/mdx": "^2.3.1",
     "@astrojs/rss": "^4.0.6",
     "@astrojs/sitemap": "^3.1.4",
-<<<<<<< HEAD
-<<<<<<< HEAD
-||||||| parent of 5afb56d (@astro/checkを導入 (#42))
-    "astro": "^4.7.0",
-    "mdx": "^0.3.1",
-    "remark-breaks": "^4.0.0"
-  },
-  "devDependencies": {
-=======
-||||||| parent of fd68233 (tailwindを導入したよ (#43))
-=======
     "@astrojs/tailwind": "^5.1.0",
->>>>>>> fd68233 (tailwindを導入したよ (#43))
-    "astro": "^4.7.0",
-    "mdx": "^0.3.1",
-    "remark-breaks": "^4.0.0",
-    "tailwindcss": "^3.4.3"
-  },
-  "devDependencies": {
-    "@astrojs/check": "^0.7.0",
->>>>>>> 5afb56d (@astro/checkを導入 (#42))
-    "@markuplint/astro-parser": "^4.0.0",
-    "@markuplint/astro-parser": "^4.6.2",
     "@markuplint/astro-parser": "^4.6.2",
     "@vanilla-extract/css": "^1.15.1",
-    "@vanilla-extract/css": "^1.15.1",
-    "@vanilla-extract/vite-plugin": "^3.9.5",
     "@vanilla-extract/vite-plugin": "^3.9.5",
     "astro": "^4.8.5",
     "cheerio": "1.0.0-rc.12",
