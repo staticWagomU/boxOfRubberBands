@@ -1,0 +1,184 @@
+---
+title: "statusline隠すとかっこよくなることに気づいてしまった..."
+pubDate: 2024-08-26
+published: true
+---
+
+import OG from "../../components/OG.astro";
+
+この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2024年8月26日(月)の記事です。
+
+前回の記事は [kawarimidoll](https://github.com/kawarimidoll) さんの「[Vimで記号や演算子をサクッと補完する](https://zenn.dev/vim_jp/articles/b4294351def1ba)」という記事でした。
+
+次回の記事は 8月28日(水) に投稿される予定です。
+
+---
+
+## はじめに
+
+気づいちゃいました.....statuslineを隠したらかっこよくなることに。
+
+![](/images/blog/2024-08-25-vim-ekiden/img1.png)
+
+かっこよくないですか？？？
+
+## statuslineを隠す方法
+
+※luaを使っているので、Vim scriptを使っている方は適宜読みかえてください。
+
+まずは`vim.opt.laststatus=0`を設定してステータスラインを非表示にします。
+<details>
+  <summary>`:h laststatus`</summary>
+
+```
+							*status-line*
+ステータス行はウィンドウの分割に使われる。'laststatus' オプションは一番下のウィ
+ンドウにステータス行を表示するかを設定する:
+	'laststatus' = 0	常にステータス行を表示しない。
+	'laststatus' = 1	ウィンドウが2つ以上ある場合に表示する。
+	'laststatus' = 2	常にステータス行を表示する。
+
+ステータス行の内容は 'statusline' オプションで変更できる。
+このオプションはウィンドウについてローカルにすることもでき、そうすると各ウィン
+ドウごとに異なるステータスラインを表示することができる。
+
+通常、ステータス行は反転表示される。これは 'highlight' オプションの 's' キャラ
+クタで変更できる。例えば、"sb" は太文字に設定する。ステータス行にハイライトを
+使用しない場合("sn")、'^' がカレントウィンドウに使われ、'=' が他のウィンドウに
+使われる。マウスがサポートされていて 'mouse' オプションでマウスが使用可能になっ
+ている場合は、ステータス行をドラッグすることでウィンドウのリサイズを行える。
+
+Note: ステータス行が反転表示されるはずが反転表示されなければ、'highlight' オプ
+ションに 'si' が含まれているか確認すること。version 3.0 では、'si' がステータ
+ス行の反転表示を意味していた。今は反転表示には 'sr' を使用し、'si' はイタリッ
+ク表示を意味している!  イタリックを表示できない端末では、ステータス行は反転表
+示となる。イタリック表示のための termcap コードがある場合にのみ、この問題が見
+られる。
+```
+
+</details>
+
+これで一件落着と思いきや、まだです。
+ステータスラインは区切り線としての役割も持っているため`:split`を実行するとステータスラインが見えてしまいます。
+![](/images/blog/2024-08-25-vim-ekiden/img2.png)
+
+
+そのため、fillcharsとstatuslineを設定することで、ステータスラインを`─`だけにします。
+
+```lua
+vim.opt.fillchars = {
+  stl = '─',
+  stlnc = '─',
+}
+vim.opt.statusline = '─'
+```
+
+<details>
+  <summary>`:h fillchars`</summary>
+
+```
+						*'fillchars'* *'fcs'*
+'fillchars' 'fcs'	文字列	(既定では "vert:|,fold:-,eob:~")
+			グローバル／ウィンドウについてローカル |global-local|
+	ウィンドウのステータス行、垂直分割の区切り、特殊行を埋める文字。
+	これはコンマで区切られた項目のリストである。各項目には、名前、コロン、
+	およびその項目の値がある: |E1511|
+
+	  キーワード	既定値		変更の対象 ~
+	  stl		' '		カレントウィンドウのステータス行
+	  stlnc		' '		非カレントウィンドウのステータス行
+	  vert		'|'		垂直分割の区切り |:vsplit|
+	  fold		'-'		'foldtext' での空白部分
+	  foldopen	'-'		折り畳みの先頭のマーク
+	  foldclose	'+'		閉じられた折り畳みのマーク
+	  foldsep	'|'		開いた折り畳みの中間文字
+	  diff		'-'		'diff' での削除された行
+	  eob		'~'		バッファ終端以降の空行
+	  lastline	'@'		'display' が含む最終行/切り捨て
+
+	指定されなかったキーワードについては、既定値が使われる。
+
+	例: >
+	    :set fillchars=stl:\ ,stlnc:\ ,vert:\|,fold:-,diff:-
+<
+	"stl", "stlnc", "foldopen", "foldclose", "foldsep" 項目に対しては1バイ
+	トおよびマルチバイトの文字をサポートしている。しかし全角文字幅の文字は
+	サポートしていない。|E1512|
+
+	強調表示が行われるものおよびその属するグループ:
+	  項目名	ハイライトグループ ~
+	  stl		StatusLine		|hl-StatusLine|
+	  stlnc		StatusLineNC		|hl-StatusLineNC|
+	  vert		VertSplit		|hl-VertSplit|
+	  fold		Folded			|hl-Folded|
+	  diff		DiffDelete		|hl-DiffDelete|
+	  eob		EndOfBuffer		|hl-EndOfBuffer|
+	  lastline	NonText			|hl-NonText|
+
+```
+
+</details>
+
+![](/images/blog/2024-08-25-vim-ekiden/img3.png)
+
+最後に、ステータスラインの背景色が気になるのでVertSplitの背景色と同じにしてみます。
+
+```lua
+
+```lua
+autocmd({'WinEnter', 'BufEnter', 'ColorScheme'}, {
+  group = MyAuGroup,
+  pattern = '*',
+  callback = function()
+    local bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg#")
+    local fg = vim.fn.synIDattr(vim.fn.hlID("VertSplit"), "fg#")
+
+    if bg ~= "" then
+      vim.cmd("hi StatusLine ctermbg=NONE guibg=" .. bg .. " ctermfg=NONE guifg=" .. fg)
+      vim.cmd("hi StatuslineNC ctermbg=NONE guibg=" .. bg .. " ctermfg=NONE guifg=" .. fg)
+    else
+      vim.cmd("hi StatusLine ctermbg=NONE guibg=NONE ctermfg=NONE guifg=" .. fg)
+      vim.cmd("hi StatuslineNC ctermbg=NONE guibg=NONE ctermfg=NONE guifg=" .. fg)
+    end
+  end,
+  once = true,
+})
+```
+
+これでステータスラインをかっこよく隠すことができました！！！！！！！
+最後に全体のコードを載せておきます。
+
+```lua
+vim.opt.laststatus = 0
+vim.opt.fillchars = {
+  stl = '─',
+  stlnc = '─',
+}
+vim.opt.statusline = '─'
+
+autocmd({'WinEnter', 'BufEnter', 'ColorScheme'}, {
+  group = MyAuGroup,
+  pattern = '*',
+  callback = function()
+    local bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg#")
+    local fg = vim.fn.synIDattr(vim.fn.hlID("VertSplit"), "fg#")
+
+    if bg ~= "" then
+      vim.cmd("hi StatusLine ctermbg=NONE guibg=" .. bg .. " ctermfg=NONE guifg=" .. fg)
+      vim.cmd("hi StatuslineNC ctermbg=NONE guibg=" .. bg .. " ctermfg=NONE guifg=" .. fg)
+    else
+      vim.cmd("hi StatusLine ctermbg=NONE guibg=NONE ctermfg=NONE guifg=" .. fg)
+      vim.cmd("hi StatuslineNC ctermbg=NONE guibg=NONE ctermfg=NONE guifg=" .. fg)
+    end
+  end,
+  once = true,
+})
+
+```
+
+## おわりに
+
+かっこいいNeovimが得られましたが、実は大きな問題があります。それはファイル名等のバッファ固有の情報が全く見えなくなるということです。
+この問題に対して自作のwinbarを作ることで対処しているのですが、まだ完成していないためお披露目はまた今度になりそうです。
+
+ステータスラインを消したことで新たなVim駅伝のネタができて正直美味しい。
