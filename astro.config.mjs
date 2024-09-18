@@ -2,10 +2,7 @@ import { defineConfig } from "astro/config";
 import remarkBreaks from "remark-breaks";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-
-
-// https://astro.build/config
-import tailwind from "@astrojs/tailwind";
+import codeBlockPlugin from "./tools/remark-code-quote";
 import wrapH2WithSection from "./tools/rehype-wrap-h2-with-section";
 
 // https://astro.build/config
@@ -17,7 +14,7 @@ export default defineConfig({
     plugins: []
   },
   markdown: {
-    remarkPlugins: [remarkBreaks],
+    remarkPlugins: [remarkBreaks, codeBlockPlugin],
     rehypePlugins: [wrapH2WithSection],
     shikiConfig: {
       theme: "github-light"
