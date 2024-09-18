@@ -6,6 +6,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 import tailwind from "@astrojs/tailwind";
+import wrapH2WithSection from "./tools/rehype-wrap-h2-with-section";
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,6 +18,7 @@ export default defineConfig({
   },
   markdown: {
     remarkPlugins: [remarkBreaks],
+    rehypePlugins: [wrapH2WithSection],
     shikiConfig: {
       theme: "github-light"
     }
