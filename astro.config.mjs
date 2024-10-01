@@ -10,7 +10,18 @@ import { astroLastModifiedAt } from "./tools/remark-astro-last-modified-at";
 export default defineConfig({
   // site: 'https://example.com',
   site: "https://wagomu.me",
-  integrations: [mdx(), sitemap()],
+  integrations: [
+	mdx(),
+	sitemap(),
+		(await import('@playform/compress')).default({
+			CSS: true,
+			HTML: true,
+			Image: false,
+			JavaScript: true,
+			SVG: true,
+			Logger: 1,
+		}),
+],
   trailingSlash: 'never',
   vite: {
     plugins: []
