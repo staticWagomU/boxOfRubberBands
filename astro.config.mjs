@@ -11,6 +11,7 @@ export default defineConfig({
   // site: 'https://example.com',
   site: "https://wagomu.me",
   integrations: [mdx(), sitemap(), tailwind()],
+  trailingSlash: 'never',
   vite: {
     plugins: []
   },
