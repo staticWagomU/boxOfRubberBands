@@ -1,0 +1,29 @@
+---
+title: "WSL2が起動しなくてあせった話"
+pubDate: 2024-10-02
+published: true
+---
+
+## はじめに
+
+
+windowsのアップデートがあって、再起動したらWSL2が起動しなくなってしまいました。
+
+![](/images/blog/2024-10-02/img1.png)
+
+```
+ネットワークを構成できませんでした (networkingMode Nat)。ネットワークを無効にするには、C:\Users\wagomu\.wslconfigで 'wsl2.networkingMode=None' を設定します
+Error code: Wsl/Service/CreateInstance/CreateVm/ConfigureNetworking/HNS/E_ACCESSDENIED
+```
+
+これはどうしたものかと思ったところ、以下のissueを教えてもらいました。
+
+https://github.com/mimikun/dotfiles/issues/798
+
+このissueのとおり、再起動することで解決しました。
+
+
+## おわりに
+
+やっぱ、再起動だよね。
+
