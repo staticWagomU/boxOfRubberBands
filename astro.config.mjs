@@ -5,6 +5,7 @@ import sitemap from "@astrojs/sitemap";
 import codeBlockPlugin from "./tools/remark-code-quote";
 import wrapH2WithSection from "./tools/rehype-wrap-h2-with-section";
 import { astroLastModifiedAt } from "./tools/remark-astro-last-modified-at";
+import remarkBudoux from "./tools/remark-budoux";
 
 // https://astro.build/config
 export default defineConfig({
@@ -28,7 +29,7 @@ export default defineConfig({
     plugins: []
   },
   markdown: {
-		remarkPlugins: [remarkBreaks, codeBlockPlugin, astroLastModifiedAt],
+		remarkPlugins: [remarkBreaks, codeBlockPlugin, astroLastModifiedAt, remarkBudoux],
     rehypePlugins: [wrapH2WithSection],
     shikiConfig: {
       theme: "github-light"
