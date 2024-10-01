@@ -8,7 +8,7 @@
   "plugins": ["prettier-plugin-astro"],
   "overrides": [
     {
-      "files": [".*", "*.json", "*.md", "*.mdx", "*.toml", "*.yml"],
+      "files": [".*", "*.json", "*.toml", "*.yml"],
       "options": {
         "useTabs": false
       }
