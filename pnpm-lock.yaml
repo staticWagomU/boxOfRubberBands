@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  astro-google-fonts-optimizer:
+    specifier: ^0.2.2
+    version: 0.2.2
   gsap:
     specifier: ^3.12.5
     version: 3.12.5
@@ -1619,6 +1622,10 @@ packages:
       - supports-color
       - typescript
     dev: true
+
+  /astro-google-fonts-optimizer@0.2.2:
+    resolution: {integrity: sha512-YQxp/ExF3NzUomAGuu1VKecO7/ETRnhnE50gqwAqfpbGPZFj4MYa4XxK1ukBg3R63QmKuE5uurOiKmXiLzttuw==}
+    dev: false
 
   /astro@5.0.0-beta.2(@types/node@20.14.10)(typescript@5.5.3):
     resolution: {integrity: sha512-PJlq/pbUwme7PXsFiVCRmrQO3ANh/hnhoQ81vxguwHJOJDwEUOYurJ9JgCJIyMCvRvfOP6G3FKnp3Y640b0B/w==}

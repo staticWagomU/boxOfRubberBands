@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
 
 export interface Props {
   title: string;
@@ -25,3 +26,6 @@ const { title, description = "/placeholder-social.jpg" } = Astro.props;
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+
+<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Michroma&display=swap" />
+<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Playwrite+AR:wght@100..400&display=swap" />
