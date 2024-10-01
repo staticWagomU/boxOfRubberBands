@@ -10,7 +10,7 @@ import { astroLastModifiedAt } from "./tools/remark-astro-last-modified-at";
 export default defineConfig({
   // site: 'https://example.com',
   site: "https://wagomu.me",
-  integrations: [mdx(), sitemap(), tailwind()],
+  integrations: [mdx(), sitemap()],
   trailingSlash: 'never',
   vite: {
     plugins: []
