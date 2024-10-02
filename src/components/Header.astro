@@ -1,18 +1,39 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import OutwardIcon from "./Icon/OutowardIcon.astro";
+
 import { SITE_TITLE } from "../config";
 ---
 
 <header>
-  <h2>
-    {SITE_TITLE}
-  </h2>
+  <h1>
+    <a href="/">Wagomu no Akibako</a>
+  </h1>
   <nav>
     <HeaderLink href="/">Home</HeaderLink>
-    <HeaderLink href="/blog">Blog</HeaderLink>
+    <HeaderLink href="/blog">Post</HeaderLink>
+    <HeaderLink href="/about">About</HeaderLink>
     <a href="https://gist.github.com/staticWagomU/a82a12613a24685e16ded616a2566db5" target="_blank"
       >CV<OutwardIcon /></a
     >
   </nav>
 </header>
+
+<style>
+  nav {
+    display: flex;
+    flex-direction: column;
+  }
+  h1 {
+    font-family: "Playwrite AR", cursive;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 1.5rem;
+
+    a {
+      text-decoration: none;
+      color: var(--text-color);
+    }
+  }
+</style>
