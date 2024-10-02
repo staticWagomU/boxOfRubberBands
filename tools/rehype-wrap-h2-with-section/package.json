@@ -8,9 +8,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "rehype": "^13.0.1",
-    "unist-util-visit": "^5.0.0"
-  }
+  "license": "ISC"
 }

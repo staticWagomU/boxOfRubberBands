@@ -17,9 +17,9 @@ importers:
       astro-google-fonts-optimizer:
         specifier: ^0.2.2
         version: 0.2.2
-      gsap:
-        specifier: ^3.12.5
-        version: 3.12.5
+      unist-util-visit:
+        specifier: 5.0.0
+        version: 5.0.0
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.3
@@ -64,14 +64,7 @@ importers:
         specifier: ^5.4.5
         version: 5.5.3
 
-  tools/rehype-wrap-h2-with-section:
-    dependencies:
-      rehype:
-        specifier: ^13.0.1
-        version: 13.0.1
-      unist-util-visit:
-        specifier: ^5.0.0
-        version: 5.0.0
+  tools/rehype-wrap-h2-with-section: {}
 
   tools/remark-astro-last-modified-at: {}
 
@@ -80,15 +73,8 @@ importers:
       budoux:
         specifier: ^0.6.2
         version: 0.6.2
-      unist-util-visit:
-        specifier: ^5.0.0
-        version: 5.0.0
 
-  tools/remark-code-quote:
-    dependencies:
-      unist-util-visit:
-        specifier: 5.0.0
-        version: 5.0.0
+  tools/remark-code-quote: {}
 
 packages:
 
@@ -3184,10 +3170,6 @@ packages:
       kind-of: 6.0.3
       section-matter: 1.0.0
       strip-bom-string: 1.0.0
-
-  /gsap@3.12.5:
-    resolution: {integrity: sha512-srBfnk4n+Oe/ZnMIOXt3gT605BX9x5+rh/prT2F1SsNJsU1XuMiP0E2aptW481OnonOGACZWBqseH5Z7csHxhQ==}
-    dev: false
 
   /hard-rejection@2.1.0:
     resolution: {integrity: sha512-VIZB+ibDhx7ObhAe7OVtoEbuP4h/MuOTHJ+J8h/eBXotJYl0fBgR72xDFCKgIh22OJZIOVNxBMWuhAr10r8HdA==}

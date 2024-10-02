@@ -9,10 +9,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "open-graph-scraper": "6.3.2",
-    "unist-builder": "4.0.0",
-    "unist-util-visit": "5.0.0"
-  },
   "type": "module"
 }
