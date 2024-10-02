@@ -14,174 +14,155 @@ const posts = (await getCollection("blog")).sort(
 <html lang="ja">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <style>
-      th {
-        text-align: center;
-      }
-      table {
-        width: max-content;
-      }
-      td:not(td:first-child) {
-        padding-right: 1rem;
-      }
-      td:not(td:nth-child(2)) {
-        text-align: center;
-      }
-    </style>
   </head>
   <body>
     <Header />
     <main>
-      <table>
-        <tr>
-          <th style="width:25px;"></th>
-          <th>NAME</th>
-          <th>Publish</th>
-          <th>Last modified</th>
-          <th>Tags</th>
-        </tr>
-        <tr>
-          <th colspan="5"><hr /></th>
-        </tr>
-        <tr>
-          <td>
-            <img src="/images/icon/back.png" alt="file icon" />
-          </td>
-          <td><a href="/">Parent Directory</a></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        {
-          import.meta.env.DEV && (
-            <tr>
-              <td>
-                <hr />
-              </td>
-              <td>
-                非公開記事
-              </td>
-              <td>
-                <hr />
-              </td>
-              <td>
-                <hr />
-              </td>
-              <td>
-                <hr />
-              </td>
-            </tr>
-          )
-        }
-        {
-          import.meta.env.DEV &&
-            posts
-              .filter((post) => !post.data.published)
-              .map((post) => (
-                <tr>
-                  <td>
-                    <img src="/images/icon/link.png" alt="file icon" />
-                  </td>
-                  <td>
-                    <a href={`/blog/${post.slug}`}>{post.data.title}.html</a>
-                  </td>
-                  <td>
-                    <time>
+      {
+        posts
+          .filter((post) => post.data.published)
+          .map((post, idx, posts) => (
+            <>
+              {idx === 0 ||
+              post.data.pubDate.getFullYear() !== posts[idx - 1].data.pubDate.getFullYear() ? (
+                <div>
+                  <div class="timeline header">
+                    <div class="date header">{post.data.pubDate.getFullYear()}</div>
+                    <div class="dashline header" />
+                    <div class="content header">
+                      {
+                        posts.filter(
+                          (p) => p.data.pubDate.getFullYear() === post.data.pubDate.getFullYear()
+                        ).length
+                      }{" "}
+                      posts
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <a href={`/blog/${post.slug}`} class="bloglink">
+                  <div class="timeline">
+                    <div class="date">
                       {post.data.pubDate
                         .toLocaleDateString("ja-JP", {
-                          year: "numeric",
                           month: "2-digit",
                           day: "2-digit",
                         })
                         .split("/")
                         .join("-")}
-                    </time>
-                  </td>
-                  <td>
-                    <time>
-                      {post.data.updatedDate
-                        ? post.data.updatedDate
-                            .toLocaleDateString("ja-JP", {
-                              year: "numeric",
-                              month: "2-digit",
-                              day: "2-digit",
-                            })
-                            .split("/")
-                            .join("-")
-                        : "-"}
-                    </time>
-                  </td>
-                  <td>-</td>
-                </tr>
-              ))
-        }
-        {
-          import.meta.env.DEV && (
-            <tr>
-              <td>
-                <hr />
-              </td>
-              <td>
-                <hr />
-              </td>
-              <td>
-                <hr />
-              </td>
-              <td>
-                <hr />
-              </td>
-              <td>
-                <hr />
-              </td>
-            </tr>
-          )
-        }
-        {
-          posts
-            .filter((post) => post.data.published)
-            .map((post) => (
-              <tr>
-                <td>
-                  <img src="/images/icon/link.png" alt="file icon" />
-                </td>
-                <td>
-                  <a href={`/blog/${post.slug}`}>{post.data.title}.html</a>
-                </td>
-                <td>
-                  <time>
-                    {post.data.pubDate
-                      .toLocaleDateString("ja-JP", {
-                        year: "numeric",
-                        month: "2-digit",
-                        day: "2-digit",
-                      })
-                      .split("/")
-                      .join("-")}
-                  </time>
-                </td>
-                <td>
-                  <time>
-                    {post.data.updatedDate
-                      ? post.data.updatedDate
-                          .toLocaleDateString("ja-JP", {
-                            year: "numeric",
-                            month: "2-digit",
-                            day: "2-digit",
-                          })
-                          .split("/")
-                          .join("-")
-                      : "-"}
-                  </time>
-                </td>
-                <td>-</td>
-              </tr>
-            ))
-        }
-        <tr>
-          <th colspan="5"><hr /></th>
-        </tr>
-      </table>
+                    </div>
+                    <div class="dashline" />
+                    <div class="content">{post.data.title}</div>
+                  </div>
+                </a>
+              )}
+            </>
+          ))
+      }
     </main>
     <Footer />
-  </body>
+  </body><style>
+    .bloglink {
+      text-decoration: none;
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+
+      &:hover {
+        & .timeline {
+          background: color-mix(in srgb, var(--bg-light), #000 5%);
+        }
+        & .dashline::before {
+          height: 2rem;
+          border-radius: 0.5rem;
+        }
+      }
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      line-height: 2rem;
+      background: transparent;
+      border-radius: 0.5rem;
+      transition: background 200ms ease;
+
+      /* 年とポスト数表示させるところ */
+      &.header {
+        font-size: 1.5rem;
+        font-weight: bold;
+
+        & > .content {
+          font-size: 1rem;
+          color: #004449bd;
+          vertical-align: bottom;
+        }
+      }
+
+      /* タイムライン */
+      & > .date,
+      & > .dashline {
+        width: 10%;
+        text-align: right;
+      }
+
+      & .date {
+        color: #004449bd;
+        &.header {
+          color: var(--bg-dark);
+        }
+      }
+
+      & > .content {
+        flex: 1;
+      }
+
+      & > .dashline {
+        position: relative;
+        aspect-ratio: 1;
+
+        &::before,
+        &::after {
+          content: "";
+          display: block;
+          position: absolute;
+        }
+
+        /* ドット */
+        &.header::before {
+          --size: 2rem;
+          /* 	border-color: blue; */
+          background: var(--a);
+        }
+        &::before {
+          --size: 0.5rem;
+          width: var(--size);
+          height: var(--size);
+          border-radius: var(--size);
+          background: var(--b);
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          transition: height 200ms ease;
+        }
+
+        /* ダッシュライン */
+        &.header::after {
+          --h: 0;
+        }
+        &::after {
+          --thin: 2px;
+          --h: 100%;
+          left: calc(50% - var(--thin) / 2);
+          bottom: 50%;
+          width: 4px;
+          height: var(--h);
+          border-left: var(--thin) dashed #00444970;
+          z-index: -1;
+        }
+      }
+    }
+  </style>
 </html>
