@@ -11,6 +11,9 @@ import remarkBudoux from "./tools/remark-budoux";
 export default defineConfig({
   // site: 'https://example.com',
   site: "https://wagomu.me",
+  build: {
+    format: "file",
+  },
   integrations: [
 	mdx(),
 	sitemap(),
@@ -32,7 +35,7 @@ export default defineConfig({
 		remarkPlugins: [remarkBreaks, codeBlockPlugin, astroLastModifiedAt, remarkBudoux],
     rehypePlugins: [wrapH2WithSection],
     shikiConfig: {
-      theme: "github-light"
+      theme: "andromeeda",
     }
   }
 });
