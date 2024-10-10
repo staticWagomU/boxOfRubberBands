@@ -18,26 +18,15 @@ const tabTitle = `${title} - ${SITE_TITLE}`;
 
   <body>
     <Header />
-    <main>
+    <main class="blog">
       <article>
         {heroImage && <img id="heroImage" src={heroImage} alt="" />}
-        <h1 class="title">{title}</h1>
-        {
-          pubDate && (
-            <time>
-              {pubDate
-                .toLocaleDateString("ja-JP", { year: "numeric", month: "2-digit", day: "2-digit" })
-                .split("/")
-                .join("-")}
-            </time>
-          )
-        }
-        {
-          updatedDate && (
-            <div>
-              Last updated on{" "}
+        <span class="title">
+          <h1 class="title"><span>{title}</span></h1>
+          {
+            pubDate && (
               <time>
-                {updatedDate
+                {pubDate
                   .toLocaleDateString("ja-JP", {
                     year: "numeric",
                     month: "2-digit",
@@ -46,13 +35,35 @@ const tabTitle = `${title} - ${SITE_TITLE}`;
                   .split("/")
                   .join("-")}
               </time>
-            </div>
-          )
-        }
+            )
+          }
+          {
+            updatedDate && (
+              <div>
+                Last updated on{" "}
+                <time>
+                  {new Date(updatedDate)
+                    .toLocaleDateString("ja-JP", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    })
+                    .split("/")
+                    .join("-")}
+                </time>
+              </div>
+            )
+          }
+        </span>
         <hr />
         <slot />
       </article>
     </main>
     <Footer />
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
   </body>
 </html>
