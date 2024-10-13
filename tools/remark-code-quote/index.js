@@ -18,7 +18,7 @@ export default function codeBlockPlugin() {
 
 function createCodeBlockWithTitle(lang, title, code) {
   const titleElement = title 
-    ? `<div class="code-block-title">${title}</div>`
+		? `<span class="code-block-title-wrapper"><div class="code-block-title">${title}</div></span>`
     : '';
   
   return `
