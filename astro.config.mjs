@@ -17,15 +17,15 @@ export default defineConfig({
   integrations: [
 	mdx(),
 	sitemap(),
-		(await import('@playform/compress')).default({
-			CSS: true,
-			HTML: true,
-			Image: false,
-			JavaScript: true,
-			SVG: true,
-			Logger: 1,
-		}),
-		(await import("@playform/inline")).default()
+		// (await import('@playform/compress')).default({
+		// 	CSS: true,
+		// 	HTML: true,
+		// 	Image: false,
+		// 	JavaScript: true,
+		// 	SVG: true,
+		// 	Logger: 1,
+		// }),
+		// (await import("@playform/inline")).default()
 ],
   trailingSlash: 'never',
   vite: {
