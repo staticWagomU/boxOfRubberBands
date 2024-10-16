@@ -1,0 +1,82 @@
+---
+title: "rio terminalを試す"
+pubDate: 2024-10-16
+published: true
+---
+
+## はじめに
+某-jpでrio terminalというものを教えてもらったので使ってみる。
+特徴はトップページにもあるように、
+- Rustなので早いぞ！
+- トゥルーカラーに対応してるぞ！
+- Sixel使えるぞ！
+- クロスプラットフォームだぞ！
+- リガチャできるぞ！
+- 画面分割もできるぞ！
+
+ということらしいです。
+便利な機能は全てそろっていて良さげだ。
+ということでインストールしてみる
+
+## インストール
+https://raphamorim.io/rio/ja/
+インストールガイドに従ってchocolatey経由でインストールしようと思ったけどなんかうまくいかないので、msiでインストール。
+※今回はWindowsで試していきます。
+
+## ためしてみる
+ファーストビューがおしゃれ
+
+![](/images/blog/2024-10-16/Pasted_image_20241015221132.png)
+
+デフォルトフォントでは日本語が豆腐化する。。
+![](/images/blog/2024-10-16/Pasted_image_20241015221213.png)
+
+![](/images/blog/2024-10-16/Pasted_image_20241015221237.png)
+設定ファイルは`%LOCALAPPDATA%\rio\config.toml`にあって、初期設定では`<C-S-,>`でダイレクトに設定ファイルを開ける。環境改善オタクに優しい設定が入っている。
+
+一先ずこんな設定にしてみた。
+https://github.com/staticWagomU/dotfiles/blob/9b8764dd478814c0a03ffc3f658e49d7fa5f3110/config/rio/config.toml
+
+設定を読み込んだ後でvim/nvimを開いたところ、描画範囲がおかしい
+
+![](/images/blog/2024-10-16/Pasted_image_20241015222615.png)
+line-heightの設定を消したら治った
+![](/images/blog/2024-10-16/Pasted_image_20241016085854.png)
+
+windowsでは？transparentやblueに対応していなそう
+![](/images/blog/2024-10-16/Pasted_image_20241015222802.png)
+
+機能をフルに使いたいなら、LinuxやMac OSから使うほうがよさそうだ。
+
+タブは
+- Bookmark
+- TopTab
+- BottomTab
+- Plain
+
+の4種類があった。
+![](/images/blog/2024-10-16/Pasted_image_20241016134643.png)
+![](/images/blog/2024-10-16/Pasted_image_20241016134626.png)
+![](/images/blog/2024-10-16/Pasted_image_20241016134637.png)
+![](/images/blog/2024-10-16/Pasted_image_20241016134646.png)
+
+clickable = trueに設定してもwindowsでは動作しなかった。
+
+weztermと同じく設定が即時反映されるのは体験としてとても良いね。
+
+### よいところ
+
+- トップページに書いてある通り、機能が揃っている
+- 設定が即時反映される
+- MacOSにも入れてみたところ、動作が早かった
+
+### わるいところ
+
+- windowsでは一部使えない機能がある？
+- paneを分割するkey bindingを設定してみたところ、Windows、MacOSで動かなかった。
+
+
+## おわりに
+
+常用は難しいかな？と思ったけど思いの外問題なく動作した。
+ただ、正直なところwindowsユーザーであればwindows terminalでいいのではないかな？と思いました。複数のOSを跨いで使っている人であれば、rio terminalやweztermやalacrityを選択肢に入れてもよさそうだ。
