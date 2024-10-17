@@ -25,7 +25,7 @@ export default defineConfig({
 		// 	SVG: true,
 		// 	Logger: 1,
 		// }),
-		// (await import("@playform/inline")).default()
+		(await import("@playform/inline")).default()
 ],
   trailingSlash: 'never',
   vite: {
