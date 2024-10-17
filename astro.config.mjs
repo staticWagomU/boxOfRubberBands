@@ -15,27 +15,27 @@ export default defineConfig({
     format: "file",
   },
   integrations: [
-	mdx(),
-	sitemap(),
-		// (await import('@playform/compress')).default({
-		// 	CSS: true,
-		// 	HTML: true,
-		// 	Image: false,
-		// 	JavaScript: true,
-		// 	SVG: true,
-		// 	Logger: 1,
-		// }),
-		(await import("@playform/inline")).default()
-],
-  trailingSlash: 'never',
+    mdx(),
+    sitemap(),
+    (await import("@playform/compress")).default({
+      CSS: false,
+      HTML: true,
+      Image: false,
+      JavaScript: true,
+      SVG: true,
+      Logger: 1,
+    }),
+    (await import("@playform/inline")).default(),
+  ],
+  trailingSlash: "never",
   vite: {
-    plugins: []
+    plugins: [],
   },
   markdown: {
-		remarkPlugins: [remarkBreaks, codeBlockPlugin, astroLastModifiedAt, remarkBudoux],
+    remarkPlugins: [remarkBreaks, codeBlockPlugin, astroLastModifiedAt, remarkBudoux],
     rehypePlugins: [wrapH2WithSection],
     shikiConfig: {
       theme: "andromeeda",
-    }
-  }
+    },
+  },
 });
