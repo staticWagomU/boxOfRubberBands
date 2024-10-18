@@ -4,15 +4,15 @@ export default function wrapH2WithSection() {
     let currentSection = null;
 
     tree.children.forEach((node) => {
-      if (node.type === 'element' && node.tagName === 'h2') {
+      if (node.type === "element" && node.tagName === "h2") {
         if (currentSection) {
           sections.push(currentSection);
         }
         currentSection = {
-          type: 'element',
-          tagName: 'section',
-          properties: { className: ['section'] },
-          children: [node]
+          type: "element",
+          tagName: "section",
+          properties: { className: ["section"] },
+          children: [node],
         };
       } else if (currentSection) {
         currentSection.children.push(node);

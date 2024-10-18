@@ -8,7 +8,7 @@ export default function codeBlockPlugin() {
         const title = titleMatch ? titleMatch[1] : "";
         const codeBlockWithTitle = {
           type: "html",
-          value: createCodeBlockWithTitle(node.lang, title, node.value)
+          value: createCodeBlockWithTitle(node.lang, title, node.value),
         };
         parent.children.splice(index, 1, codeBlockWithTitle);
       }
@@ -17,10 +17,10 @@ export default function codeBlockPlugin() {
 }
 
 function createCodeBlockWithTitle(lang, title, code) {
-  const titleElement = title 
-		? `<span class="code-block-title-wrapper"><div class="code-block-title">${title}</div></span>`
-    : '';
-  
+  const titleElement = title
+    ? `<span class="code-block-title-wrapper"><div class="code-block-title">${title}</div></span>`
+    : "";
+
   return `
 <div class="code-block-with-title">
   ${titleElement}
