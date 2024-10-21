@@ -9,6 +9,7 @@ import { getCollection } from "astro:content";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+let currentYear: number = 0;
 ---
 
 <!doctype html>
@@ -23,25 +24,24 @@ const posts = (await getCollection("blog")).sort(
       {
         posts
           .filter((post) => post.data.published)
-          .map((post, idx, posts) => (
-            <>
-              {idx === 0 ||
-              post.data.pubDate.getFullYear() !== posts[idx - 1].data.pubDate.getFullYear() ? (
-                <div>
-                  <div class="timeline header">
-                    <div class="date header">{post.data.pubDate.getFullYear()}</div>
-                    <div class="dashline header" />
-                    <div class="content header">
-                      {
-                        posts.filter(
-                          (p) => p.data.pubDate.getFullYear() === post.data.pubDate.getFullYear()
-                        ).length
-                      }{" "}
-                      posts
+          .map((post, _) => {
+            const postYear = post.data.pubDate.getFullYear();
+            const isNewYear = currentYear !== postYear;
+            currentYear = postYear;
+            return (
+              <>
+                {isNewYear && (
+                  <div>
+                    <div class="timeline header">
+                      <div class="date header">{postYear}</div>
+                      <div class="dashline header" />
+                      <div class="content header">
+                        {posts.filter((p) => p.data.pubDate.getFullYear() === postYear).length}{" "}
+                        posts
+                      </div>
                     </div>
                   </div>
-                </div>
-              ) : (
+                )}
                 <a href={`/blog/${post.slug}`} class="bloglink">
                   <div class="timeline">
                     <div class="date">
@@ -57,9 +57,9 @@ const posts = (await getCollection("blog")).sort(
                     <div class="content">{post.data.title}</div>
                   </div>
                 </a>
-              )}
-            </>
-          ))
+              </>
+            );
+          })
       }
     </main>
     <Footer />
