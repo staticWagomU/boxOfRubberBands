@@ -41,7 +41,7 @@ importers:
         version: 3.2.1
       '@markuplint/astro-parser':
         specifier: ^4.6.5
-        version: 4.6.10(typescript@5.6.3)
+        version: 4.6.11(typescript@5.6.3)
       astro:
         specifier: 5.0.0-beta.5
         version: 5.0.0-beta.5(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.24.0)(terser@5.36.0)(typescript@5.6.3)
@@ -763,8 +763,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@markuplint/astro-parser@4.6.10':
-    resolution: {integrity: sha512-pXze4L3SyK1ugJvqCFeJ4xwHzWI1DqJFzGqlRKi10eIar+WK0hlOsYeiX1PBP/1oaeSJ39XRczUMC1+D7DJn4w==}
+  '@markuplint/astro-parser@4.6.11':
+    resolution: {integrity: sha512-012cmmDaix7cWK8ost84xknbbXo+n578OPPVjkS4fIQD4tqZJMAoEam5zc3VbEgh/J7MrjcPO/xgR/VISl6RkA==}
 
   '@markuplint/cli-utils@4.4.9':
     resolution: {integrity: sha512-/0kmslrv/cdk+urYU2B7QwlxUVRqcv+UOAy/k5tP+3jJYSyiSVI8Bb7wdVJLaJN+wgVeXFKyIm+HH2MkSQ5faw==}
@@ -784,9 +784,6 @@ packages:
   '@markuplint/i18n@4.5.7':
     resolution: {integrity: sha512-Fv441agzagCZ3fujPqOoQui7wr4CpjU7g8re6VxIBhYviipX7M/4mibiUVhkdsU0jhm/75/hzVatG1o89ML3vg==}
 
-  '@markuplint/ml-ast@4.4.7':
-    resolution: {integrity: sha512-ewtAO+wa+CcKXZTzFmaLPGhU/PycrBMRHxoiBoRsgxaQ9KbWNdVd03BzgxK3rRXb4L5ZhY5HErscRLHihp4WDg==}
-
   '@markuplint/ml-ast@4.4.8':
     resolution: {integrity: sha512-oFF+goq79mY+S5cr6LhJZyROwr9cNn8gNZJQdfJ2sAlfg4qk4r08BEQKtdra9g5MUYySiHpCe/JpyuezrlkcFw==}
 
@@ -796,14 +793,8 @@ packages:
   '@markuplint/ml-core@4.10.3':
     resolution: {integrity: sha512-Jo/8+YKoDd6/Danp2VX2xZTTBDLD+4rfSCmkv5SgO8XHwY9O3AIm/rfPypksxcWXbX4mcI+gLalmwji5tUrvCQ==}
 
-  '@markuplint/ml-spec@4.8.0':
-    resolution: {integrity: sha512-b1KIRdZKz0O4DBcw10kodp2yjKNisuNKxSecpDL1IFZCQYpzbsMCMtbFwok45DQqQ/GfdvkH+ZWqZubwjLYG0A==}
-
   '@markuplint/ml-spec@4.8.1':
     resolution: {integrity: sha512-yT/GLOQQuDyBFVSOnqMQaNRKgIZ/ak4VAd2j4R7FqKMQBcsrPT1RpZ1H+5xdoQr9exY2lpXhTF7Oit5fFlLwmQ==}
-
-  '@markuplint/parser-utils@4.7.1':
-    resolution: {integrity: sha512-1RsY2+H764R388dcnGZP5lemXN16PLxFvFNaiMXHHUzweoG/iMSPrqhvJbKrLTamMLYxGiRsLMkE25kUSQwT4g==}
 
   '@markuplint/parser-utils@4.7.2':
     resolution: {integrity: sha512-aVjxP+3ynyx9RUm5D0ocpm/ROlbyvYrkvGupzovGnYafsOIEcO0+kkX3WhZlrdCqg6zYPVnj5lLlT0p/x7FwVg==}
@@ -814,14 +805,8 @@ packages:
   '@markuplint/selector@4.6.11':
     resolution: {integrity: sha512-MCKSGZvdSIuFg/wjCuhRQwyKaysXI4rw025rMwKLJoNg7gQQbQE+jUnXf5zioSPw/moaB2S50KKeY/n5A09TyA==}
 
-  '@markuplint/shared@4.4.8':
-    resolution: {integrity: sha512-zxWYresO3BUD20O/pCd7WLrnZ5E7o0fiA2zT1xT4lISJQgLePnhp0FH/h3oxgh0AkEXzcMeTRsB0YUqlSe3k8w==}
-
   '@markuplint/shared@4.4.9':
     resolution: {integrity: sha512-KzQflsf2ZjPym9oKRhUee0YCC1wiq3Jr3haPo9s6BMYG7t/LvFlIgYl3SydqIoeV5AK1LDtFEefVZUFY8Fp7ow==}
-
-  '@markuplint/types@4.6.3':
-    resolution: {integrity: sha512-uNfe3Mlu2o/Qk8NY0oOMSouZ+QqAIJ0Bhyq6IWu2YGwx5mgMJpe1sbWeQi6E7jjpe4WEv5p732BTpEuxyYo6vg==}
 
   '@markuplint/types@4.6.4':
     resolution: {integrity: sha512-s/fnNMkiUDYvzcAsHXvhevT8I46J6SFF/Ix0t+ciYJsyeYUHQ6K4YrFDZ0oSoYCh0k3xWjwh3TPBX2gdddwDiQ==}
@@ -1450,6 +1435,7 @@ packages:
 
   critters@0.0.24:
     resolution: {integrity: sha512-Oyqew0FGM0wYUSNqR0L6AteO5MpMoUU0rhKRieXeiKs+PmRTxiJMyaunYB2KF6fQ3dzChXKCpbFOEJx3OQ1v/Q==}
+    deprecated: Ownership of Critters has moved to the Nuxt team, who will be maintaining the project going forward. If you'd like to keep using Critters, please switch to the actively-maintained fork at https://github.com/danielroe/beasties
 
   cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -4280,10 +4266,10 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@markuplint/astro-parser@4.6.10(typescript@5.6.3)':
+  '@markuplint/astro-parser@4.6.11(typescript@5.6.3)':
     dependencies:
-      '@markuplint/ml-ast': 4.4.7
-      '@markuplint/parser-utils': 4.7.1
+      '@markuplint/ml-ast': 4.4.8
+      '@markuplint/parser-utils': 4.7.2
       astro-eslint-parser: 1.0.3(typescript@5.6.3)
     transitivePeerDependencies:
       - supports-color
@@ -4338,8 +4324,6 @@ snapshots:
 
   '@markuplint/i18n@4.5.7': {}
 
-  '@markuplint/ml-ast@4.4.7': {}
-
   '@markuplint/ml-ast@4.4.8': {}
 
   '@markuplint/ml-config@4.8.3':
@@ -4374,16 +4358,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@markuplint/ml-spec@4.8.0':
-    dependencies:
-      '@markuplint/ml-ast': 4.4.7
-      '@markuplint/types': 4.6.3
-      dom-accessibility-api: 0.7.0
-      is-plain-object: 5.0.0
-      type-fest: 4.26.1
-    transitivePeerDependencies:
-      - supports-color
-
   '@markuplint/ml-spec@4.8.1':
     dependencies:
       '@markuplint/ml-ast': 4.4.8
@@ -4391,19 +4365,6 @@ snapshots:
       dom-accessibility-api: 0.7.0
       is-plain-object: 5.0.0
       type-fest: 4.26.1
-    transitivePeerDependencies:
-      - supports-color
-
-  '@markuplint/parser-utils@4.7.1':
-    dependencies:
-      '@markuplint/ml-ast': 4.4.7
-      '@markuplint/ml-spec': 4.8.0
-      '@markuplint/types': 4.6.3
-      '@types/uuid': 10.0.0
-      debug: 4.3.7
-      espree: 10.2.0
-      type-fest: 4.26.1
-      uuid: 10.0.0
     transitivePeerDependencies:
       - supports-color
 
@@ -4447,28 +4408,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@markuplint/shared@4.4.8':
-    dependencies:
-      html-entities: 2.5.2
-
   '@markuplint/shared@4.4.9':
     dependencies:
       html-entities: 2.5.2
-
-  '@markuplint/types@4.6.3':
-    dependencies:
-      '@markuplint/shared': 4.4.8
-      '@types/css-tree': 2.3.8
-      '@types/debug': 4.1.12
-      '@types/whatwg-mimetype': 3.0.2
-      bcp-47: 2.1.0
-      css-tree: 3.0.0
-      debug: 4.3.7
-      leven: 4.0.0
-      type-fest: 4.26.1
-      whatwg-mimetype: 4.0.0
-    transitivePeerDependencies:
-      - supports-color
 
   '@markuplint/types@4.6.4':
     dependencies:
