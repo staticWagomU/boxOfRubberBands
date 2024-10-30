@@ -116,4 +116,12 @@ pre::after {
   --bg-light: #f1f4e0;
   --bg-dark: #004449;
   --text: #444;
+
+  --pagefind-ui-primary: var(--text);
+  --pagefind-ui-text: var(--text);
+  --pagefind-ui-background: #ffffff;
+  --pagefind-ui-border: var(--a);
+  --pagefind-ui-tag: #eeeeee;
+  --pagefind-ui-border-width: 2px;
+  --pagefind-ui-border-radius: 8px;
 }
