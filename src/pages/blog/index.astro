@@ -105,16 +105,17 @@ let currentYear: number = 0;
       flex-direction: row;
       .date {
         color: var(--bg-dark);
+        order: 2;
         opacity: 0.8;
         font-size: 0.9rem;
       }
     }
 
-    @media (width < 768px) {
+    @media (width < 820px) {
       .timeline {
         display: flex;
         gap: 0rem;
-        flex-direction: column;
+        flex-direction: column-reverse;
       }
     }
   </style>
