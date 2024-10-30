@@ -31,14 +31,10 @@ let currentYear: number = 0;
             return (
               <>
                 {isNewYear && (
-                  <div>
-                    <div class="timeline header">
-                      <div class="date header">{postYear}</div>
-                      <div class="dashline header" />
-                      <div class="content header">
-                        {posts.filter((p) => p.data.pubDate.getFullYear() === postYear).length}{" "}
-                        posts
-                      </div>
+                  <div class="header">
+                    <div class="date">{postYear}</div>
+                    <div class="content">
+                      {posts.filter((p) => p.data.pubDate.getFullYear() === postYear).length} posts
                     </div>
                   </div>
                 )}
@@ -53,7 +49,6 @@ let currentYear: number = 0;
                         .split("/")
                         .join("-")}
                     </div>
-                    <div class="dashline" />
                     <div class="content">{post.data.title}</div>
                   </div>
                 </a>
@@ -70,6 +65,15 @@ let currentYear: number = 0;
       margin: 0;
       padding: 0;
 
+      & + .bloglink {
+        margin-top: 1rem;
+      }
+
+      .timeline {
+        padding: 0.5rem;
+        border-radius: 10px;
+      }
+
       &:hover {
         & .timeline {
           background: color-mix(in srgb, var(--bg-light), #000 5%);
@@ -80,90 +84,37 @@ let currentYear: number = 0;
         }
       }
     }
-
-    .timeline {
+    .header {
       display: flex;
       flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      line-height: 2rem;
-      background: transparent;
-      border-radius: 0.5rem;
-      transition: background 200ms ease;
-
-      /* 年とポスト数表示させるところ */
-      &.header {
-        font-size: 1.5rem;
+      gap: 1rem;
+      align-items: flex-end;
+      vertical-align: bottom;
+      border-bottom: 1px solid var(--bg-dark);
+      margin-bottom: 1rem;
+      .date {
+        font-size: 2rem;
+        line-height: 2rem;
+        color: var(--bg-dark);
         font-weight: bold;
-
-        & > .content {
-          font-size: 1rem;
-          color: #004449bd;
-          vertical-align: bottom;
-        }
       }
-
-      /* タイムライン */
-      & > .date,
-      & > .dashline {
-        width: 10%;
-        text-align: right;
+    }
+    .timeline {
+      display: flex;
+      gap: 1rem;
+      flex-direction: row;
+      .date {
+        color: var(--bg-dark);
+        opacity: 0.8;
+        font-size: 0.9rem;
       }
+    }
 
-      & .date {
-        color: #004449bd;
-        &.header {
-          color: var(--bg-dark);
-        }
-      }
-
-      & > .content {
-        flex: 1;
-      }
-
-      & > .dashline {
-        position: relative;
-        aspect-ratio: 1;
-
-        &::before,
-        &::after {
-          content: "";
-          display: block;
-          position: absolute;
-        }
-
-        /* ドット */
-        &.header::before {
-          --size: 2rem;
-          /* 	border-color: blue; */
-          background: var(--a);
-        }
-        &::before {
-          --size: 0.5rem;
-          width: var(--size);
-          height: var(--size);
-          border-radius: var(--size);
-          background: var(--b);
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          transition: height 200ms ease;
-        }
-
-        /* ダッシュライン */
-        &.header::after {
-          --h: 0;
-        }
-        &::after {
-          --thin: 2px;
-          --h: 100%;
-          left: calc(50% - var(--thin) / 2);
-          bottom: 50%;
-          width: 4px;
-          height: var(--h);
-          border-left: var(--thin) dashed #00444970;
-          z-index: -1;
-        }
+    @media (width < 768px) {
+      .timeline {
+        display: flex;
+        gap: 0rem;
+        flex-direction: column;
       }
     }
   </style>
