@@ -5,10 +5,44 @@ import Footer from "../../components/Footer.astro";
 import Search from "../../components/Search.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../config";
 import { getCollection } from "astro:content";
+import Parser from "rss-parser";
+import Zenn from "../../components/Icon/Zenn.astro";
+import Pencil from "../../components/Icon/Pencil.astro";
 
-const posts = (await getCollection("blog")).sort(
+const parser = new Parser();
+const zenn_feed = await parser.parseURL("https://zenn.dev/wagomu/feed?all=1");
+type Post = {
+  slug: string;
+  kind: "zenn" | "blog";
+  data: {
+    title: string;
+    pubDate: Date;
+  };
+};
+const zenn_posts: Post[] = zenn_feed.items.map((item) => ({
+  slug: item.link || "",
+  kind: "zenn",
+  data: {
+    title: item.title || "",
+    pubDate: new Date(item.pubDate as string),
+  },
+}));
+
+const blog_posts: Post[] = (await getCollection("blog"))
+  .filter((post) => post.data.published)
+  .map((post) => ({
+    slug: post.slug,
+    kind: "blog",
+    data: {
+      title: post.data.title,
+      pubDate: new Date(post.data.pubDate),
+    },
+  }));
+
+const posts = [...zenn_posts, ...blog_posts].sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
 let currentYear: number = 0;
 ---
 
@@ -22,23 +56,23 @@ let currentYear: number = 0;
     <Search />
     <main>
       {
-        posts
-          .filter((post) => post.data.published)
-          .map((post, _) => {
-            const postYear = post.data.pubDate.getFullYear();
-            const isNewYear = currentYear !== postYear;
-            currentYear = postYear;
-            return (
-              <>
-                {isNewYear && (
-                  <div class="header">
-                    <div class="date">{postYear}</div>
-                    <div class="content">
-                      {posts.filter((p) => p.data.pubDate.getFullYear() === postYear).length} posts
-                    </div>
+        posts.map((post, _) => {
+          const postYear = post.data.pubDate.getFullYear();
+          const isNewYear = currentYear !== postYear;
+          currentYear = postYear;
+          return (
+            <>
+              {isNewYear && (
+                <div class="header">
+                  <div class="date">{postYear}</div>
+                  <div class="content">
+                    {posts.filter((p) => p.data.pubDate.getFullYear() === postYear).length} posts
                   </div>
-                )}
-                <a href={`/blog/${post.slug}`} class="bloglink">
+                </div>
+              )}
+              {post.kind === "zenn" && (
+                <a href={post.slug} class="bloglink">
+                  <Zenn />
                   <div class="timeline">
                     <div class="date">
                       {post.data.pubDate
@@ -52,9 +86,27 @@ let currentYear: number = 0;
                     <div class="content">{post.data.title}</div>
                   </div>
                 </a>
-              </>
-            );
-          })
+              )}
+              {post.kind === "blog" && (
+                <a href={`/blog/${post.slug}`} class="bloglink">
+                  <Pencil />
+                  <div class="timeline">
+                    <div class="date">
+                      {post.data.pubDate
+                        .toLocaleDateString("ja-JP", {
+                          month: "2-digit",
+                          day: "2-digit",
+                        })
+                        .split("/")
+                        .join("-")}
+                    </div>
+                    <div class="content">{post.data.title}</div>
+                  </div>
+                </a>
+              )}
+            </>
+          );
+        })
       }
     </main>
     <Footer />
@@ -64,6 +116,8 @@ let currentYear: number = 0;
       color: var(--text);
       margin: 0;
       padding: 0;
+      display: flex;
+      align-items: center;
 
       & + .bloglink {
         margin-top: 1rem;
