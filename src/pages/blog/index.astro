@@ -72,7 +72,6 @@ let currentYear: number = 0;
               )}
               {post.kind === "zenn" && (
                 <a href={post.slug} class="bloglink">
-                  <Zenn />
                   <div class="timeline">
                     <div class="date">
                       {post.data.pubDate
@@ -83,13 +82,17 @@ let currentYear: number = 0;
                         .split("/")
                         .join("-")}
                     </div>
-                    <div class="content">{post.data.title}</div>
+                    <div class="content">
+                      <span class="icon">
+                        <Zenn />
+                      </span>
+                      {post.data.title}
+                    </div>
                   </div>
                 </a>
               )}
               {post.kind === "blog" && (
                 <a href={`/blog/${post.slug}`} class="bloglink">
-                  <Pencil />
                   <div class="timeline">
                     <div class="date">
                       {post.data.pubDate
@@ -100,7 +103,12 @@ let currentYear: number = 0;
                         .split("/")
                         .join("-")}
                     </div>
-                    <div class="content">{post.data.title}</div>
+                    <div class="content">
+                      <span class="icon">
+                        <Pencil />
+                      </span>
+                      {post.data.title}
+                    </div>
                   </div>
                 </a>
               )}
@@ -128,11 +136,18 @@ let currentYear: number = 0;
         border-radius: 10px;
       }
 
+      .date {
+        min-width: 5ch;
+      }
+
       &:hover {
         & .timeline {
           background: color-mix(in srgb, var(--bg-light), #000 5%);
         }
       }
+    }
+    .icon {
+      margin-right: 1rem;
     }
     .header {
       display: flex;
