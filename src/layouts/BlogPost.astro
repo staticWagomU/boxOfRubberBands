@@ -1,9 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 import { SITE_TITLE } from "../config.ts";
+import Base from "./Base.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -11,14 +9,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 const tabTitle = `${title} - ${SITE_TITLE}`;
 ---
 
-<html lang="ja">
-  <head>
-    <BaseHead title={tabTitle} description={description ? description : title} />
-  </head>
-
-  <body>
-    <Header />
-    <main class="blog">
+<Base title={tabTitle} description={description ? description : title} >
       <article>
         {heroImage && <img id="heroImage" src={heroImage} alt="" />}
         <span class="title">
@@ -58,12 +49,4 @@ const tabTitle = `${title} - ${SITE_TITLE}`;
         <hr />
         <slot />
       </article>
-    </main>
-    <Footer />
-    <style>
-      @view-transition {
-        navigation: auto;
-      }
-    </style>
-  </body>
-</html>
+</Base>

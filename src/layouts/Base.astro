@@ -4,12 +4,14 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 import "../styles/global.css";
+
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="ja">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title={title || SITE_TITLE} description={description || SITE_DESCRIPTION} />
   </head>
   <body>
     <Header title={SITE_TITLE} />
@@ -17,18 +19,5 @@ import "../styles/global.css";
       <slot />
     </main>
     <Footer />
-    <style>
-      @view-transition {
-        navigation: auto;
-      }
-      body {
-        display: flex;
-        flex-direction: column;
-        height: 100dvh;
-      }
-      main {
-        flex-grow: 1;
-      }
-    </style>
   </body>
 </html>
