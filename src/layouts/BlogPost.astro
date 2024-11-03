@@ -9,44 +9,44 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 const tabTitle = `${title} - ${SITE_TITLE}`;
 ---
 
-<Base title={tabTitle} description={description ? description : title} >
-      <article>
-        {heroImage && <img id="heroImage" src={heroImage} alt="" />}
-        <span class="title">
-          <h1 class="title"><span>{title}</span></h1>
-          {
-            pubDate && (
-              <time>
-                {pubDate
-                  .toLocaleDateString("ja-JP", {
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                  })
-                  .split("/")
-                  .join("-")}
-              </time>
-            )
-          }
-          {
-            updatedDate && (
-              <div>
-                Last updated on{" "}
-                <time>
-                  {new Date(updatedDate)
-                    .toLocaleDateString("ja-JP", {
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                    })
-                    .split("/")
-                    .join("-")}
-                </time>
-              </div>
-            )
-          }
-        </span>
-        <hr />
-        <slot />
-      </article>
+<Base title={tabTitle} description={description ? description : title}>
+  <article>
+    {heroImage && <img id="heroImage" src={heroImage} alt="" />}
+    <span class="title">
+      <h1 class="title"><span>{title}</span></h1>
+      {
+        pubDate && (
+          <time>
+            {pubDate
+              .toLocaleDateString("ja-JP", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              })
+              .split("/")
+              .join("-")}
+          </time>
+        )
+      }
+      {
+        updatedDate && (
+          <div>
+            Last updated on{" "}
+            <time>
+              {new Date(updatedDate)
+                .toLocaleDateString("ja-JP", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                })
+                .split("/")
+                .join("-")}
+            </time>
+          </div>
+        )
+      }
+    </span>
+    <hr />
+    <slot />
+  </article>
 </Base>

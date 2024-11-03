@@ -1,9 +1,5 @@
 ---
-import BaseHead from "../../components/BaseHead.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
-import Search from "../../components/Search.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../../config";
+import Base from "../../layouts/Base.astro";
 import { getCollection } from "astro:content";
 import Parser from "rss-parser";
 import Zenn from "../../components/Icon/Zenn.astro";
@@ -28,16 +24,18 @@ const zenn_posts: Post[] = zenn_feed.items.map((item) => ({
   },
 }));
 
-const blog_posts: Post[] = (await getCollection("blog"))
-  .filter((post) => post.data.published)
-  .map((post) => ({
-    slug: post.slug,
-    kind: "blog",
-    data: {
-      title: post.data.title,
-      pubDate: new Date(post.data.pubDate),
-    },
-  }));
+const blog_posts: Post[] = (
+  await getCollection("blog", ({ data }) => {
+    return data.published;
+  })
+).map((post) => ({
+  slug: post.slug,
+  kind: "blog",
+  data: {
+    title: post.data.title,
+    pubDate: new Date(post.data.pubDate),
+  },
+}));
 
 const posts = [...zenn_posts, ...blog_posts].sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -46,142 +44,132 @@ const posts = [...zenn_posts, ...blog_posts].sort(
 let currentYear: number = 0;
 ---
 
-<!doctype html>
-<html lang="ja">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body>
-    <Header />
-    <Search />
-    <main>
-      {
-        posts.map((post, _) => {
-          const postYear = post.data.pubDate.getFullYear();
-          const isNewYear = currentYear !== postYear;
-          currentYear = postYear;
-          return (
-            <>
-              {isNewYear && (
-                <div class="header">
-                  <div class="date">{postYear}</div>
-                  <div class="content">
-                    {posts.filter((p) => p.data.pubDate.getFullYear() === postYear).length} posts
-                  </div>
+<Base>
+  {
+    posts.map((post, _) => {
+      const postYear = post.data.pubDate.getFullYear();
+      const isNewYear = currentYear !== postYear;
+      currentYear = postYear;
+      return (
+        <>
+          {isNewYear && (
+            <div class="header">
+              <div class="date">{postYear}</div>
+              <div class="content">
+                {posts.filter((p) => p.data.pubDate.getFullYear() === postYear).length} posts
+              </div>
+            </div>
+          )}
+          {post.kind === "zenn" && (
+            <a href={post.slug} class="bloglink">
+              <div class="timeline">
+                <div class="date">
+                  {post.data.pubDate
+                    .toLocaleDateString("ja-JP", {
+                      month: "2-digit",
+                      day: "2-digit",
+                    })
+                    .split("/")
+                    .join("-")}
                 </div>
-              )}
-              {post.kind === "zenn" && (
-                <a href={post.slug} class="bloglink">
-                  <div class="timeline">
-                    <div class="date">
-                      {post.data.pubDate
-                        .toLocaleDateString("ja-JP", {
-                          month: "2-digit",
-                          day: "2-digit",
-                        })
-                        .split("/")
-                        .join("-")}
-                    </div>
-                    <div class="content">
-                      <span class="icon">
-                        <Zenn />
-                      </span>
-                      {post.data.title}
-                    </div>
-                  </div>
-                </a>
-              )}
-              {post.kind === "blog" && (
-                <a href={`/blog/${post.slug}`} class="bloglink">
-                  <div class="timeline">
-                    <div class="date">
-                      {post.data.pubDate
-                        .toLocaleDateString("ja-JP", {
-                          month: "2-digit",
-                          day: "2-digit",
-                        })
-                        .split("/")
-                        .join("-")}
-                    </div>
-                    <div class="content">
-                      <span class="icon">
-                        <Pencil />
-                      </span>
-                      {post.data.title}
-                    </div>
-                  </div>
-                </a>
-              )}
-            </>
-          );
-        })
-      }
-    </main>
-    <Footer />
-  </body><style>
-    .bloglink {
-      text-decoration: none;
-      color: var(--text);
-      margin: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
+                <div class="content">
+                  <span class="icon">
+                    <Zenn />
+                  </span>
+                  {post.data.title}
+                </div>
+              </div>
+            </a>
+          )}
+          {post.kind === "blog" && (
+            <a href={`/blog/${post.slug}`} class="bloglink">
+              <div class="timeline">
+                <div class="date">
+                  {post.data.pubDate
+                    .toLocaleDateString("ja-JP", {
+                      month: "2-digit",
+                      day: "2-digit",
+                    })
+                    .split("/")
+                    .join("-")}
+                </div>
+                <div class="content">
+                  <span class="icon">
+                    <Pencil />
+                  </span>
+                  {post.data.title}
+                </div>
+              </div>
+            </a>
+          )}
+        </>
+      );
+    })
+  }
+</Base>
+<style>
+  .bloglink {
+    text-decoration: none;
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
 
-      & + .bloglink {
-        margin-top: 1rem;
-      }
+    & + .bloglink {
+      margin-top: 1rem;
+    }
 
-      .timeline {
-        padding: 0.5rem;
-        border-radius: 10px;
-      }
+    .timeline {
+      padding: 0.5rem;
+      border-radius: 10px;
+    }
 
-      .date {
-        min-width: 5ch;
-      }
+    .date {
+      min-width: 5ch;
+    }
 
-      &:hover {
-        & .timeline {
-          background: color-mix(in srgb, var(--bg-light), #000 5%);
-        }
+    &:hover {
+      & .timeline {
+        background: color-mix(in srgb, var(--bg-light), #000 5%);
       }
     }
-    .icon {
-      margin-right: 1rem;
+  }
+  .icon {
+    margin-right: 1rem;
+  }
+  .header {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: flex-end;
+    vertical-align: bottom;
+    border-bottom: 1px solid var(--bg-dark);
+    margin: 1rem 0;
+    .date {
+      font-size: 2.5rem;
+      line-height: 2.5rem;
+      color: var(--bg-dark);
+      font-weight: bold;
     }
-    .header {
-      display: flex;
-      flex-direction: row;
-      gap: 1rem;
-      align-items: flex-end;
-      vertical-align: bottom;
-      border-bottom: 1px solid var(--bg-dark);
-      margin: 1rem 0;
-      .date {
-        font-size: 2.5rem;
-        line-height: 2.5rem;
-        color: var(--bg-dark);
-        font-weight: bold;
-      }
+  }
+  .timeline {
+    display: flex;
+    gap: 1rem;
+    flex-direction: row;
+    .date {
+      color: var(--bg-dark);
+      order: 2;
+      opacity: 0.8;
+      font-size: 0.9rem;
     }
+  }
+
+  @media (width < 820px) {
     .timeline {
       display: flex;
-      gap: 1rem;
-      flex-direction: row;
-      .date {
-        color: var(--bg-dark);
-        order: 2;
-        opacity: 0.8;
-        font-size: 0.9rem;
-      }
+      gap: 0rem;
+      flex-direction: column-reverse;
     }
-
-    @media (width < 820px) {
-      .timeline {
-        display: flex;
-        gap: 0rem;
-        flex-direction: column-reverse;
-      }
-    }
-  </style>
-</html>
+  }
+</style>
