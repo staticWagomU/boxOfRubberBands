@@ -90,9 +90,16 @@ if (ogp[url]) {
     font-weight: bold;
   }
 
-  .og_wrap img {
+  .og_wrap .imag_container {
     max-width: 200px;
     max-height: 150px;
+  }
+
+  .imag_container img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
   }
 
   @media (width < 800px) {
@@ -111,5 +118,7 @@ if (ogp[url]) {
       {description && description.length > 100 ? `${description?.slice(0, 100)}...` : description}
     </span>
   </div>
-  {image && <img src={image} alt="ogp" />}
+  <span class="imag_container">
+    {image && <img src={image} alt="ogp" />}
+  </span>
 </div>
