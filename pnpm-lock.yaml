@@ -7,25 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@pagefind/default-ui':
-        specifier: ^1.1.1
-        version: 1.1.1
-      '@playform/compress':
-        specifier: ^0.1.1
-        version: 0.1.4(@types/node@22.5.0)(rollup@4.24.0)(typescript@5.5.3)
-      '@playform/inline':
-        specifier: ^0.1.0
-        version: 0.1.0(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.24.0)(terser@5.34.1)(typescript@5.5.3)
-      astro-google-fonts-optimizer:
-        specifier: ^0.2.2
-        version: 0.2.2
-      pagefind:
-        specifier: ^1.1.1
-        version: 1.2.0
-      unist-util-visit:
-        specifier: 5.0.0
-        version: 5.0.0
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.3
@@ -42,15 +23,21 @@ importers:
       '@markuplint/astro-parser':
         specifier: ^4.6.5
         version: 4.6.5(typescript@5.5.3)
+      '@playform/compress':
+        specifier: ^0.1.1
+        version: 0.1.4(@types/node@22.5.0)(rollup@4.24.0)(typescript@5.5.3)
+      '@playform/inline':
+        specifier: ^0.1.0
+        version: 0.1.0(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.24.0)(terser@5.34.1)(typescript@5.5.3)
       astro:
         specifier: 5.0.0-beta.7
         version: 5.0.0-beta.7(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.24.0)(terser@5.34.1)(typescript@5.5.3)(yaml@2.5.0)
+      astro-google-fonts-optimizer:
+        specifier: ^0.2.2
+        version: 0.2.2
       cheerio:
         specifier: 1.0.0
         version: 1.0.0
-      husky:
-        specifier: ^9.0.11
-        version: 9.1.6
       markuplint:
         specifier: ^4.0.0
         version: 4.10.1(typescript@5.5.3)
@@ -60,9 +47,6 @@ importers:
       prettier:
         specifier: ^3.3.2
         version: 3.3.3
-      prettier-plugin-astro:
-        specifier: ^0.14.0
-        version: 0.14.1
       remark-breaks:
         specifier: ^4.0.0
         version: 4.0.0
@@ -72,6 +56,9 @@ importers:
       typescript:
         specifier: ^5.4.5
         version: 5.5.3
+      unist-util-visit:
+        specifier: 5.0.0
+        version: 5.0.0
 
   tools/rehype-wrap-h2-with-section: {}
 
@@ -757,34 +744,6 @@ packages:
 
   '@oslojs/encoding@1.1.0':
     resolution: {integrity: sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ==}
-
-  '@pagefind/darwin-arm64@1.2.0':
-    resolution: {integrity: sha512-pHnPL2rm4xbe0LqV376g84hUIsVdy4PK6o2ACveo0DSGoC40eOIwPUPftnUPUinSdDWkkySaL5FT5r9hsXk0ZQ==}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@pagefind/darwin-x64@1.2.0':
-    resolution: {integrity: sha512-q2tcnfvcRyx0GnrJoUQJ5bRpiFNtI8DZWM6a4/k8sNJxm2dbM1BnY5hUeo4MbDfpb64Qc1wRMcvBUSOaMKBjfg==}
-    cpu: [x64]
-    os: [darwin]
-
-  '@pagefind/default-ui@1.1.1':
-    resolution: {integrity: sha512-ZM0zDatWDnac/VGHhQCiM7UgA4ca8jpjA+VfuTJyHJBaxGqZMQnm4WoTz9E0KFcue1Bh9kxpu7uWFZfwpZZk0A==}
-
-  '@pagefind/linux-arm64@1.2.0':
-    resolution: {integrity: sha512-wVtLOlF9AUrwLovP9ZSEKOYnwIVrrxId4I2Mz02Zxm3wbUIJyx8wHf6LyEf7W7mJ6rEjW5jtavKAbngKCAaicg==}
-    cpu: [arm64]
-    os: [linux]
-
-  '@pagefind/linux-x64@1.2.0':
-    resolution: {integrity: sha512-Lo5aO2bA++sQTeEWzK5WKr3KU0yzVH5OnTY88apZfkgL4AVfXckH2mrOU8ouYKCLNPseIYTLFEdj0V5xjHQSwQ==}
-    cpu: [x64]
-    os: [linux]
-
-  '@pagefind/windows-x64@1.2.0':
-    resolution: {integrity: sha512-tGQcwQAb5Ndv7woc7lhH9iAdxOnTNsgCz8sEBbsASPB2A0uI8BWBmVdf2GFLQkYHqnnqYuun63sa+UOzB7Ah3g==}
-    cpu: [x64]
-    os: [win32]
 
   '@pkgr/core@0.1.1':
     resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
@@ -1932,11 +1891,6 @@ packages:
     resolution: {integrity: sha512-1e4Wqeblerz+tMKPIq2EMGiiWW1dIjZOksyHWSUm1rmuvw/how9hBHZ38lAGj5ID4Ik6EdkOw7NmWPy6LAwalw==}
     engines: {node: '>= 14'}
 
-  husky@9.1.6:
-    resolution: {integrity: sha512-sqbjZKK7kf44hfdE94EoX8MZNk0n7HeW37O4YrVGCF4wzgQjp+akPAkfUK5LZ6KuR/6sqeAVuXHji+RzQgOn5A==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   iconv-lite@0.6.3:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
@@ -2598,10 +2552,6 @@ packages:
 
   package-json-from-dist@1.0.0:
     resolution: {integrity: sha512-dATvCeZN/8wQsGywez1mzHtTlP22H8OEfPrVMLNr4/eGa+ijtLn/6M5f0dY8UKNrC2O9UCU6SSoG3qRKnt7STw==}
-
-  pagefind@1.2.0:
-    resolution: {integrity: sha512-sFVv5/x73qCp9KlLHv8/uWDv7rG1tsWcG9MuXc5YTrXIrb8c1Gshm9oc5rMLXNZILXUWai8WczqaK4jjroEzng==}
-    hasBin: true
 
   param-case@3.0.4:
     resolution: {integrity: sha512-RXlj7zCYokReqWpOPH9oYivUzLYZ5vAPIfEmCTNViosC78F8F0H9y7T7gG2M39ymgutxF5gcFEsyZQSph9Bp3A==}
@@ -4424,23 +4374,6 @@ snapshots:
 
   '@oslojs/encoding@1.1.0': {}
 
-  '@pagefind/darwin-arm64@1.2.0':
-    optional: true
-
-  '@pagefind/darwin-x64@1.2.0':
-    optional: true
-
-  '@pagefind/default-ui@1.1.1': {}
-
-  '@pagefind/linux-arm64@1.2.0':
-    optional: true
-
-  '@pagefind/linux-x64@1.2.0':
-    optional: true
-
-  '@pagefind/windows-x64@1.2.0':
-    optional: true
-
   '@pkgr/core@0.1.1': {}
 
   '@playform/compress@0.1.4(@types/node@22.5.0)(rollup@4.24.0)(typescript@5.5.3)':
@@ -5962,8 +5895,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  husky@9.1.6: {}
-
   iconv-lite@0.6.3:
     dependencies:
       safer-buffer: 2.1.2
@@ -6874,14 +6805,6 @@ snapshots:
 
   package-json-from-dist@1.0.0: {}
 
-  pagefind@1.2.0:
-    optionalDependencies:
-      '@pagefind/darwin-arm64': 1.2.0
-      '@pagefind/darwin-x64': 1.2.0
-      '@pagefind/linux-arm64': 1.2.0
-      '@pagefind/linux-x64': 1.2.0
-      '@pagefind/windows-x64': 1.2.0
-
   param-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
@@ -7020,6 +6943,7 @@ snapshots:
       '@astrojs/compiler': 2.10.3
       prettier: 3.3.3
       sass-formatter: 0.7.9
+    optional: true
 
   prettier@2.8.7:
     optional: true
@@ -7282,13 +7206,15 @@ snapshots:
     dependencies:
       queue-microtask: 1.2.3
 
-  s.color@0.0.15: {}
+  s.color@0.0.15:
+    optional: true
 
   safer-buffer@2.1.2: {}
 
   sass-formatter@0.7.9:
     dependencies:
       suf-log: 2.5.3
+    optional: true
 
   sax@1.4.1: {}
 
@@ -7471,6 +7397,7 @@ snapshots:
   suf-log@2.5.3:
     dependencies:
       s.color: 0.0.15
+    optional: true
 
   supports-color@5.5.0:
     dependencies:
