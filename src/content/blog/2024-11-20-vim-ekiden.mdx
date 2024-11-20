@@ -1,0 +1,160 @@
+---
+title: "fall.vimいいぞ"
+pubDate: 2024-11-20
+published: true
+---
+
+import OG from "../../components/OG.astro";
+
+この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2024年11月20日(水)の記事です。
+
+前回の記事は [kyoh86](https://github.com/kyoh86) さんの「[:terminalのZSHからNeovimにコマンドの終了を通知すると便利](https://zenn.dev/vim_jp/articles/2d192656cad3e0)」という記事でした。
+
+次回の記事は 11月22日(金) に投稿される予定です。
+
+---
+
+## はじめに
+
+neovimのsub環境にlambdalisueさんの新作プラグインであるfall.vimというffプラグインを導入してみました。
+
+<OG url="https://github.com/vim-fall/fall.vim" />
+
+vimを使いはじめたときから今に至るまで、lambdalisue wareにお世話になっている身として、新作が出たら使ってみるしかありません。
+
+## fall.vimとは
+
+ffプラグインです。ffはファージーにファインドするやつです。
+
+UIは[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)で見慣れたフローティングウィンドウ形式です。
+
+![](/images/blog/2024-11-20-vim-ekiden/img1.png)
+
+現在はビルドインで、以下のソースが提供されています。
+
+- grep
+- git-grep
+- file
+- file:all
+- line
+- buffer
+- help
+- quickfix
+- oldfiles
+- history
+
+![](/images/blog/2024-11-20-vim-ekiden/img3.png)
+
+
+概要はこのあたりにして、fall.vimのここすきポイントを紹介します
+
+## ここすきポイント
+
+### ヘルプが用意されている
+
+ここでのヘルプはヘルプファイルのことではなく、UI上でのヘルプです。
+
+デフォルトでは、`<F1>`でヘルプを表示できます。
+
+![](/images/blog/2024-11-20-vim-ekiden/img2.png)
+
+これによって導入したあとで、ヘルプを起動するキーマッピングを覚えるだけで、fall.vimの使い方をある程度知ることができます。
+本腰を入れてカスタマイズする前にサクッと挙動を試したいので、この機能はありがたいです。
+
+### tsファイルでカスタマイズする
+
+fall.vimのソースや並び順等のカスタマイズはtsファイルで行います。
+その設定ファイルは`:FallCustom`を実行することで、`stdpath('config')`直下に`/fall/custom.ts`を自動生成します。その体験はcoc.nvimの`:CocConfig`にインスパイアされているそうです。
+
+メイン環境で使っている[ddu.vim](https://github.com/Shougo/ddu.vim)ではファイル検索するときに[ddu-filter-sorter_mtime](https://github.com/kuuote/ddu-filter-sorter_mtime)ソートを多用しているので、同様のソートをfall.vimでも作ってみました。
+```ts
+function sorterMtime<T extends Detail>(): Sorter<T> {
+  return defineSorter<T>((_denops, { items }) => {
+    items.sort((a, b) => {
+      try {
+        const fileInfoA = Deno.statSync(a.detail.path as string);
+        const fileInfoB = Deno.statSync(b.detail.path as string);
+
+        if(fileInfoA.isFile && fileInfoB.isFile) {
+          const va = fileInfoA.mtime?.getTime() ?? 0;
+          const vb = fileInfoB.mtime?.getTime() ?? 0;
+
+          return vb - va;
+        }
+        return 0;
+      } catch {
+        return 0;
+      }
+    })
+  });
+}
+
+// ...
+
+
+export const main: Entrypoint = (
+  {
+    definePickerFromSource,
+    definePickerFromCurator,
+    refineSetting,
+  },
+) => {
+  refineSetting({
+    coordinator: builtin.coordinator.modern,
+    theme: builtin.theme.MODERN_THEME,
+  });
+
+// ...
+
+  definePickerFromSource(
+    "file:mtime",
+    refineSource(
+      builtin.source.file({
+        filterFile: myFilterFile,
+        filterDirectory: myFilterDirectory,
+      }),
+      builtin.refiner.relativePath,
+    ),
+    {
+      matchers: [builtin.matcher.fzf],
+      sorters: [
+        sorterMtime,
+      ],
+      renderers: [
+        composeRenderers(
+          builtin.renderer.smartPath,
+          builtin.renderer.nerdfont,
+        ),
+      ],
+      previewers: [builtin.previewer.file],
+      actions: {
+        ...myPathActions,
+        ...myQuickfixActions,
+        ...myMiscActions,
+      },
+      defaultAction: "open",
+    },
+  );
+
+// ...
+
+};
+```
+
+このように、tsファイルでカスタマイズすることで、自分好みのソートやソース、フィルター等を追加することができます。
+
+
+### 丁寧なJSDocが書かれている
+
+書くことが面倒になりがちなJSDocが丁寧に書かれているので、カスタマイズする際に助かります
+
+![](/images/blog/2024-11-20-vim-ekiden/Animation1.gif)
+
+
+### 型がしっかりしている
+
+これはプラグインというよりも、TypeScriptの話になってしまいますが、型がしっかりしているので、カスタマイズする際にエラーが出にくいです。
+
+## おわりに
+
+使っていてとても良かったので、サブ環境に元々入っていたffプラグインである、[mini.pick](https://github.com/echasnovski/mini.pick)と併用していこうと思います。
