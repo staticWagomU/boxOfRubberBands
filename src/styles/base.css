@@ -1,0 +1,26 @@
+:root {
+	--bg: #f1f4e0;
+	--color: #444;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	padding: 0rem 0.3rem;
+	min-height: 100vh;
+	width: 100%;
+	max-width: clamp(300px, 100%, 800px);
+	margin: auto;
+	color: var(--color);
+	background: var(--bg);
+	font-optical-sizing: auto;
+}
+
+.dark {
+	--bg: #4b6158;
+	--color: #f7f0f0;
+}
