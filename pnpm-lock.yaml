@@ -47,6 +47,9 @@ importers:
       prettier:
         specifier: ^3.3.2
         version: 3.3.3
+      prettier-plugin-astro:
+        specifier: ^0.14.0
+        version: 0.14.1
       remark-breaks:
         specifier: ^4.0.0
         version: 4.0.0
@@ -6943,7 +6946,6 @@ snapshots:
       '@astrojs/compiler': 2.10.3
       prettier: 3.3.3
       sass-formatter: 0.7.9
-    optional: true
 
   prettier@2.8.7:
     optional: true
@@ -7206,15 +7208,13 @@ snapshots:
     dependencies:
       queue-microtask: 1.2.3
 
-  s.color@0.0.15:
-    optional: true
+  s.color@0.0.15: {}
 
   safer-buffer@2.1.2: {}
 
   sass-formatter@0.7.9:
     dependencies:
       suf-log: 2.5.3
-    optional: true
 
   sax@1.4.1: {}
 
@@ -7397,7 +7397,6 @@ snapshots:
   suf-log@2.5.3:
     dependencies:
       s.color: 0.0.15
-    optional: true
 
   supports-color@5.5.0:
     dependencies:
