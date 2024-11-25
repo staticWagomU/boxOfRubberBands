@@ -4,7 +4,7 @@ root = true
 indent_style = tab
 tab_width = 2
 
-[{src,scripts}/**.{ts,json,js,cjs}]
+[{src,scripts}/**.{ts,json,js,cjs,astro}]
 end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
