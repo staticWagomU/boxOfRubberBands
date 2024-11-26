@@ -1,10 +1,11 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "compiilerOptions": {
-    "strict": true,
-    // Error when a value import is only used as a type.
-    "importsNotUsedAsValues": "error",
-    "noEmit": true,
-    "strictNullCheckes": true
-  }
+	"extends": "astro/tsconfigs/strict",
+	"compiilerOptions": {
+		"strict": true,
+		"strictNullChecks": true,
+		// Error when a value import is only used as a type.
+		"importsNotUsedAsValues": "error",
+		"noEmit": true,
+		"strictNullCheckes": true
+	}
 }
