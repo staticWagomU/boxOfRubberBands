@@ -35,10 +35,12 @@ export default defineConfig({
 		remarkPlugins: [remarkBreaks, astroLastModifiedAt, remarkBudoux, codeBlockPlugin],
 		rehypePlugins: [wrapH2WithSection, rehypeLineNumbers],
 		shikiConfig: {
+			defaultColor: false,
 			themes: {
 				light: "everforest-light",
 				dark: "everforest-dark",
 			},
+			wrap: false,
 		},
 	},
 });
