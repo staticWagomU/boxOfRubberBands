@@ -68,3 +68,7 @@ body {
 	}
 }
 
+img {
+	max-width: clamp(300px, 100%, 800px);
+	height: auto;
+}
