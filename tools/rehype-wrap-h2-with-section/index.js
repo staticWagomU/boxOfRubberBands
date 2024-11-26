@@ -11,7 +11,7 @@ export default function wrapH2WithSection() {
 				currentSection = {
 					type: "element",
 					tagName: "section",
-					properties: { className: ["section"] },
+					properties: { className: ["blog-section"] },
 					children: [node],
 				};
 			} else if (currentSection) {
