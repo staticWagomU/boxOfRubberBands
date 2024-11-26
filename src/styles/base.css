@@ -24,3 +24,47 @@ body {
 	--bg: #4b6158;
 	--color: #f7f0f0;
 }
+
+.code-block-wrapper {
+	display: flex;
+	flex-direction: row;
+	font-size: 13px;
+	line-height: 2ch;
+	position: relative;
+
+	.code-content {
+		width: 100%;
+
+		pre {
+			padding: 1ch;
+			border-radius: 1ch;
+		}
+	}
+
+	.line-number {
+		position: absolute;
+		left: 0;
+		border-radius: 0.5ch 0 0 0.5ch;
+		transform: translateX(calc(-100% + 1ch));
+		background:#23262E;
+		padding: 1ch;
+		padding-left: 0.5ch;
+		padding-bottom: 0.6ch;
+		display: inline-flex;
+		text-align: right;
+		flex-direction: column;
+		color: #D5CED9;
+		user-select: none;
+
+		.line-number-item:last-child {
+			display: none;
+		}
+	}
+}
+
+@media (max-width: 820px) {
+	.code-block-wrapper .line-number {
+		display: none;
+	}
+}
+
