@@ -67,7 +67,8 @@ fall.vimのソースや並び順等のカスタマイズはtsファイルで行�
 その設定ファイルは`:FallCustom`を実行することで、`stdpath('config')`直下に`/fall/custom.ts`を自動生成します。その体験はcoc.nvimの`:CocConfig`にインスパイアされているそうです。
 
 メイン環境で使っている[ddu.vim](https://github.com/Shougo/ddu.vim)ではファイル検索するときに[ddu-filter-sorter_mtime](https://github.com/kuuote/ddu-filter-sorter_mtime)ソートを多用しているので、同様のソートをfall.vimでも作ってみました。
-```ts
+
+```ts title="fall/custom.ts"
 function sorterMtime<T extends Detail>(): Sorter<T> {
   return defineSorter<T>((_denops, { items }) => {
     items.sort((a, b) => {
