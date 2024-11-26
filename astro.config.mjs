@@ -35,7 +35,10 @@ export default defineConfig({
 		remarkPlugins: [remarkBreaks, astroLastModifiedAt, remarkBudoux, codeBlockPlugin],
 		rehypePlugins: [wrapH2WithSection, rehypeLineNumbers],
 		shikiConfig: {
-			theme: "andromeeda",
+			themes: {
+				light: "everforest-light",
+				dark: "everforest-dark",
+			},
 		},
 	},
 });
