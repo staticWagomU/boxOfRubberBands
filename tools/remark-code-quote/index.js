@@ -11,6 +11,12 @@ export default function codeBlockPlugin() {
 					value: createCodeBlockWithTitle(node.lang, title, node.value),
 				};
 				parent.children.splice(index, 1, codeBlockWithTitle);
+			} else {
+				const codeBlock = {
+					type: "html",
+					value: `<pre><code class="language-${node.lang}">${escapeHtml(node.value)}</code></pre>`,
+				};
+				parent.children.splice(index, 1, codeBlock);
 			}
 		});
 	};
@@ -26,7 +32,7 @@ function createCodeBlockWithTitle(lang, title, code) {
   ${titleElement}
   <pre><code class="language-${lang}">${escapeHtml(code)}</code></pre>
 </div>
-`;
+`.trim();
 }
 
 function escapeHtml(unsafe) {
