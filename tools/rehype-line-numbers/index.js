@@ -28,7 +28,6 @@ export default function rehypeLineNumbers(options = {}) {
 			const code = toString(codeNode);
 			// 空の行を保持しながら分割
 			const lines = code.split(/\r?\n/);
-			console.log(lines);
 			const startNumber = startFrom1 ? 1 : 0;
 
 			// 行番号要素の作成
