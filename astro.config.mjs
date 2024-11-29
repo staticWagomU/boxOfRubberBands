@@ -32,6 +32,10 @@ export default defineConfig({
 		plugins: [],
 	},
 	markdown: {
+		remarkRehype: {
+			footnoteLabelTagName: "hr",
+			footnoteLabel: " ",
+		},
 		remarkPlugins: [remarkBreaks, astroLastModifiedAt, remarkBudoux, codeBlockPlugin],
 		rehypePlugins: [wrapH2WithSection, rehypeLineNumbers],
 		shikiConfig: {
