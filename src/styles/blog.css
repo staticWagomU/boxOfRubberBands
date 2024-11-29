@@ -30,6 +30,20 @@ h2 {
 
 }
 
+/* リンク */
+a {
+	color: var(--accent);
+	transition: color .2s, text-decoration .2s;
+	text-decoration: none;
+	text-decoration-skip-ink: all;
+
+	/* ホバー時は太めな波線 */
+	&:hover {
+		color: var(--accent2);
+		text-decoration: underline wavy;
+		text-decoration-thickness: 2px;
+	}
+}
 
 /* 画像 */
 img {
@@ -72,7 +86,7 @@ kbd {
 /* マーカー */
 mark {
 	background: var(--accent3);
-		padding: 0.1rem 0.3rem;
+	padding: 0.1rem 0.3rem;
 }
 
 /* 脚注 */
