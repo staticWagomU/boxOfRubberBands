@@ -1,0 +1,155 @@
+/* リストマーカー */
+li::marker {
+	color: var(--gray);
+}
+
+/* ヘッダー */
+h1,h2,h3,h4,h5,h6 {
+	color: var(--accent);
+}
+
+h2 {
+	border-bottom: 3px solid var(--gray);
+	span {
+		display: inline-block;
+		position: relative;
+		padding: 0 .4em .2em;
+		color: var(--accent1);
+
+		&::before {
+			position: absolute;
+			bottom: -3px;
+			left: 0;
+			width: 100%;
+			height: 3px;
+			background-color: var(--accent2);
+			content: '';
+		}
+
+	}
+
+}
+
+
+/* 画像 */
+img {
+	max-width: clamp(300px, 100%, 800px);
+	height: auto;
+}
+
+
+/* 区切り線 */
+hr {
+	border: 1px solid var(--accent2);
+}
+
+/* インラインコード */
+code:not(pre code) {
+	background: var(--gray);
+	border-radius: 0.3rem;
+	color: var(--bg);
+	padding: 0.1rem 0.4rem;
+}
+
+
+/* 引用 */
+blockquote {
+	margin: 1rem 0;
+	padding: 1rem;
+	border-left: .2rem solid var(--gray);
+}
+
+/* キーボード */
+kbd {
+	color: #444;
+	padding: 0.1rem 0.3rem;
+	background: #f9f9f9;
+	border-radius: 0.3rem;
+	border: 1px solid var(--gray);
+	box-shadow: -1px 3px 0 var(--gray);
+}
+
+/* マーカー */
+mark {
+	background: var(--accent3);
+		padding: 0.1rem 0.3rem;
+}
+
+/* 脚注 */
+section.footnotes {
+	margin-top: 2rem;
+}
+
+
+.code-block-with-title {
+	width: 100%;
+	font-size: 1.5ch;
+	line-height: 2ch;
+	.code-block-title-wrapper {
+		text-align: right;
+	}
+}
+
+.code-block-wrapper {
+	display: flex;
+	flex-direction: row;
+	font-size: 13px;
+	line-height: 2ch;
+	position: relative;
+
+	.code-content {
+		width: 100%;
+
+		pre {
+			padding: 1ch;
+			border-radius: 1ch;
+		}
+
+		pre,
+		span {
+			--bg: var(--shiki-light-bg);
+			--color: var(--shiki-light);
+			background: var(--bg);
+			color: var(--color);
+			padding-left: .4rem;
+		}
+	}
+
+	.line-number {
+		position: absolute;
+		left: 0;
+		transform: translateX(calc(-100% + 1ch));
+		border-radius: 0.5ch 0 0 0.5ch;
+		display: inline-flex;
+		flex-direction: column;
+		--bg: #fdf6e3;
+		--color: #5c6a72;
+		background: var(--bg);
+		color: var(--color);
+		text-align: right;
+		user-select: none;
+		padding: .4rem;
+	}
+}
+
+.dark .code-block-wrapper {
+	.line-number {
+		--bg: #2d353b;
+		--color: #d3c6aa;
+		background: var(--bg);
+		color: var(--color);
+	}
+	pre,
+	span {
+		--bg: var(--shiki-dark-bg);
+		--color: var(--shiki-dark);
+		background: var(--bg);
+		color: var(--color);
+	}
+}
+
+@media (width < 820px) {
+	.code-block-wrapper .line-number {
+		display: none;
+	}
+}
