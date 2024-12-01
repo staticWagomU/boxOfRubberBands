@@ -1,0 +1,124 @@
+---
+import { load } from "cheerio";
+import { writeFileSync, readFileSync } from "node:fs";
+
+type Props = {
+	url: string;
+};
+type OGPJson = Record<
+	string,
+	{
+		title: string;
+		description: string;
+		image: string;
+	}
+>;
+
+const { url } = Astro.props;
+const generatedFilePath = new URL(
+	"../../generated/ogp.json",
+	// astroはbuild時に自身ではなくdist/entry.mjsに向けてしまう
+	import.meta.url
+);
+const ogp: OGPJson = JSON.parse(readFileSync(generatedFilePath, "utf8"));
+let title: string = "";
+let description: string = "";
+let image: string = "";
+
+if (ogp[url]) {
+	title = ogp[url].title;
+	description = ogp[url].description;
+	image = ogp[url].image;
+} else {
+	const html = await fetch(url).then((res) => res.text());
+	const $ = load(html);
+
+	title = $("meta[property='og:title']").attr("content") ?? $("title").text();
+	description =
+		$("meta[property='og:description']").attr("content") ??
+		$("meta[name='description']").attr("content") ??
+		"";
+	image = $("meta[property='og:image']").attr("content") ?? "";
+
+	if (image && !image.startsWith("http")) {
+		image = `${new URL(url).origin}/${image}`;
+	}
+
+	if (import.meta.env.PROD) {
+		const ogp = JSON.parse(readFileSync(generatedFilePath, "utf8"));
+
+		writeFileSync(
+			generatedFilePath,
+			JSON.stringify(
+				{
+					...ogp,
+					[url]: {
+						title,
+						description,
+						image,
+					},
+				},
+				null,
+				2
+			)
+		);
+	}
+}
+---
+
+<style>
+	.og_wrap {
+		width: 100%;
+		border: 1px solid #000;
+		border-radius: 4px;
+		display: flex;
+		padding: 1rem;
+		justify-content: space-between;
+		max-width: 800px;
+	}
+
+	.og_wrap .og_text {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.og_wrap .og_text * {
+		flex-gap: 0.5rem;
+	}
+
+	.og_wrap .og_text a {
+		font-weight: bold;
+	}
+
+	.og_wrap .imag_container {
+		max-width: 200px;
+		max-height: 150px;
+	}
+
+	.imag_container img {
+		max-width: 100%;
+		max-height: 100%;
+		width: auto;
+		height: auto;
+	}
+
+	@media (width < 800px) {
+		.og_wrap {
+			flex-direction: column;
+		}
+	}
+</style>
+
+<div class="og_wrap">
+	<div class="og_text">
+		<a href={url} target="_blank">
+			{title}
+		</a>
+		<span>
+			{description && description.length > 100 ? `${description?.slice(0, 100)}...` : description}
+		</span>
+	</div>
+	<span class="imag_container">
+		{image && <img src={image} alt="ogp" />}
+	</span>
+</div>
