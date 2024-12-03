@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      gsap:
+        specifier: ^3.12.5
+        version: 3.12.5
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.3
@@ -35,9 +39,15 @@ importers:
       astro-google-fonts-optimizer:
         specifier: ^0.2.2
         version: 0.2.2
+      budoux:
+        specifier: ^0.6.2
+        version: 0.6.2
       cheerio:
         specifier: 1.0.0
         version: 1.0.0
+      hast-util-to-string:
+        specifier: ^3.0.1
+        version: 3.0.1
       markuplint:
         specifier: ^4.0.0
         version: 4.10.1(typescript@5.5.3)
@@ -1805,6 +1815,9 @@ packages:
   gray-matter@4.0.3:
     resolution: {integrity: sha512-5v6yZd4JK3eMI3FqqCouswVqwugaA9r4dNZB1wwcmrD02QkV5H0y7XBQW8QwQqEaZY1pM9aqORSORhJRdNK44Q==}
     engines: {node: '>=6.0'}
+
+  gsap@3.12.5:
+    resolution: {integrity: sha512-srBfnk4n+Oe/ZnMIOXt3gT605BX9x5+rh/prT2F1SsNJsU1XuMiP0E2aptW481OnonOGACZWBqseH5Z7csHxhQ==}
 
   has-flag@3.0.0:
     resolution: {integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==}
@@ -5713,6 +5726,8 @@ snapshots:
       section-matter: 1.0.0
       strip-bom-string: 1.0.0
 
+  gsap@3.12.5: {}
+
   has-flag@3.0.0: {}
 
   has-flag@4.0.0: {}
@@ -6031,7 +6046,7 @@ snapshots:
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.5
       is-potential-custom-element-name: 1.0.1
-      parse5: 7.1.2
+      parse5: 7.2.0
       rrweb-cssom: 0.6.0
       saxes: 6.0.0
       symbol-tree: 3.2.4
