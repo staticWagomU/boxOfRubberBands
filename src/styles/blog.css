@@ -94,6 +94,28 @@ section.footnotes {
 	margin-top: 2rem;
 }
 
+/* テーブル */
+table {
+	border-collapse: collapse;
+	width: 100%;
+
+	th {
+		font-weight: bold;
+		text-align: left;
+	}
+	tr {
+		border-bottom: 1px solid var(--gray);
+
+		&:has(th) {
+			border-bottom: 4px double var(--gray);
+		}
+	}
+
+	tr:nth-child(even) {
+		background: var(--gray);
+	}
+}
+
 
 .code-block-with-title {
 	width: 100%;
