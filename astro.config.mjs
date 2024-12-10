@@ -47,4 +47,7 @@ export default defineConfig({
 			wrap: false,
 		},
 	},
+	experimental: {
+		svg: true,
+	}
 });
