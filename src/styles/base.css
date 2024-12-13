@@ -28,14 +28,16 @@
 }
 
 body {
-	padding: 0rem 0.3rem;
-	min-height: 100vh;
-	width: 100%;
-	max-width: clamp(300px, 100%, 800px);
-	margin: auto;
-	color: var(--color);
 	background: var(--bg);
+	color: var(--color);
+	display: grid;
 	font-optical-sizing: auto;
+	grid-template-rows: auto 1fr auto;
 	line-height: 2.3;
+	margin: auto;
+	max-width: clamp(300px, 100%, 800px);
+	min-height: 100%;
+	padding: 0rem 0.3rem;
+	width: 100%;
 }
 
