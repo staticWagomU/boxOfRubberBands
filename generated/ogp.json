@@ -83,5 +83,10 @@
     "title": "GitHub - staticWagomU/neovim-as-a-git-tool: gitツールとしてのNeovim",
     "description": "gitツールとしてのNeovim. Contribute to staticWagomU/neovim-as-a-git-tool development by creating an account on GitHub.",
     "image": "https://opengraph.githubassets.com/fec002491d194958de873a24b39f342a553d95c24b682c9cec781eb6d6cecf0a/staticWagomU/neovim-as-a-git-tool"
+  },
+  "https://github.com/vim-fall/fall.vim": {
+    "title": "GitHub - vim-fall/fall.vim: 🍂 Yet Another Fuzzy Finder designed for Vim and Neovim and to be programmer-friendly",
+    "description": "🍂 Yet Another Fuzzy Finder designed for Vim and Neovim and to be programmer-friendly - vim-fall/fall.vim",
+    "image": "https://opengraph.githubassets.com/9c68ea88d6f0d174fe5c92cfb2c141811f5448be641819d2353571e2da1b9851/vim-fall/fall.vim"
   }
 }
