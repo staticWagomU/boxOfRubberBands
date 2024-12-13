@@ -32,13 +32,15 @@ const today = new Date();
 			<p>&copy; {today.getFullYear()} wagomu. All rights reserved.</p>
 			<ul>
 				<li>
-					<a href="https://zenn.dev/wagomu"><span class="zenn-icon" /></a>
+					<a href="https://zenn.dev/wagomu"><span class="zenn-icon"></span></a>
 				</li>
 				<li>
-					<a href="https://github.com/staticWagomU/BoxOfRubberBands"><span class="github-icon" /></a>
+					<a href="https://github.com/staticWagomU/BoxOfRubberBands"
+						><span class="github-icon"></span></a
+					>
 				</li>
 				<li>
-					<a href="https://codepen.io/statictowa"><span class="codepen-icon" /></a>
+					<a href="https://codepen.io/statictowa"><span class="codepen-icon"></span></a>
 				</li>
 			</ul>
 		</footer>
@@ -46,16 +48,8 @@ const today = new Date();
 </html>
 
 <style>
-
-	@container (min-width: 400px) {
-		footer,
-		nav{
-			flex-direction: row;
-		}
-	}
 	nav {
 		display: flex;
-		flex-direction: column;
 		container-type: inline-size;
 		justify-content: space-between;
 		width: 100%;
@@ -67,15 +61,12 @@ const today = new Date();
 		ul {
 			list-style: none;
 			display: flex;
-			justify-content: space-between;
 			align-items: center;
 			padding: 1rem;
 		}
 	}
 
 	footer {
-		container-type: inline-size;
-		container-type: size;
 		border-top: 2px solid var(--accent1);
 		color: var(--color);
 		padding: 1rem;
@@ -84,18 +75,16 @@ const today = new Date();
 		justify-content: space-between;
 		width: 100%;
 
-
 		a {
 			margin-right: 0.5rem;
 			text-decoration: none;
-			color: var(--color)
+			color: var(--color);
 		}
 
 		ul {
 			display: flex;
 			list-style: none;
 		}
-
 	}
 	.zenn-icon {
 		display: inline-block;
@@ -152,7 +141,7 @@ const today = new Date();
 		display: inline-block;
 		width: 16px;
 		height: 16px;
-		 --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm1.5 2.5c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0a8 8 0 0 0-8-8a1 1 0 0 1 0-2m0 4a6 6 0 0 1 6 6a1 1 0 1 1-2 0a4 4 0 0 0-4-4a1 1 0 0 1 0-2m.5 7a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3'/%3E%3C/svg%3E");
+		--svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm1.5 2.5c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0a8 8 0 0 0-8-8a1 1 0 0 1 0-2m0 4a6 6 0 0 1 6 6a1 1 0 1 1-2 0a4 4 0 0 0-4-4a1 1 0 0 1 0-2m.5 7a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3'/%3E%3C/svg%3E");
 		background-color: currentColor;
 		-webkit-mask-image: var(--svg);
 		mask-image: var(--svg);
@@ -183,53 +172,53 @@ const today = new Date();
 </style>
 
 <script is:inline>
-		function toggleTheme() {
-			const body = document.body;
-			const themeIcon = document.querySelector(".theme-icon");
+	function toggleTheme() {
+		const body = document.body;
+		const themeIcon = document.querySelector(".theme-icon");
 
-			if (document.startViewTransition) {
-					document.startViewTransition(() => {
-							body.classList.toggle("dark");
-							const isDark = body.classList.contains("dark");
-							localStorage.setItem("theme", isDark ? "dark" : "light");
+		if (document.startViewTransition) {
+			document.startViewTransition(() => {
+				body.classList.toggle("dark");
+				const isDark = body.classList.contains("dark");
+				localStorage.setItem("theme", isDark ? "dark" : "light");
 
-							if (isDark) {
-									themeIcon.classList.remove("icon-sun");
-									themeIcon.classList.add("icon-moon");
-							} else {
-									themeIcon.classList.remove("icon-moon");
-									themeIcon.classList.add("icon-sun");
-							}
-					});
-			} else {
-					body.classList.toggle("dark");
-					const isDark = body.classList.contains("dark");
-					localStorage.setItem("theme", isDark ? "dark" : "light");
+				if (isDark) {
+					themeIcon.classList.remove("icon-sun");
+					themeIcon.classList.add("icon-moon");
+				} else {
+					themeIcon.classList.remove("icon-moon");
+					themeIcon.classList.add("icon-sun");
+				}
+			});
+		} else {
+			body.classList.toggle("dark");
+			const isDark = body.classList.contains("dark");
+			localStorage.setItem("theme", isDark ? "dark" : "light");
 
-					sun.classList.toggle("hidden");
-					dark.classList.toggle("hidden");
-			}
+			sun.classList.toggle("hidden");
+			dark.classList.toggle("hidden");
+		}
 	}
 
 	document.addEventListener("DOMContentLoaded", () => {
-			const savedTheme = localStorage.getItem("theme");
-			const themeIcon = document.querySelector(".theme-icon");
+		const savedTheme = localStorage.getItem("theme");
+		const themeIcon = document.querySelector(".theme-icon");
 
-			if (savedTheme === "dark") {
-					document.body.classList.add("dark");
+		if (savedTheme === "dark") {
+			document.body.classList.add("dark");
 
-					themeIcon.classList.remove("icon-sun");
-					themeIcon.classList.add("icon-moon");
-			} else {
-					document.body.classList.remove("dark");
+			themeIcon.classList.remove("icon-sun");
+			themeIcon.classList.add("icon-moon");
+		} else {
+			document.body.classList.remove("dark");
 
-					themeIcon.classList.remove("icon-moon");
-					themeIcon.classList.add("icon-sun");
-			}
+			themeIcon.classList.remove("icon-moon");
+			themeIcon.classList.add("icon-sun");
+		}
 
-			const toggleButton = document.getElementById("theme-toggle");
-			if (toggleButton) {
-					toggleButton.addEventListener("click", toggleTheme);
-			}
+		const toggleButton = document.getElementById("theme-toggle");
+		if (toggleButton) {
+			toggleButton.addEventListener("click", toggleTheme);
+		}
 	});
 </script>
