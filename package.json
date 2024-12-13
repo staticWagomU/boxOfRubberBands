@@ -36,8 +36,6 @@
     "unist-util-visit": "5.0.0"
   },
   "dependencies": {
-    "astro-purgecss": "^5.0.0",
-    "gsap": "^3.12.5",
-    "purgecss": "^7.0.2"
+    "gsap": "^3.12.5"
   }
 }

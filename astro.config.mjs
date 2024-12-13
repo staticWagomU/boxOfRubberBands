@@ -7,14 +7,12 @@ import wrapH2WithSection from "./tools/rehype-wrap-h2-with-section";
 import astroLastModifiedAt from "./tools/remark-astro-last-modified-at";
 import remarkBudoux from "./tools/remark-budoux";
 import rehypeLineNumbers from "./tools/rehype-line-numbers";
-import purgecss from "astro-purgecss";
 
 // https://astro.build/config
 export default defineConfig({
 	site: "https://wagomu.me",
 	build: {
 		format: "file",
-		inlineStylesheets: "never",
 	},
 	integrations: [
 		mdx(),
@@ -28,12 +26,6 @@ export default defineConfig({
 			Logger: 1,
 		}),
 		(await import("@playform/inline")).default(),
-		purgecss({
-			fontFace: true,
-			keyframes: true,
-			safelist: ["random", "yep", "button", /^nav-/],
-			blocklist: ["usedClass", /^nav-/],
-		}),
 	],
 	trailingSlash: "never",
 	vite: {
