@@ -4,17 +4,19 @@ import Base from "../../layouts/Base.astro";
 import { Debug } from "astro:components";
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection("blog");
+	const allPosts = await getCollection("blog");
 
-	const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())].filter(v => v !== undefined);
+	const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())].filter(
+		(v) => v !== undefined
+	);
 
-  return uniqueTags.map((tag) => {
-    const filteredPosts = allPosts.filter((post) => post.data.tags?.includes(tag));
-    return {
-      params: { tag },
-      props: { posts: filteredPosts },
-    };
-  });
+	return uniqueTags.map((tag) => {
+		const filteredPosts = allPosts.filter((post) => post.data.tags?.includes(tag));
+		return {
+			params: { tag },
+			props: { posts: filteredPosts },
+		};
+	});
 }
 
 const { tag } = Astro.params;
@@ -23,9 +25,14 @@ const { posts } = Astro.props;
 
 <Base>
 	<Debug value={{ posts }} />
-  <p>Posts tagged with {tag}</p>
-  <ul>
-		{posts.map((post) => <li><a href={`/blog/${post.slug}`}>{post.data.title} </a></li>)}
-  </ul>
-
+	<p>Posts tagged with {tag}</p>
+	<ul>
+		{
+			posts.map((post) => (
+				<li>
+					<a href={`/blog/${post.slug}`}>{post.data.title} </a>
+				</li>
+			))
+		}
+	</ul>
 </Base>
