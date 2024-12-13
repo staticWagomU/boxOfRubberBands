@@ -1,5 +1,6 @@
 ---
 import Base from "./Base.astro";
+import { SITE_TITLE } from "../config";
 
 import "../styles/blog.css";
 const { post } = Astro.props;
@@ -11,7 +12,7 @@ const formattedDate = pubDate.toLocaleDateString("ja-JP", {
 });
 ---
 
-<Base>
+<Base title={`${title} - ${SITE_TITLE}`}>
 	<time datetime={pubDate}>{formattedDate}</time>
 	<h1>{title}</h1>
 	<slot />

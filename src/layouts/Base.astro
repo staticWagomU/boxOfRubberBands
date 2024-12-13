@@ -2,6 +2,14 @@
 import "../styles/base.css";
 import "../styles/theme-toggle.css";
 
+import { SITE_TITLE } from "../config";
+
+type Props = {
+	title: string;
+};
+
+const { title } = Astro.props;
+
 const today = new Date();
 ---
 
@@ -10,11 +18,11 @@ const today = new Date();
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>輪ごむの空き箱</title>
+		<title>{title || SITE_TITLE}</title>
 	</head>
 	<body>
 		<nav>
-			<h1><a href="/">輪ごむの空き箱</a></h1>
+			<h1><a href="/">{SITE_TITLE}</a></h1>
 			<ul>
 				<li>
 					<a href="/blog">Blog</a>
