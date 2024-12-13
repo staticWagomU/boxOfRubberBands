@@ -5,6 +5,7 @@
 	--accent2: #6a994e;
 	--accent3: #ffad33;
 	--gray: #b8b8b8;
+	--footer: #243617;
 }
 
 .dark {
@@ -13,8 +14,11 @@
 	--accent1: #f1f4e0;
 	--accent2: #8bc34a;
 	--accent3: #ffb74d;
-	--gray: #65ae83;
+	--gray: #9ea49d;
+	/* --gray: #65ae83; */
+	/* --gray: #bfc3bc;  */
 	--link: #a2e2a4;
+	--footer: #2f3a34;
 }
 
 
