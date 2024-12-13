@@ -34,14 +34,16 @@ h2 {
 a {
 	color: var(--accent);
 	transition: color .2s, text-decoration .2s;
-	text-decoration: none;
+	text-decoration: underline dashed;
+	text-underline-offset: 4px;
+	text-underline-position: under;
+	text-decoration-thickness: 2px;
 	text-decoration-skip-ink: all;
 
 	/* ホバー時は太めな波線 */
 	&:hover {
 		color: var(--accent2);
 		text-decoration: underline wavy;
-		text-decoration-thickness: 2px;
 	}
 }
 
