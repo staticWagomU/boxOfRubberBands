@@ -1,0 +1,50 @@
+---
+import Base from "./Base.astro";
+import { SITE_TITLE } from "../config";
+
+import "../styles/blog.css";
+const { post } = Astro.props;
+const { title, pubDate, tags } = post.data;
+const formattedDate = pubDate.toLocaleDateString("ja-JP", {
+	year: "numeric",
+	month: "2-digit",
+	day: "2-digit",
+});
+---
+
+<Base title={`${title} - ${SITE_TITLE}`}>
+	<time datetime={pubDate}>{formattedDate}</time>
+	<h1>{title}</h1>
+	<slot />
+	{
+		tags && (
+			<ul class="tags">
+				{tags.map((tag: string) => (
+					<li>
+						<a href={`/tags/${tag}`}>{tag}</a>
+					</li>
+				))}
+			</ul>
+		)
+	}
+</Base>
+
+<style>
+	time {
+		font-size: 0.8em;
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		list-style: none;
+		padding: 0;
+		a {
+			padding: 0.2em 0.5em;
+			border-radius: 1em;
+		}
+		a::before {
+			content: "#";
+		}
+	}
+</style>
