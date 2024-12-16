@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
-import { Debug } from "astro:components";
 
 export async function getStaticPaths() {
 	const allPosts = await getCollection("blog");
@@ -24,7 +23,6 @@ const { posts } = Astro.props;
 ---
 
 <Base>
-	<Debug value={{ posts }} />
 	<p>Posts tagged with {tag}</p>
 	<ul>
 		{
