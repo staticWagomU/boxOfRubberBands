@@ -17,7 +17,7 @@ importers:
         version: 0.9.4(prettier-plugin-astro@0.14.1)(prettier@3.4.2)(typescript@5.7.2)
       '@astrojs/mdx':
         specifier: 4.0.2
-        version: 4.0.2(astro@5.0.5(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1))
+        version: 4.0.2(astro@5.0.7(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1))
       '@astrojs/rss':
         specifier: ^4.0.10
         version: 4.0.10
@@ -34,8 +34,8 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1)
       astro:
-        specifier: 5.0.5
-        version: 5.0.5(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1)
+        specifier: 5.0.7
+        version: 5.0.7(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1)
       astro-google-fonts-optimizer:
         specifier: ^0.2.2
         version: 0.2.2
@@ -973,8 +973,8 @@ packages:
   astro-google-fonts-optimizer@0.2.2:
     resolution: {integrity: sha512-YQxp/ExF3NzUomAGuu1VKecO7/ETRnhnE50gqwAqfpbGPZFj4MYa4XxK1ukBg3R63QmKuE5uurOiKmXiLzttuw==}
 
-  astro@5.0.5:
-    resolution: {integrity: sha512-xfptdmurDsQcj/Anc7mU+eKlcyV7ppJIlmaSwhX3ZWwK5N/0rGKVmUqnuILgR6MB0XVJiIfublNzDGoyj4Q6BQ==}
+  astro@5.0.7:
+    resolution: {integrity: sha512-NFBNIgu8SFJXDhcYyAXAn1jHDdv0+WWui6syedDdCaeyUdMnGHposfJODIgks0579Ma7yGhedetfUpZ5OdxJdw==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -3229,12 +3229,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@4.0.2(astro@5.0.5(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1))':
+  '@astrojs/mdx@4.0.2(astro@5.0.7(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1))':
     dependencies:
       '@astrojs/markdown-remark': 6.0.1
       '@mdx-js/mdx': 3.1.0(acorn@8.14.0)
       acorn: 8.14.0
-      astro: 5.0.5(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1)
+      astro: 5.0.7(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1)
       es-module-lexer: 1.5.4
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.3
@@ -3785,7 +3785,7 @@ snapshots:
       '@playform/pipe': 0.1.1
       '@types/csso': 5.0.4
       '@types/html-minifier-terser': 7.0.2
-      astro: 5.0.5(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1)
+      astro: 5.0.7(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1)
       commander: 12.1.0
       csso: 5.0.5
       deepmerge-ts: 7.1.3
@@ -3813,7 +3813,7 @@ snapshots:
   '@playform/inline@0.1.0(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1)':
     dependencies:
       '@playform/pipe': 0.1.0
-      astro: 5.0.5(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1)
+      astro: 5.0.7(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1)
       critters: 0.0.24
     transitivePeerDependencies:
       - '@types/node'
@@ -4151,7 +4151,7 @@ snapshots:
 
   astro-google-fonts-optimizer@0.2.2: {}
 
-  astro@5.0.5(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1):
+  astro@5.0.7(@types/node@22.5.0)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1):
     dependencies:
       '@astrojs/compiler': 2.10.3
       '@astrojs/internal-helpers': 0.4.2
