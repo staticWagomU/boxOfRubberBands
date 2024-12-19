@@ -11,6 +11,7 @@ h4,
 h5,
 h6 {
 	color: var(--accent);
+	margin-block: 1rem;
 }
 
 h2 {
@@ -18,7 +19,7 @@ h2 {
 	span {
 		display: inline-block;
 		position: relative;
-		padding: 0 0.4em 0.2em;
+		padding: 0 0.4em;
 		color: var(--accent1);
 
 		&::before {
