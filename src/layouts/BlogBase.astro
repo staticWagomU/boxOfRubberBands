@@ -14,21 +14,25 @@ const formattedDate = pubDate.toLocaleDateString("ja-JP", {
 
 <Base title={`${title} - ${SITE_TITLE}`}>
 	<div id="progress"></div>
-	<time datetime={pubDate}>{formattedDate}</time>
-	<h1>{title}</h1>
-	<slot />
-	{
-		tags && (
-			<h3>Tags</h3>
-			<ul class="tags">
-				{tags.map((tag: string) => (
-					<li>
-						<a href={`/tags/${tag}`}>{tag}</a>
-					</li>
-				))}
-			</ul>
-		)
-	}
+	<article class="blog">
+		<time datetime={pubDate}>{formattedDate}</time>
+		<h1>{title}</h1>
+		<slot />
+		{
+			tags && (
+				<>
+					<h3>Tags</h3>
+					<ul class="tags">
+						{tags.map((tag: string) => (
+							<li>
+								<a href={`/tags/${tag}`}>{tag}</a>
+							</li>
+						))}
+					</ul>
+				</>
+			)
+		}
+	</article>
 </Base>
 
 <style>
@@ -43,11 +47,11 @@ const formattedDate = pubDate.toLocaleDateString("ja-JP", {
 
 	#progress {
 		/* スタイリング */
-			position: fixed;
-			width: 100%;
-			height: 5px;
-			left: 0;
-			background: var(--accent2);
+		position: fixed;
+		width: 100%;
+		height: 5px;
+		left: 0;
+		background: var(--accent2);
 
 		animation: grow-progress linear;
 		animation-timeline: scroll();
