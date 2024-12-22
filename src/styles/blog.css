@@ -71,6 +71,7 @@ article.blog {
 		text-underline-position: under;
 		text-decoration-thickness: 2px;
 		text-decoration-skip-ink: all;
+		word-wrap: break-word;
 
 		/* ホバー時は太めな波線 */
 		&:hover {
