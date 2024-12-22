@@ -72,9 +72,9 @@ if (ogp[url]) {
 		border: 1px solid #000;
 		border-radius: 4px;
 		display: flex;
-		padding: 1rem;
+		padding: var(--space-xs);
 		justify-content: space-between;
-		max-width: 800px;
+		max-width: var(--max-width);
 	}
 
 	.og_wrap .og_text {
@@ -83,7 +83,7 @@ if (ogp[url]) {
 	}
 
 	.og_wrap .og_text * {
-		flex-gap: 0.5rem;
+		flex-gap: var(--space-xs);
 	}
 
 	.og_wrap .og_text a {
@@ -102,7 +102,7 @@ if (ogp[url]) {
 		height: auto;
 	}
 
-	@media (width < 800px) {
+	@media (width < 820px) {
 		.og_wrap {
 			flex-direction: column;
 		}
