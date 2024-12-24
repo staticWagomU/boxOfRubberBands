@@ -136,7 +136,7 @@ article.blog {
 		background: var(--gray);
 		border-radius: 0.3rem;
 		color: var(--bg);
-		padding: var(--space-xxs) var(--space-xs);
+		padding: var(--space-xxs);
 	}
 
 	/* 引用 */
