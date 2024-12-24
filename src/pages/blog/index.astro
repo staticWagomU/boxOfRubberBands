@@ -25,7 +25,7 @@ const blog_posts: Post[] = (
 	await getCollection("blog", ({ data }) => {
 		return data.published;
 	})
-).map((post: Post) => ({
+).map((post) => ({
 	slug: `/blog/${post.slug}`,
 	kind: "blog",
 	data: {
