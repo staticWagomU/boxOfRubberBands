@@ -60,6 +60,46 @@ article.blog {
 		}
 	}
 
+	h3 {
+		border-bottom: 2px solid var(--gray);
+		span {
+			display: inline-block;
+			position: relative;
+			padding: 0 0.3em;
+			color: var(--accent2);
+
+			&::before {
+				position: absolute;
+				bottom: -2px;
+				left: 0;
+				width: 100%;
+				height: 2px;
+				background-color: var(--accent3);
+				content: "";
+			}
+		}
+	}
+
+	h4 {
+		border-bottom: 1px solid var(--gray);
+		span {
+			display: inline-block;
+			position: relative;
+			padding: 0 0.2em;
+			color: var(--accent3);
+
+			&::before {
+				position: absolute;
+				bottom: -1px;
+				left: 0;
+				width: 100%;
+				height: 1px;
+				background-color: var(--accent1);
+				content: "";
+			}
+		}
+	}
+
 	/* リンク */
 	a {
 		color: var(--accent);
