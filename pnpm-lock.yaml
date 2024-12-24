@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      astro-compressor:
+        specifier: ^1.0.0
+        version: 1.0.0
       gsap:
         specifier: ^3.12.5
         version: 3.12.5
@@ -1057,6 +1060,9 @@ packages:
   astring@1.9.0:
     resolution: {integrity: sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==}
     hasBin: true
+
+  astro-compressor@1.0.0:
+    resolution: {integrity: sha512-MNGRmjIsb73BIJivbU/HnTbPu5CEFvXp1NCev0bpsuK/cp4cCPX6C1omUPXzw2oQbtKv0phTTTtEk+h20SrF1Q==}
 
   astro-eslint-parser@1.1.0:
     resolution: {integrity: sha512-F6NW1RJo5pp2kPnnM97M5Ohw8zAGjv83MpxHqfAochH68n/kiXN57+hYaNUCA7XkScoVNr6yzvly3hsY34TGfQ==}
@@ -4555,6 +4561,8 @@ snapshots:
   array-union@2.1.0: {}
 
   astring@1.9.0: {}
+
+  astro-compressor@1.0.0: {}
 
   astro-eslint-parser@1.1.0(typescript@5.7.2):
     dependencies:

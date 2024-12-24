@@ -8,6 +8,8 @@ import astroLastModifiedAt from "./tools/remark-astro-last-modified-at";
 import remarkBudoux from "./tools/remark-budoux";
 import rehypeLineNumbers from "./tools/rehype-line-numbers";
 
+import compressor from "astro-compressor";
+
 // https://astro.build/config
 export default defineConfig({
 	site: "https://wagomu.me",
@@ -26,6 +28,7 @@ export default defineConfig({
 			Logger: 1,
 		}),
 		(await import("@playform/inline")).default(),
+		compressor(),
 	],
 	trailingSlash: "never",
 	vite: {
