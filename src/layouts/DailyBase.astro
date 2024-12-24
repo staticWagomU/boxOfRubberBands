@@ -1,0 +1,49 @@
+---
+import Base from "./Base.astro";
+
+import "../styles/blog.css";
+const { post } = Astro.props;
+const { pubDate } = post.data;
+const formattedDate = pubDate.toLocaleDateString("ja-JP", {
+	year: "numeric",
+	month: "short",
+	day: "numeric",
+	weekday: "short",
+});
+---
+
+<Fragment slot="head">
+	<meta name="robots" content="noindex">
+	<meta name="googlebot" content="noindex">
+</Fragment>
+
+<Base title={`${formattedDate}の日記`}>
+	<div id="progress"></div>
+	<article class="blog">
+		<h1><time datetime={pubDate}>{formattedDate}</time>の日記</h1>
+		<slot />
+	</article>
+</Base>
+
+<style>
+	@keyframes grow-progress {
+		from {
+			width: 0;
+		}
+		to {
+			width: 100%;
+		}
+	}
+
+	#progress {
+		/* スタイリング */
+		position: fixed;
+		width: 100%;
+		height: 5px;
+		left: 0;
+		background: var(--accent2);
+
+		animation: grow-progress linear;
+		animation-timeline: scroll();
+	}
+</style>

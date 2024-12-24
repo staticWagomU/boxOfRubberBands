@@ -13,6 +13,14 @@ const blogCollection = defineCollection({
 	}),
 });
 
+const dailyCollection = defineCollection({
+	type: "content",
+	schema: z.object({
+		pubDate: z.date().transform((v) => new Date(v)),
+	}),
+});
+
 export const collections = <const>{
 	blog: blogCollection,
+	daily: dailyCollection,
 };

@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import DailyBase from "../../layouts/DailyBase.astro";
+
+export async function getStaticPaths() {
+	const posts = await getCollection("daily");
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: posts.find((x) => x.slug === post.slug),
+	}));
+}
+
+type Props = CollectionEntry<"daily">;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<DailyBase post={post}>
+	<Content />
+</DailyBase>
