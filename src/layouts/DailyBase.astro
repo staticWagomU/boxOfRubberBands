@@ -18,8 +18,8 @@ const ogImage = `${import.meta.env.SITE}/daily/${post.slug}.png`;
 	<meta name="googlebot" content="noindex" />
 	<meta property="og:title" content={`${formattedDate}の日記`} />
 	<meta property="og:image" content={ogImage} />
-
-	</Fragment>
+	<meta name="twitter:image" content={ogImage} />
+</Fragment>
 
 <Base title={`${formattedDate}の日記`}>
 	<div id="progress"></div>
