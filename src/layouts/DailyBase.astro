@@ -10,12 +10,16 @@ const formattedDate = pubDate.toLocaleDateString("ja-JP", {
 	day: "numeric",
 	weekday: "short",
 });
+const ogImage = `${import.meta.env.SITE}/${import.meta.env.BASE_URL}/${post.slug}.png`;
 ---
 
 <Fragment slot="head">
 	<meta name="robots" content="noindex" />
 	<meta name="googlebot" content="noindex" />
-</Fragment>
+	<meta property="og:title" content={`${formattedDate}の日記`} />
+	<meta property="og:image" content={ogImage} />
+
+	</Fragment>
 
 <Base title={`${formattedDate}の日記`}>
 	<div id="progress"></div>
