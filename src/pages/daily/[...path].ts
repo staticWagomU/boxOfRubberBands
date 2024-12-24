@@ -1,12 +1,11 @@
 import { getCollection } from "astro:content";
-import { OGImageRoute } from "astro-og-canvas"
+import { OGImageRoute } from "astro-og-canvas";
 
 const collectionEntries = await getCollection("daily");
 
 const pages = process.env.SKIP_OG
 	? []
 	: Object.fromEntries(collectionEntries.map(({ id, data }) => [id, data]));
-
 
 export const { getStaticPaths, GET } = OGImageRoute({
 	param: "path",
@@ -26,9 +25,7 @@ export const { getStaticPaths, GET } = OGImageRoute({
 					lineHeight: 2.3,
 				},
 			},
-			fonts: [
-				"./src/pages/daily/_fonts/Cherry_Bomb_One/CherryBombOne-Regular.ttf",
-			],
+			fonts: ["./src/pages/daily/_fonts/Cherry_Bomb_One/CherryBombOne-Regular.ttf"],
 		};
-	}
+	},
 });
