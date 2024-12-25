@@ -12,7 +12,7 @@ export const { getStaticPaths, GET } = OGImageRoute({
 	pages,
 	getImageOptions: (_, page) => {
 		return {
-			title: ` ${page.pubDate.getMonth()}/${page.pubDate.getDate()}のにっき`,
+			title: ` ${Number(page.pubDate.getMonth() + 1)}/${page.pubDate.getDate()}のにっき`,
 			bgImage: {
 				path: "./public/OGP/daily.png",
 				fit: "cover",
