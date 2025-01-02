@@ -1,0 +1,46 @@
+---
+title: "DuckDBを使ってVim駅伝の年毎の参加人数を調べてみた"
+pubDate: 2025-01-02
+published: true
+---
+
+
+## はじめに
+
+事の発端については[こちら](https://wagomu.me/blog/2025-01-02_1)を参照
+
+## 本題
+
+実行したSQLは以下の通りです。
+
+```sql
+SELECT
+	date_part('year', a.date) as year,
+	count(DISTINCT a.runner) as unique_runners,
+	count(*) as total_articles
+FROM(
+	SELECT unnest(articles) as a
+	FROM read_json('src/content.json')
+)
+GROUP BY year
+ORDER BY year;
+```
+
+出力結果は以下の通りです。
+
+```
+┌───────┬────────────────┬────────────────┐
+│ year  │ unique_runners │ total_articles │
+│ int64 │     int64      │     int64      │
+├───────┼────────────────┼────────────────┤
+│  2023 │             48 │            131 │
+│  2024 │             60 │            157 │
+│  2025 │              7 │              7 │
+└───────┴────────────────┴────────────────┘
+```
+
+昨年は60人も参加してくださったようだ。ありがたい。。。
+
+## おわりに
+
+話に聞いていたとおり、DuckDBを使うことで楽にJSONデータを扱うことができました。
