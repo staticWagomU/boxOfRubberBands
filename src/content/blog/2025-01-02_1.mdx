@@ -1,0 +1,125 @@
+---
+title: "DuckDBで一般的なjsonを扱う"
+pubDate: 2025-01-02
+published: true
+---
+
+
+## 事の発端
+
+私は毎週、月・水・金曜日に記事を書くvim駅伝という企画に参加しており、2023年3月から2024年12月まで毎月1本以上の記事を書いています。
+その記事の一覧はこちらのJSONファイルで管理しているのですが、ふと年毎のVim駅伝の参加人数を調べたくなりました。
+https://github.com/vim-jp/ekiden/blob/main/src/content.json
+
+そんなことを考えていると、DuckDBを使うと簡単にJSONを扱えることを思い出したので、試してみました。
+
+※ DockDBのインストール方法は[こちら](https://duckdb.org/docs/installation)を参照してください。
+
+## やりかた
+
+DuckDBでは標準でJSONを扱うことのできる関数が用意されています。
+ですら、まずはこのようなSQLを書いてみました。
+
+```sql
+SELECT *
+FROM read_json('src/content.json');
+```
+
+すると、以下のような出力が得られました。
+
+```
+> duckdb
+v1.1.3 19864453f7
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+D SELECT *
+  FROM read_json('src/content.json');
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                articles                                                                                 │
+│                                 struct(title varchar, date date, runner varchar, url varchar, githubuser varchar, issuenumber bigint)[]                                 │
+├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ [{'title': Vim 駅伝、始動します, 'date': 2023-03-01, 'runner': thinca, 'url': https://thinca.hatenablog.com/entry/vim-ekiden-is-launched, 'githubUser': thinca, 'issu…  │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+DuckDBを何もしらない私としては、これだけで配列が展開された形で出力されるものと思っていたので、びっくりしました。
+調べてみたところ、DuckDBでは1行毎にJSON Lines形式のログファイルなどを読みこみ、解析することができるようです。そのため、配列が展開された形で出力されるわけではないようです。
+
+そこで、再度しらべてみたところ、`unnest`[^1] [^2]という関数を使うことで、JSONをフラットにすることができるようです。
+
+[^1]: https://duckdb.org/docs/sql/query_syntax/unnest.html
+[^2]: https://speakerdeck.com/ktz/duckdbza-shao-jie-1-dot-1dui-ying-ban-at-duckdbzuo-tan-hui?slide=19
+
+
+ですから、正解のSQLは以下のようになります。
+
+```sql
+SELECT a.*
+FROM(
+	SELECT unnest(articles) as a
+	FROM read_json('src/content.json')
+);
+```
+
+これで、以下のような出力が得られました。
+```
+┌──────────────────────┬────────────┬────────────────┬─────────────────────────────────────────────────────────────────────────────────────┬────────────────┬─────────────┐
+│        title         │    date    │     runner     │                                         url                                         │   githubUser   │ issueNumber │
+│       varchar        │    date    │    varchar     │                                       varchar                                       │    varchar     │    int64    │
+├──────────────────────┼────────────┼────────────────┼─────────────────────────────────────────────────────────────────────────────────────┼────────────────┼─────────────┤
+│ Vim 駅伝、始動します │ 2023-03-01 │ thinca         │ https://thinca.hatenablog.com/entry/vim-ekiden-is-launched                          │ thinca         │          11 │
+│ Insertモードでも気…  │ 2023-03-03 │ atusy          │ https://blog.atusy.net/2023/03/03/horizontal-arrows-on-insert/                      │ atusy          │          12 │
+│ bunsetsu.vimとbuns…  │ 2023-03-06 │ ryoppippi      │ https://github.com/ryoppippi/bunsetsu-wb.nvim/blob/main/README.md                   │ ryoppippi      │          15 │
+│ Project V 「思考の…  │ 2023-03-08 │ tani           │ https://gist.github.com/tani/04c52c12ab4254528c1ba7ad509946ad                       │ tani           │          16 │
+│ heirline.nvimでNeo…  │ 2023-03-10 │ kyoh86         │ https://zenn.dev/kyoh86/articles/681ab90a44302c                                     │ kyoh86         │          17 │
+│ Vim,Neovimのフォン…  │ 2023-03-13 │ staticWagomU   │ https://wagomu.me/blog/2023-03-12-vim-ekiden                                        │ staticWagomU   │          18 │
+│ Vim Input Method E…  │ 2023-03-15 │ kuuote         │ https://zenn.dev/vim_jp/articles/20230315_skkeleton                                 │ kuuote         │          20 │
+│ lualine.nvimでステ…  │ 2023-03-17 │ Liquid_system  │ https://liquid-system.github.io/lualine.nvim%E3%81%A7%E3%82%B9%E3%83%86%E3%83%BC%…  │ Liquid-system  │          22 │
+│ Vim9 script の始め方 │ 2023-03-20 │ thinca         │ https://thinca.hatenablog.com/entry/execute-vim9-script                             │ thinca         │          32 │
+│ 錆びついたinit.vim…  │ 2023-03-22 │ matoruru       │ https://qiita.com/matoruru/items/b5ad6e0f1ef6c804378d                               │ matoruru       │          33 │
+│ neovimターミナルモ…  │ 2023-03-24 │ fuzmare        │ https://zenn.dev/fuzmare/articles/vim-term-escape                                   │ fuzmare        │          35 │
+│ Vimを使わないVimme…  │ 2023-03-27 │ tadashi-aikawa │ https://minerva.mamansoft.net/%F0%9F%93%98Articles/%F0%9F%93%98Vim%E3%82%92%E4%BD…  │ tadashi-aikawa │          41 │
+│ Vimのテキストオブ…   │ 2023-03-29 │ ArcCosine      │ https://looxu.blogspot.com/2023/03/vim-surroundvim.html                             │ ArcCosine      │          43 │
+│ Vim 駅伝開始1ヶ月…   │ 2023-03-31 │ monaqa         │ https://zenn.dev/vim_jp/articles/2023-03-31-vim-ekiden-looking-back-the-first-month │ monaqa         │          44 │
+│ Vim + npm install …  │ 2023-04-03 │ IK             │ https://qiita.com/get_me_power/items/c20447b9cab4eeaef4e4                           │ get-me-power   │          45 │
+│ ミニマリストに憧れ…  │ 2023-04-05 │ eihigh         │ https://eihigh.hatenablog.com/entry/2023/04/05/000000                               │ eihigh         │          51 │
+│ vusted & nvim-kit…   │ 2023-04-07 │ uga-rosa       │ https://zenn.dev/uga_rosa/articles/6a69ecb4dd26c1                                   │ uga-rosa       │          53 │
+│ denops-docker.vim …  │ 2023-04-10 │ ゴリラ         │ https://zenn.dev/vim_jp/articles/2023-03-29-vim-docker-vim-bug-fix                  │ skanehira      │          55 │
+│ dial.nvim の新機能…  │ 2023-04-12 │ monaqa         │ https://zenn.dev/vim_jp/articles/2023-04-12-vim-dial-additive-increment             │ monaqa         │          57 │
+│ HHKBとViｍとの親和…  │ 2023-04-14 │ ArcCosine      │ https://looxu.hateblo.jp/entry/an-hhkb-and-vim-wannabe-talks                        │ ArcCosine      │          59 │
+│          ·           │     ·      │   ·            │                            ·                                                        │   ·            │           · │
+│          ·           │     ·      │   ·            │                            ·                                                        │   ·            │           · │
+│          ·           │     ·      │   ·            │                            ·                                                        │   ·            │           · │
+│ Meguro.vim #26 を…   │ 2024-12-02 │ thinca         │ https://thinca.hatenablog.com/entry/2024/12/megurovim-26                            │ thinca         │         647 │
+│ lazyvimの遅延読み…   │ 2024-12-04 │ tositada       │ https://zenn.dev/vim_jp/articles/609c75cea1208a                                     │ tositada17     │         697 │
+│ Neovimでlazy load…   │ 2024-12-06 │ kyoh86         │ https://zenn.dev/vim_jp/articles/9a5258067a3132                                     │ kyoh86         │         728 │
+│ Neovim でコマンド…   │ 2024-12-09 │ s-show         │ https://kankodori-blog.com/posts/2024-12-09/                                        │ s-show         │         729 │
+│ neovimプラグインの…  │ 2024-12-11 │ tositada       │ https://zenn.dev/vim_jp/articles/dbafe015ce9a4e                                     │ tositada17     │         722 │
+│ ソフトウェア技術者…  │ 2024-12-13 │ yuys13         │ https://zenn.dev/vim_jp/articles/vimjpradio22-guest-car                             │ yuys13         │         732 │
+│ Vim 本体に evalfun…  │ 2024-12-16 │ mikoto2000     │ https://mikoto2000.blogspot.com/2024/12/vim-evalfunc-vim-script.html                │ mikoto2000     │         738 │
+│ ちょっと面倒だなぁ…  │ 2024-12-18 │ kamecha        │ https://zenn.dev/trap/articles/5a76bf9af20875                                       │ kamecha        │         741 │
+│ VimでTextObjの末尾…  │ 2024-12-20 │ utubo          │ https://zenn.dev/utubo/articles/vim-move-to-head-of-textobj                         │ utubo          │         739 │
+│ 2024年 Neovim成長…   │ 2024-12-23 │ tadashi-aikawa │ https://minerva.mamansoft.net/%F0%9F%93%98Articles/%F0%9F%93%982024%E5%B9%B4%20Ne…  │ tadashi-aikawa │         730 │
+│ 覚えられない操作は…  │ 2024-12-25 │ staticWagomU   │ https://wagomu.me/blog/2024-12-25-vim-ekiden                                        │ staticWagomU   │         731 │
+│ プラグインなしでVi…  │ 2024-12-27 │ PicricAcid     │ https://qiita.com/picric_acid/items/ec987cf244ae86ff6fc4                            │ PicricAcid     │         740 │
+│ 思考の速さで日本語…  │ 2024-12-30 │ NI57721        │ https://zenn.dev/vim_jp/articles/neo-azik-for-you                                   │ NI57721        │         749 │
+│ NeoVimで書き初め(…   │ 2025-01-01 │ Kleha          │ https://zenn.dev/haru_0205/books/d8b9cd0cf37db9                                     │ Haru-0205      │         773 │
+│ NeovimのDiagnostic…  │ 2025-01-03 │ yuys13         │ https://zenn.dev/vim_jp/articles/entering-neovim-diagnosic-floating-window          │ yuys13         │         784 │
+│ telescope.nvim で…   │ 2025-01-06 │ delphinus      │                                                                                     │ delphinus      │         793 │
+│ lazyvimに2ヶ月入っ…  │ 2025-01-08 │ tositada       │                                                                                     │ tositada17     │         775 │
+│ vimiumはいいぞ       │ 2025-01-10 │ 静カニ         │ https://shizukani-cp.github.io/blog/articles/20250110/                              │ shizukani-cp   │         794 │
+│ Vim正規表現とマク…   │ 2025-01-13 │ yasunori0418   │ https://blog.yasunori0418.dev/p/combining_vim_regex_and_macros/                     │ yasunori0418   │         804 │
+│ Neovim内で翻訳でき…  │ 2025-01-15 │ 苔コッコー     │                                                                                     │ Kokecoco       │         805 │
+├──────────────────────┴────────────┴────────────────┴─────────────────────────────────────────────────────────────────────────────────────┴────────────────┴─────────────┤
+│ 295 rows (40 shown)                                                                                                                                           6 columns │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+## おわりに
+
+これで、後は好きなように集計すれば良いですね。
+
+後半の記事に続く。
+
+https://wagomu.me/blog/2025-01-02_2
