@@ -1,0 +1,89 @@
+---
+const { slug, pubDate, title, kind } = Astro.props;
+
+function dateString(date: Date) {
+	return date.toLocaleDateString("ja-JP", {
+		month: "2-digit",
+		day: "2-digit",
+	});
+}
+---
+
+<a href={slug} class="bloglink">
+	<div class="post">
+		<div class="date">{dateString(pubDate)}</div>
+		<div class="content">
+			<span class={`${kind}-icon`}></span>
+			<span>{title}</span>
+		</div>
+	</div>
+</a>
+
+<style>
+	.bloglink {
+		text-decoration: none;
+		color: var(--color);
+	}
+
+	.post {
+		display: flex;
+		gap: var(--space-xs);
+		flex-direction: row;
+		align-items: center;
+		padding: var(--space-xxs);
+		border-radius: 10px;
+
+		&:hover {
+			background: color-mix(in srgb, var(--gray), #000 10%);
+
+			.zenn-icon {
+				background-color: #3ea8ff;
+			}
+		}
+
+		.post {
+			margin-top: var(--space-s);
+		}
+
+		.date {
+			order: 2;
+			font-size: 0.9rem;
+			line-height: 1;
+			opacity: 0.7;
+		}
+
+		.content {
+			display: flex;
+			gap: var(--space-xs);
+			align-items: center;
+		}
+	}
+
+	.zenn-icon {
+		display: inline-block;
+		width: 1rem;
+		height: 1rem;
+		background-color: currentColor;
+		--svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath  d='M.264 23.771h4.984a.8.8 0 0 0 .645-.352L19.614.874c.176-.293-.029-.645-.381-.645h-4.72a.63.63 0 0 0-.557.323L.03 23.361c-.088.176.029.41.234.41m17.181-.352l6.479-10.408a.477.477 0 0 0-.41-.733h-4.691a.52.52 0 0 0-.44.235l-6.655 10.643c-.176.264.029.616.352.616h4.779a.65.65 0 0 0 .586-.353'/%3E%3C/svg%3E");
+		-webkit-mask-image: var(--svg);
+		mask-image: var(--svg);
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+		-webkit-mask-size: 100% 100%;
+		mask-size: 100% 100%;
+	}
+
+	.blog-icon {
+		display: inline-block;
+		width: 1rem;
+		height: 1rem;
+		--svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Cpath fill='%23000' d='M28 30H6V8h13.22l2-2H6a2 2 0 0 0-2 2v22a2 2 0 0 0 2 2h22a2 2 0 0 0 2-2V15l-2 2Z' class='clr-i-outline clr-i-outline-path-1'/%3E%3Cpath fill='%23000' d='m33.53 5.84l-3.37-3.37a1.61 1.61 0 0 0-2.28 0L14.17 16.26l-1.11 4.81A1.61 1.61 0 0 0 14.63 23a1.7 1.7 0 0 0 .37 0l4.85-1.07L33.53 8.12a1.61 1.61 0 0 0 0-2.28M18.81 20.08l-3.66.81l.85-3.63L26.32 6.87l2.82 2.82ZM30.27 8.56l-2.82-2.82L29 4.16L31.84 7Z' class='clr-i-outline clr-i-outline-path-2'/%3E%3Cpath fill='none' d='M0 0h36v36H0z'/%3E%3C/svg%3E");
+		background-color: currentColor;
+		-webkit-mask-image: var(--svg);
+		mask-image: var(--svg);
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+		-webkit-mask-size: 100% 100%;
+		mask-size: 100% 100%;
+	}
+</style>
