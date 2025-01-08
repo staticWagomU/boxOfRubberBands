@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
+import LinkItem from "../../components/LinkItem.astro";
 
 export async function getStaticPaths() {
 	const allPosts = await getCollection("blog");
@@ -28,9 +29,21 @@ const { posts } = Astro.props;
 		{
 			posts.map((post) => (
 				<li>
-					<a href={`/blog/${post.slug}`}>{post.data.title} </a>
+					<LinkItem
+						slug={post.slug}
+						pubDate={post.data.pubDate}
+						title={post.data.title}
+						kind="blog"
+					/>
 				</li>
 			))
 		}
 	</ul>
 </Base>
+
+<style>
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+</style>
