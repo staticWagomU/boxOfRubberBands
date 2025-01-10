@@ -71,12 +71,8 @@ jobs:
             // Extract issue body
             const issueBody = issue.body;
 
-            const content = `---
-pubDate: ${today}
----
-
-${issueBody}
-`;
+            // YAML の区切り文字 (---) が YAML そのものと競合しないように \n 表示に変更
+            const content = `---\\npubDate: ${today}\\n---\\n\\n${issueBody}\\n`;
 
             // Commit the file to the repository
             const { data: refData } = await github.git.getRef({
