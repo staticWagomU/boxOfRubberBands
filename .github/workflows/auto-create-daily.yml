@@ -3,8 +3,6 @@ name: Daily Issue Handler
 on:
   issues:
     types: [opened, labeled]
-    # 'opened' will trigger when a new issue is created
-    # 'labeled' will trigger when a label is added to an issue
 
 jobs:
   process-daily-issue:
@@ -18,6 +16,8 @@ jobs:
           script: |
             const { owner, repo } = context.repo;
             const issue = context.payload.issue;
+            const today = new Date().toISOString().split('T')[0]; // Get today's date in yyyy-MM-dd format
+            const filePath = `src/content/daily/${today}.mdx`;
 
             // Ensure the issue creator is the repository owner
             if (issue.user.login !== owner) {
@@ -39,9 +39,38 @@ jobs:
               return;
             }
 
+            // Check if the file already exists
+            try {
+              await github.repos.getContent({
+                owner,
+                repo,
+                path: filePath
+              });
+
+              // If the file exists, post a comment and close the issue
+              await github.issues.createComment({
+                owner,
+                repo,
+                issue_number: issue.number,
+                body: '一日一度だけ作成できます。'
+              });
+
+              await github.issues.update({
+                owner,
+                repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+
+              return;
+            } catch (error) {
+              if (error.status !== 404) {
+                throw error; // Re-throw if error is not due to file not found
+              }
+            }
+
             // Extract issue body
             const issueBody = issue.body;
-            const today = new Date().toISOString().split('T')[0]; // Get today's date in yyyy-MM-dd format
 
             const content = `---
 pubDate: ${today}
@@ -49,9 +78,6 @@ pubDate: ${today}
 
 ${issueBody}
 `;
-
-            // Create a new file in src/content/daily
-            const filePath = `src/content/daily/${today}.mdx`;
 
             // Commit the file to the repository
             const { data: refData } = await github.git.getRef({
