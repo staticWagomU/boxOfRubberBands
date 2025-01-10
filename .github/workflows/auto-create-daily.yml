@@ -6,7 +6,6 @@ on:
 
 jobs:
   process-daily-issue:
-    if: github.event.label.name == 'daily'
     runs-on: ubuntu-latest
     steps:
       - name: Check if issue is labeled with 'daily'
