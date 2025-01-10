@@ -1,0 +1,99 @@
+name: Daily Issue Handler
+
+on:
+  issues:
+    types: [opened, labeled]
+    # 'opened' will trigger when a new issue is created
+    # 'labeled' will trigger when a label is added to an issue
+
+jobs:
+  process-daily-issue:
+    if: github.event.label.name == 'daily'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if issue is labeled with 'daily'
+        if: contains(github.event.issue.labels.*.name, 'daily')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issue = context.payload.issue;
+
+            // Ensure the issue creator is the repository owner
+            if (issue.user.login !== owner) {
+              // Post a comment and close the issue
+              await github.issues.createComment({
+                owner,
+                repo,
+                issue_number: issue.number,
+                body: '`daily`ラベルはレポジトリオーナーのみ使用できます。'
+              });
+
+              await github.issues.update({
+                owner,
+                repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+
+              return;
+            }
+
+            // Extract issue body
+            const issueBody = issue.body;
+            const today = new Date().toISOString().split('T')[0]; // Get today's date in yyyy-MM-dd format
+
+            const content = `---
+pubDate: ${today}
+---
+
+${issueBody}
+`;
+
+            // Create a new file in src/content/daily
+            const filePath = `src/content/daily/${today}.mdx`;
+
+            // Commit the file to the repository
+            const { data: refData } = await github.git.getRef({
+              owner,
+              repo,
+              ref: 'heads/main'
+            });
+
+            const baseSha = refData.object.sha;
+
+            const { data: blobData } = await github.git.createBlob({
+              owner,
+              repo,
+              content: Buffer.from(content).toString('base64'),
+              encoding: 'base64'
+            });
+
+            const { data: treeData } = await github.git.createTree({
+              owner,
+              repo,
+              base_tree: baseSha,
+              tree: [
+                {
+                  path: filePath,
+                  mode: '100644',
+                  type: 'blob',
+                  sha: blobData.sha
+                }
+              ]
+            });
+
+            const { data: commitData } = await github.git.createCommit({
+              owner,
+              repo,
+              message: `Create daily log for ${today}`,
+              tree: treeData.sha,
+              parents: [baseSha]
+            });
+
+            await github.git.updateRef({
+              owner,
+              repo,
+              ref: 'heads/main',
+              sha: commitData.sha
+            });
