@@ -13,7 +13,7 @@ importers:
         version: 1.0.0
       astro-og-canvas:
         specifier: ^0.5.5
-        version: 0.5.5(astro@5.1.7(@types/node@22.5.0)(jiti@2.4.2)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1))
+        version: 0.5.6(astro@5.1.7(@types/node@22.5.0)(jiti@2.4.2)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1))
       canvaskit-wasm:
         specifier: ^0.39.1
         version: 0.39.1
@@ -866,8 +866,8 @@ packages:
   astro-google-fonts-optimizer@0.2.2:
     resolution: {integrity: sha512-YQxp/ExF3NzUomAGuu1VKecO7/ETRnhnE50gqwAqfpbGPZFj4MYa4XxK1ukBg3R63QmKuE5uurOiKmXiLzttuw==}
 
-  astro-og-canvas@0.5.5:
-    resolution: {integrity: sha512-dbZ7voJAmvy8Zyv5zFsgENs9G4uhcCJ4nVuUPb7ymu8+Vp/jr/fdQDKPrLYUG2TSi/1HejYRnzkXcSv6ntlDTA==}
+  astro-og-canvas@0.5.6:
+    resolution: {integrity: sha512-w75UErZdRxYyoVnTz4IXn6T869PBrwYQEjPecWVaev9faYCHC3Uk7R47KCO3u+MSDkc8tCENz4ghVDrLImx9SA==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       astro: ^3.0.0 || ^4.0.0 || ^5.0.0
@@ -4188,7 +4188,7 @@ snapshots:
 
   astro-google-fonts-optimizer@0.2.2: {}
 
-  astro-og-canvas@0.5.5(astro@5.1.7(@types/node@22.5.0)(jiti@2.4.2)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1)):
+  astro-og-canvas@0.5.6(astro@5.1.7(@types/node@22.5.0)(jiti@2.4.2)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1)):
     dependencies:
       astro: 5.1.7(@types/node@22.5.0)(jiti@2.4.2)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1)
       canvaskit-wasm: 0.39.1
