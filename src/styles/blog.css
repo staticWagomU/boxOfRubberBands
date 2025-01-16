@@ -254,23 +254,23 @@ article.blog {
 		}
 	}
 
-	.dark .code-block-wrapper {
-		.line-number {
-			--bg: #2d353b;
-			--color: #d3c6aa;
-		}
-		pre,
-		span {
-			--bg: var(--shiki-dark-bg);
-			--color: var(--shiki-dark);
-			background: var(--bg);
-			color: var(--color);
-		}
-	}
-
 	@media (width < 820px) {
 		.code-block-wrapper .line-number {
 			display: none;
 		}
+	}
+}
+
+body.dark article.blog .code-block-wrapper {
+	.line-number {
+		--bg: #2d353b;
+		--color: #d3c6aa;
+	}
+	pre,
+	span {
+		--bg: var(--shiki-dark-bg);
+		--color: var(--shiki-dark);
+		background: var(--bg);
+		color: var(--color);
 	}
 }
