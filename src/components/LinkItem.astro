@@ -32,6 +32,7 @@ function dateString(date: Date) {
 		align-items: center;
 		padding: var(--space-xxs);
 		border-radius: 10px;
+		margin-top: var(--space-s);
 
 		&:hover {
 			background: color-mix(in srgb, var(--gray), #000 10%);
@@ -39,10 +40,6 @@ function dateString(date: Date) {
 			.zenn-icon {
 				background-color: #3ea8ff;
 			}
-		}
-
-		.post {
-			margin-top: var(--space-s);
 		}
 
 		.date {
@@ -53,9 +50,20 @@ function dateString(date: Date) {
 		}
 
 		.content {
-			display: flex;
+			display: grid;
+			grid-template-columns: 1rem 1fr;
 			gap: var(--space-xs);
 			align-items: center;
+		}
+	}
+
+
+	@media (width < 820px) {
+		.post {
+			display: flex;
+			gap: 0rem;
+			flex-direction: column-reverse;
+			align-items: flex-start;
 		}
 	}
 
