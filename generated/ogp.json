@@ -88,5 +88,35 @@
     "title": "GitHub - vim-fall/fall.vim: 🍂 Yet Another Fuzzy Finder designed for Vim and Neovim and to be programmer-friendly",
     "description": "🍂 Yet Another Fuzzy Finder designed for Vim and Neovim and to be programmer-friendly - vim-fall/fall.vim",
     "image": "https://opengraph.githubassets.com/9c68ea88d6f0d174fe5c92cfb2c141811f5448be641819d2353571e2da1b9851/vim-fall/fall.vim"
+  },
+  "https://gihyo.jp/book/2024/978-4-297-14484-5": {
+    "title": "コード×AI ーソフトウェア開発者のための生成AI実践入門",
+    "description": "GitHub CopilotやChatGPTなど生成AIによるコード生成やコードリーデイング支援が流行っています。これらは破壊的なイノベーションで，いずれはすべての開発者や企業が導入するものです。\n\nただ，現状では生成AI&times;コードを推進・導入している企業は多くはなく，さらに活用法については手探りの状況です。\n\n本書では生成AI&times;コードでなにができるか，どうすればよりよく活用できるかを解説します。しっかりと活用していくための知識と，現場で活用できる実践が身に付く必携の一冊です。",
+    "image": "https://image.gihyo.co.jp/assets/images/ogp/2024/9784297144845.jpg"
+  },
+  "https://blog.3qe.us/entry/2025/01/15/194843": {
+    "title": "何かがそれほど得意でなくても、世の中の平均よりは得意だと思っておいたほうがよい - Lambdaカクテル",
+    "description": "仕事とかプライベートとかで、ものすごく頭が回るときと、エンストしたようにまるで回転しないときとがあり、その差はどこから来るのだろうと考えていた時期があった。 結論から言うと、自分の場合、「それを得意だと思っているかどうか」によって頭の回転具合がかなり変わるらしいことがわかった。 例えば、自分はこうした執筆がそこそこにできて、プログラミング言語でいえばScalaが他人よりも得意だが、こうした、自分の脳が「これは得意だぞ」と思っていることがらと相対すると、脳はやらせてくれやらせてくれと元気に働き始める。成功が目に見えているからね。 他方で、これそんなに得意じゃないな〜、とか、自分がやったら時間かか…",
+    "image": "https://ogimage.blog.st-hatena.com/12921228815713116358/6802418398320342754/1737028273"
+  },
+  "https://book.impress.co.jp/books/1122101087": {
+    "title": "インタプリタの作り方 －言語設計／開発の基本と2つの方式による実装－ - インプレスブックス",
+    "description": "実践！モダン言語実装の基礎を知る",
+    "image": "https://img.ips.co.jp/ij/22/1122101087/1122101087-520x.jpg"
+  },
+  "https://washibane.hatenablog.com/entry/2023/04/23/232820": {
+    "title": "言葉だけが最後に残る - 鷲はいまどこを飛ぶか",
+    "description": "一つひとつの行為を通して、我々は自分の伝記を書く。私が下す決断一つひとつが、それ自体のために下されるだけでなく、私のような人間がこういう場合どのような道を選びそうかを、私自身や他人に示すために下されるのでもあるのだ。過去の自分のすべての決断や経験をふり返ってみるとき、私はそれらをつねに、何らかの伝記的全体にまとめ上げようとしている。自分自身に向かって、ひとつの主題、ひとつの連続性を捏造してみせようとしている。そうやって私が捏造する連続性が、今度は私の新しい決断に影響を与え、それに基づいて為された新しい行為一つひとつがかつての連続性を構成し直す。自分を想像することと、自分を説明することとは、並行…",
+    "image": "https://ogimage.blog.st-hatena.com/10257846132677721740/4207112889983924872/1717133078"
+  },
+  "https://zenn.dev/wagomu/scraps/882a2c0bf2b8c5": {
+    "title": "typeormのソースを読む",
+    "description": "",
+    "image": "https://storage.googleapis.com/zenn-user-upload/avatar/c3c8ce3ad7.jpeg"
+  },
+  "https://github.com/tadashi-aikawa/mobile-first-daily-interface": {
+    "title": "GitHub - tadashi-aikawa/mobile-first-daily-interface: Obsidianにてモバイルに最適なインターフェースでデイリーノートを扱うプラグインです。",
+    "description": "Obsidianにてモバイルに最適なインターフェースでデイリーノートを扱うプラグインです。. Contribute to tadashi-aikawa/mobile-first-daily-interface development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/1efc0a4d1de27f55f1d5fea353093f3f4dacba2d7e168bc72baa30a8d50c9a31/tadashi-aikawa/mobile-first-daily-interface"
   }
 }
