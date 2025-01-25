@@ -1,3 +1,11 @@
+@font-face {
+	font-family: "JetBrains Mono Nerd Font";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/fonts/JetBrainsMonoNerdFont-Medium.woff2") format("woff2");
+}
+
 article.blog {
 	/* リストマーカー */
 	li::marker {
@@ -207,6 +215,7 @@ article.blog {
 
 		.code-content {
 			width: 100%;
+			font-family: "JetBrains Mono Nerd Font", monospace;
 
 			pre {
 				padding: 1ch;
