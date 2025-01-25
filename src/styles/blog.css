@@ -3,7 +3,8 @@
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: url("/fonts/JetBrainsMonoNerdFont-Medium.woff2") format("woff2");
+	src: url("/fonts/JetBrainsMonoNerdFont-Medium.woff2") format("woff2"),
+		url("/fonts/JetBrainsMonoNerdFont-Medium.woff") format("woff");
 }
 
 article.blog {
@@ -226,13 +227,16 @@ article.blog {
 
 		.code-content {
 			width: 100%;
-			font-family: "JetBrains Mono Nerd Font", monospace;
 
 			pre {
 				padding: 1ch;
 				border-radius: 1ch;
 				padding-top: 1rem;
 				padding-bottom: 1rem;
+
+				code {
+					font-family: "JetBrains Mono Nerd Font", monospace;
+				}
 			}
 
 			code>span.line {
