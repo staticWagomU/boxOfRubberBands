@@ -63,6 +63,7 @@ body {
 	max-width: clamp(300px, 100%, var(--max-width));
 	min-height: 100dvh;
 	padding: 0rem var(--space-m);
+	font: Roboto, sans-serif;
 }
 
 nav {
