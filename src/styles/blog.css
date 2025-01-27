@@ -9,6 +9,10 @@
 
 article.blog {
 
+	p {
+		margin: var(--space-m) 0;
+	}
+
 	/* リストマーカー */
 	li::marker {
 		color: var(--gray);
