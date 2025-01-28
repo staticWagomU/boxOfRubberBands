@@ -2,10 +2,9 @@ import { defineConfig } from "astro/config";
 import remarkBreaks from "remark-breaks";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import codeBlockPlugin from "./tools/remark-code-quote";
-import wrapH2WithSection from "./tools/rehype-wrap-h2-with-section";
 import astroLastModifiedAt from "./tools/remark-astro-last-modified-at";
-import remarkBudoux from "./tools/remark-budoux";
+import codeBlockPlugin from "./tools/remark-code-quote";
+import rehypeHeadingSpan from "./tools/rehype-heading-span";
 import rehypeLineNumbers from "./tools/rehype-line-numbers";
 
 import compressor from "astro-compressor";
@@ -39,8 +38,8 @@ export default defineConfig({
 			footnoteLabelTagName: "hr",
 			footnoteLabel: " ",
 		},
-		remarkPlugins: [remarkBreaks, astroLastModifiedAt, remarkBudoux, codeBlockPlugin],
-		rehypePlugins: [wrapH2WithSection, rehypeLineNumbers],
+		remarkPlugins: [remarkBreaks, astroLastModifiedAt, codeBlockPlugin],
+		rehypePlugins: [rehypeLineNumbers, rehypeHeadingSpan],
 		shikiConfig: {
 			defaultColor: false,
 			themes: {
