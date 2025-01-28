@@ -3,12 +3,12 @@
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: url("/fonts/JetBrainsMonoNerdFont-Medium.woff2") format("woff2"),
+	src:
+		url("/fonts/JetBrainsMonoNerdFont-Medium.woff2") format("woff2"),
 		url("/fonts/JetBrainsMonoNerdFont-Medium.woff") format("woff");
 }
 
 article.blog {
-
 	p {
 		margin: var(--space-m) 0;
 	}
@@ -321,7 +321,7 @@ article.blog {
 				}
 			}
 
-			code>span.line {
+			code > span.line {
 				padding-left: 0.4rem;
 			}
 
@@ -351,9 +351,11 @@ article.blog {
 			padding-bottom: 1rem;
 			background:
 				linear-gradient(to bottom, var(--bg) 0 calc(1rem - 1px), transparent 1rem),
-				linear-gradient(to bottom,
+				linear-gradient(
+					to bottom,
 					transparent 0 calc(100% - 1rem),
-					var(--bg) calc(100% - 1rem + 1px) 100%),
+					var(--bg) calc(100% - 1rem + 1px) 100%
+				),
 				linear-gradient(to right, transparent calc(100% - 1px), var(--gray) 100%) var(--bg);
 		}
 	}
@@ -386,7 +388,6 @@ body.dark article.blog {
 			background: var(--accent2);
 		}
 	}
-
 
 	.code-block-wrapper {
 		.line-number {

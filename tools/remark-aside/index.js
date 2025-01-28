@@ -24,18 +24,18 @@ export default function remarkAside() {
 								children: [],
 								data: {
 									hName: "span",
-									hProperties: { className: ["icon"] }
-								}
+									hProperties: { className: ["icon"] },
+								},
 							},
 							{
 								type: "text",
 								value: getType(type),
-							}
+							},
 						],
 						data: {
 							hName: "div",
-							hProperties: { className: ["aside-title"] }
-						}
+							hProperties: { className: ["aside-title"] },
+						},
 					},
 					{
 						type: "paragraph",
@@ -43,10 +43,10 @@ export default function remarkAside() {
 							{
 								type: "text",
 								value: content,
-							}
+							},
 						],
 						data: { hProperties: { className: ["aside-content"] } },
-					}
+					},
 				],
 				data: {
 					hName: "aside",
