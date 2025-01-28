@@ -40,12 +40,16 @@ const today = new Date();
 		</nav>
 		<slot />
 		<footer>
-			<a href="/info" class="copy">
-				<p>&copy; {today.getFullYear()} wagomu. All rights reserved.</p>
-			</a>
+			<p class="copy">
+				<a href="/info" class="copy">CC BY-NC-SA 4.0</a>
+				<span>&nbsp;2021-PRESENT &copy;&nbsp; </span>
+				<a href="/about">wagomu</a><span>. All rights reserved.</span>
+			</p>
 			<ul>
 				<li>
-					<a href="https://zenn.dev/wagomu"><span class="zenn-icon" style="--size: var(--font-size-m)"></span></a>
+					<a href="https://zenn.dev/wagomu"
+						><span class="zenn-icon" style="--size: var(--font-size-m)"></span></a
+					>
 				</li>
 				<li>
 					<a href="https://github.com/staticWagomU/BoxOfRubberBands"
@@ -53,7 +57,9 @@ const today = new Date();
 					</a>
 				</li>
 				<li>
-					<a href="https://codepen.io/statictowa"><span class="codepen-icon" style="--size: var(--font-size-m)"></span></a>
+					<a href="https://codepen.io/statictowa"
+						><span class="codepen-icon" style="--size: var(--font-size-m)"></span></a
+					>
 				</li>
 				<li>
 					<a href="/rss.xml"><span class="icon-rss" style="--size: var(--font-size-m)"></span></a>

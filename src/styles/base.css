@@ -2,7 +2,7 @@
 	--font-size: clamp(1rem, 2.5vw, 1.2rem);
 	--line-height: 2.3;
 
-	--font-size-xs: clamp(.65rem, 2vw, .85rem);
+	--font-size-xs: clamp(0.65rem, 2vw, 0.85rem);
 	--font-size-s: clamp(0.875rem, 2.5vw, 1rem);
 	--font-size-m: clamp(1rem, 3vw, 1.125rem);
 	--font-size-l: clamp(1.125rem, 4vw, 1.25rem);
@@ -89,7 +89,8 @@ nav {
 
 footer {
 	border-top: 2px solid var(--accent1);
-	color: var(--color);
+	color: var(--gray);
+	font-size: var(--font-size-xs);
 	padding: var(--space-m);
 	padding-top: var(--space-s);
 	display: flex;
@@ -99,12 +100,26 @@ footer {
 	width: 100%;
 	margin-top: auto;
 
+	.copy {
+		display: flex;
+		justify-content: flex-end;
+		a {
+			margin: 0;
+		}
+	}
+
 	a {
 		display: flex;
 		justify-content: flex-end;
 		margin-right: var(--space-xs);
 		text-decoration: none;
 		color: var(--gray);
+		text-underline-offset: 4px;
+		text-decoration: underline dashed;
+
+		&:hover {
+			color: var(--accent1);
+		}
 	}
 
 	ul {
