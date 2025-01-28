@@ -36,30 +36,38 @@ const today = new Date();
 						<span class="theme-icon icon-sun"></span>
 					</button>
 				</li>
-				<li><a href="/rss.xml"><span class="icon-rss"></span></a></li>
 			</ul>
 		</nav>
 		<slot />
 		<footer>
-			<a href="/info">
+			<a href="/info" class="copy">
 				<p>&copy; {today.getFullYear()} wagomu. All rights reserved.</p>
 			</a>
 			<ul>
 				<li>
-					<a href="https://zenn.dev/wagomu"><span class="zenn-icon"></span></a>
+					<a href="https://zenn.dev/wagomu"><span class="zenn-icon" style="--size: var(--font-size-m)"></span></a>
 				</li>
 				<li>
 					<a href="https://github.com/staticWagomU/BoxOfRubberBands"
-						><span class="github-icon"></span></a
-					>
+						><span class="github-icon" style="--size: var(--font-size-m)"></span>
+					</a>
 				</li>
 				<li>
-					<a href="https://codepen.io/statictowa"><span class="codepen-icon"></span></a>
+					<a href="https://codepen.io/statictowa"><span class="codepen-icon" style="--size: var(--font-size-m)"></span></a>
+				</li>
+				<li>
+					<a href="/rss.xml"><span class="icon-rss" style="--size: var(--font-size-m)"></span></a>
 				</li>
 			</ul>
 		</footer>
 	</body>
 </html>
+
+<style>
+	.copy {
+		font-size: var(--font-size-xs);
+	}
+</style>
 
 <script is:inline>
 	function toggleTheme() {
