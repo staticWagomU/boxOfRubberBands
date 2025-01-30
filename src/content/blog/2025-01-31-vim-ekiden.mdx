@@ -1,0 +1,144 @@
+---
+title: "自分にとっての無人島プラグイン ver.2025.01"
+pubDate: 2025-01-31
+published: true
+---
+
+import OG from "../../components/OG.astro";
+
+
+この記事は[Vim駅伝](https://vim-jp.org/ekiden/)2025年1月31日(金)の記事です。
+前回の記事は [gsy0911](https://github.com/gsy0911) さんの「[neovimを使って4ヶ月](https://zenn.dev/gsy0911/articles/c009044a4f7026)」という記事でした。
+次回の記事は 2月3日(月) に投稿される予定です。
+
+## はじめに
+
+vim歴が4年目になった輪ごむです。
+
+今からもし、10個のプラグインしか入っていないvim(Neovim)を渡されて無人島に行かないといけないとしたら何を選びますか？という条件のもと選出されたプラグインの紹介になります。
+
+現在自分のNeovim(以下、vim)には120個ほどのプラグインが入っているようですが、その中から無人島に持っていくなら、これだ！！！というプラグインを選びました。皆さんの無人島プラグインも教えてもらえると嬉しいです。
+
+ということで無人島へ行く準備をしましょう。
+
+## 全10選
+
+血の涙を流しながら選出した10個のプラグインはこちらです。
+
+`cmp-buffer`や`ddu-ui-ff`が含まれてるのはゆるしてください！！！！！！！最低限のものだけに絞ったので！！！！！！！！！お願いします！！！
+
+1. denops.vim
+2. skkeleton
+3. vim-gin
+4. nvim-treesitter
+5. oil.nvim
+6. nvim-cmp
+	1. cmp-buffer
+	2. cmp-nvim-lsp
+7. mason.nvim
+8. mason-lspconfig.nvim
+9. nvim-lspconfig
+10. ddu.vim
+	1. ddu-ui-ff
+	2. ddu-source-file_rec
+	3. ddu-kind-file
+	4. ddu-filter-matcher_substring
+
+
+### 1. [vim-denops/denops.vim](https://github.com/vim-denops/denops.vim)
+
+まずはこちらのプラグインですが、前提プラグインです。
+以降説明する9つのプラグインのうち3つがこのdenops.vimに依存しています。
+これがないと本当に無人島生活を始めることができないので1番目に選定しました！
+
+### 2. [vim-skk/skkeleton](https://github.com/vim-skk/skkeleton)
+
+denops依存プラグインの一つ目です。
+このプラグインはvim内でSKKという文字入力システムを実現するためのプラグインです。日本人がvimを使う上で障害となるのが、かな入力のままキー操作をしてしまって、ターミナル上に謎の「ｊｋｊｋ」が表示される現象に遭遇したことのある人は多くいると思います。しかしSKKを導入することで英字/かな入力の切り替えキーを押さなくなり、この問題とおさらばできる素晴らしい入力方法です。癖のある入力方法のため、慣れるまでに時間を要するかもしれませんが、慣れてしまうともう離れることができません。
+
+こちらが作者の方が出したブログ記事です。
+気になった方はぜひお試しください。
+<OG url="https://zenn.dev/kuu/articles/vac2021-skkeleton" />
+
+### 3. [lambdalisue/vim-gin](https://github.com/lambdalisue/vim-gin)
+
+またもやdenops依存プラグインです。
+denops.vimの作者であるlambdalisueさんが作成されたgit操作をvim上で行うためのプラグインです。
+次に紹介するgitsigns.nvimを併用することによってターミナルに戻ることなく全てのgit操作をvim内で完結させています。
+vim-ginはlazy-gitやtigのような独自UIでgit操作をするのではなく、gitコマンドを実行したときに表示される標準出力とあまり変わらない表示がbufferに出力され、それをvim上から操作を行える非常に強力なプラグインです。
+gitコマンドを直接たたきたいときには`:Gin stash pop`のように`:Gin`以降に実行したいコマンドを入力することができます。この機能のおかげもありvimから出ずに全てのgit操作を賄うことができています。
+
+gin.vimではこれらのgit操作を行なっています。
+
+- ファイル単位でのstage/unstage
+- ブランチ操作
+- 差分の確認
+- ログの確認
+- gitコマンドの実行
+
+### 4. [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
+
+このプラグインはdenops非依存です。
+先ほど紹介したvim-ginと同じくgit操作を行うためのプラグインですが、別の用途で活躍しています。
+
+gitsigns.nvimでは
+
+- hunk単位のpreview
+- hunk単位のstage
+- blame
+- 次の差分への移動
+
+といった操作をするために使っています。
+
+副産物として、signcolumnや行番号の色が変わってエディタがおしゃれになります。
+
+### 5. [stevearc/oil.nvim](https://github.com/stevearc/oil.nvim)
+
+こちらはファイラプラグインです。
+特徴は、vimのバッファとして扱えるため、`dd`で行を削除することでファイルやフォルダの削除を行えたり、`:%s`を使って一括ファイル名の変換等を行えます。
+tree形式のファイラが好きな人には刺さらないかもしれませんが、ファイラを探している人がいたらぜひ使ってみてください。
+
+
+### 6. [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+
+補完プラグインです。
+asyncomplete.vim、ddc.vim、mini.completion、blink-cmp等を使った経験がありますがnvim-cmpが一番手になじんだため使い続けています。
+
+わがままをいうと、skkeletonの補完を行ってくれるソースや絵文字ソースなども含めたかったのですが、無人島に大量の荷物を持っていくことはできないため、なくなく置いてきました。
+
+### 7. [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
+
+LS等を管理してくれるプラグインです。
+vim-jpではmiseを使ったりnixを使ってLSを管理している人もいますが、自分はwindows, WSL, Linux, MacOSを気分で使い分けているため一番手っ取り早くLSをインストールできるmason.nvimを好んで使っています。
+
+### 8. [williamboman/mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
+
+mason.nvimとnvim-lspconfigの橋渡し的なプラグインです。
+
+### 9. [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+
+vimでlspの初期設定を用意してくれていたり、便利関数を提供してくれているプラグインという認識です。間違えていたらどなたか訂正お願いします。
+最近はnvim側に色々なlsp関連の機能が追加されましたが、依然としてlsを気軽に扱うためには必須なプラグインです。
+
+### 10. [Shougo/ddu.vim](https://github.com/Shougo/ddu.vim)
+
+最後に紹介するのは暗黒美夢王ことShougoさんの作成されたddu.vimです。
+ddu.vimとはなんぞや？という記事については、Shougoさんが書かれた記事やkyoh86さんの書いた記事、手前味噌ですが私の書いた記事を参考として貼っておきます。
+
+<OG url="https://zenn.dev/shougo/articles/ddu-vim-beta" />
+<OG url="https://zenn.dev/vim_jp/articles/c0d75d1f3c7f33" />
+<OG url="https://zenn.dev/vim_jp/articles/20231020step-by-step-ddu" />
+
+少し雑な表現となってしまいますが、telescope.nvimの設定を一から自分の好きなようにできます！というプラグインです。
+telescope.nvimやfzf.vimといったプラグインを使った経験がありましたが、ddu.vimを使うことで自分の好きなようにsourceやfilterを追加することができて非常に便利です。
+先にあげたように一から設定を書く必要があるため、万人におすすめできるプラグインではありませんがその分、自分好みの挙動を実現することができて、しっかりとリターンを得ることのできるプラグインだと思っています。また、作者が日本人であるため、母国語で質問できるというのも非常に良い点だと思っています。
+
+自分の用途としてはファイルの検索とLive grep機能、無人島には連れてくることができませんでしたが、lambdalisueさんが作成されたmr.vimと連携させて直近で開いたファイルや保存したファイルを検索するmrソースを主に使っています。
+
+コードを書いていると、開いているファイル内は勿論のこと、プロジェクト内の別のファイルをパパっと開きたいことがよくあります。そのような時にddu.vimを使ってシュッと開くことができると非常に気持ちが良いものです。oil.vimとの使い分けとしては同一階層のファイルを開くときやリネーム等のファイル操作にはoil.nvim。それ以外のファイルを開くときはddu.vimという使い分けをしています。VSCodeの`Ctrl + p`と似た機能です。
+
+### おわりに
+
+10個しか持っていけないとなると結構悩みました。わがままを言って20個くらいにしたいし、前提プラグインは含めないなどの案も考えましたが、飽くまで無人島に行くことを念頭に置いて選定したため妥協なく選ばせてもらいました。
+
+プラグインマネージャーが選ばれていない理由は、10個なら遅延はいらないからruntimepathへ直接ぶち込もうという考えによるものです。
