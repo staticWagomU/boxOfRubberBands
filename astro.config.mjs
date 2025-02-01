@@ -38,7 +38,7 @@ export default defineConfig({
 			footnoteLabelTagName: "hr",
 			footnoteLabel: " ",
 		},
-		remarkPlugins: [remarkBreaks, remarkAside, codeBlockPlugin],
+		remarkPlugins: [remarkAside, codeBlockPlugin, remarkBreaks ],
 		rehypePlugins: [rehypeLineNumbers, rehypeHeadingSpan],
 		shikiConfig: {
 			defaultColor: false,
