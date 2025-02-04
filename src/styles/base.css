@@ -64,7 +64,8 @@ body {
 	max-width: clamp(300px, 100%, var(--max-width));
 	min-height: 100dvh;
 	padding: 0rem var(--space-m);
-	font: Roboto, sans-serif;
+	font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo,
+		sans-serif;
 }
 
 nav {
@@ -103,6 +104,7 @@ footer {
 	.copy {
 		display: flex;
 		justify-content: flex-end;
+
 		a {
 			margin: 0;
 		}
