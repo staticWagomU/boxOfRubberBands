@@ -12,8 +12,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       astro-og-canvas:
-        specifier: ^0.5.5
-        version: 0.5.6(astro@5.3.0(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.3)(yaml@2.6.1))
+        specifier: ^0.6.0
+        version: 0.6.0(astro@5.3.0(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.3)(yaml@2.6.1))
       canvaskit-wasm:
         specifier: ^0.39.1
         version: 0.39.1
@@ -883,11 +883,13 @@ packages:
   astro-google-fonts-optimizer@0.2.2:
     resolution: {integrity: sha512-YQxp/ExF3NzUomAGuu1VKecO7/ETRnhnE50gqwAqfpbGPZFj4MYa4XxK1ukBg3R63QmKuE5uurOiKmXiLzttuw==}
 
-  astro-og-canvas@0.5.6:
-    resolution: {integrity: sha512-w75UErZdRxYyoVnTz4IXn6T869PBrwYQEjPecWVaev9faYCHC3Uk7R47KCO3u+MSDkc8tCENz4ghVDrLImx9SA==}
+  astro-og-canvas@0.6.0:
+    resolution: {integrity: sha512-3p6pWAVhF5cYKiLNKgV1CQFKs4V8N150d74eYqJPZZRktSTZWLdFFUH8HyMihYNF8HS6drHXOWhyaKqcBLFtJg==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       astro: ^3.0.0 || ^4.0.0 || ^5.0.0
+    bundledDependencies:
+      - canvaskit-wasm
 
   astro@5.3.0:
     resolution: {integrity: sha512-e88l/Yk/6enR/ZDddLbqtM+oblBFk5mneNSmNesyVYGL/6Dj4UA67GPAZOk79VxT5dbLlclZSyyw/wlxN1aj3A==}
@@ -4264,10 +4266,9 @@ snapshots:
 
   astro-google-fonts-optimizer@0.2.2: {}
 
-  astro-og-canvas@0.5.6(astro@5.3.0(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.3)(yaml@2.6.1)):
+  astro-og-canvas@0.6.0(astro@5.3.0(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.3)(yaml@2.6.1)):
     dependencies:
       astro: 5.3.0(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.27.0)(rollup@4.28.0)(terser@5.36.0)(typescript@5.7.3)(yaml@2.6.1)
-      canvaskit-wasm: 0.39.1
       deterministic-object-hash: 2.0.2
       entities: 4.5.0
 
